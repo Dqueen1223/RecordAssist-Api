@@ -50,5 +50,20 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(productDTO);
         }
+
+        [HttpGet("/{categories}")]
+        public async Task<ActionResult<ProductDTO>> GetAllUniqueProductCategories()
+        {
+            //TODO
+            _logger.LogInformation($"Request received for GetAllUniqueProductCategories");
+            var products = await _productProvider.GetProductsAsync();
+            _logger.LogInformation($"Request received for GetAllUniqueProductCategories {products}");
+            //var products = await _productProvider.GetAllUniqueProductCategories();
+            //IEnumerable<string> uniqueCategories=products
+            var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
+
+            return Ok(productDTOs);
+
+        }
     }
 }

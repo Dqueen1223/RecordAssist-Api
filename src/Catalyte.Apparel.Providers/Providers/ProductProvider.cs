@@ -55,6 +55,20 @@ namespace Catalyte.Apparel.Providers.Providers
             return product;
         }
 
+       /* public async Task<Product> GetAllUniqueProductCategories()
+        {
+            Product product;
+            String Category;
+
+            //TODO
+            try
+            {
+                product=await _productRepository.
+            }
+        }*/
+
+
+
         /// <summary>
         /// Asynchronously retrieves all products from the database.
         /// </summary>

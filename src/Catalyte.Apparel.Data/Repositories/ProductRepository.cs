@@ -28,6 +28,13 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Products.ToListAsync();
         }
+
+        //TODO
+        public async Task<IEnumerable<Product>> GetAllUniqueProductCategories()
+        {
+            return await _ctx.Products.ToListAsync();
+            //return await _ctx.Products.Category.ToListAsynch();
+        }
     }
 
 }
