@@ -34,6 +34,16 @@ namespace Catalyte.Apparel.Data.Model
 
         public bool Active { get; set; }
 
+        public string Brand { get; set; }
+
+        public string ImageSrc { get; set; }
+
+        public string Material  { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int quantity { get; set; }
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
