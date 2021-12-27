@@ -36,5 +36,16 @@ namespace Catalyte.Apparel.DTOs.Products
         public string GlobalProductCode { get; set; }
 
         public bool Active { get; set; }
+
+        public string Brand { get; set; }
+
+        public string ImageSrc { get; set; }
+
+        public string Material { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int Quantity { get; set; }
+
     }
 }
