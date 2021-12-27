@@ -145,6 +145,7 @@ namespace Catalyte.Apparel.Data.SeedData
             return "sc" + RandomString(5);
         }
 
+
         /// <summary>
         /// Generates a number of random products based on input.
         /// </summary>
@@ -182,7 +183,12 @@ namespace Catalyte.Apparel.Data.SeedData
                 ReleaseDate = DateTime.Now,
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
-                Active = false
+                Active = false,
+                Brand = null,
+                ImageSrc = null,
+                Material = null,
+                Price = 0,
+                Quantity = 0
             };
         }
 

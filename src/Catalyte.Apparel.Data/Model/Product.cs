@@ -42,7 +42,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public decimal Price { get; set; }
 
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
 
         public override string ToString()
         {
@@ -75,6 +75,12 @@ namespace Catalyte.Apparel.Data.Model
                 hashCode.Add(obj.StyleNumber);
                 hashCode.Add(obj.GlobalProductCode);
                 hashCode.Add(obj.Active);
+                hashCode.Add(obj.Brand);
+                hashCode.Add(obj.ImageSrc);
+                hashCode.Add(obj.Material);
+                hashCode.Add(obj.Price);
+                hashCode.Add(obj.Quantity);
+
                 return hashCode.ToHashCode();
             }
         }
