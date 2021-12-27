@@ -38,7 +38,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string ImageSrc { get; set; }
 
-        public string Material  { get; set; }
+        public string Material { get; set; }
 
         public decimal Price { get; set; }
 
