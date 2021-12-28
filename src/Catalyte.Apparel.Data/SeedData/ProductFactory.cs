@@ -184,11 +184,6 @@ namespace Catalyte.Apparel.Data.SeedData
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
                 Active = false,
-                Brand = null,
-                ImageSrc = null,
-                Material = null,
-                Price = 0,
-                Quantity = 0
             };
         }
 
