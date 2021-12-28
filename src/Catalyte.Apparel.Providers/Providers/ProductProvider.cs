@@ -55,17 +55,21 @@ namespace Catalyte.Apparel.Providers.Providers
             return product;
         }
 
-       /* public async Task<Product> GetAllUniqueProductCategories()
+        public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
         {
-            Product product;
-            String Category;
+            List<string> categories;
 
-            //TODO
             try
             {
-                product=await _productRepository.
+                categories = await _productRepository.GetAllUniqueProductCategoriesAsync();
             }
-        }*/
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
 
 
 

@@ -4,6 +4,7 @@ using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Catalyte.Apparel.Data.Repositories
 {
@@ -29,11 +30,9 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Products.ToListAsync();
         }
 
-        //TODO
-        public async Task<IEnumerable<Product>> GetAllUniqueProductCategories()
+        public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
         {
-            return await _ctx.Products.ToListAsync();
-            //return await _ctx.Products.Category.ToListAsynch();
+            return await _ctx.Products.Select(l => l.Category).Distinct().ToListAsync();
         }
     }
 
