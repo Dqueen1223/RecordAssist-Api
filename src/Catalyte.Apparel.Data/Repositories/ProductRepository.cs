@@ -34,6 +34,11 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Products.Select(l => l.Category).Distinct().ToListAsync();
         }
+        
+        public async Task<List<string>> GetAllUniqueProductTypesAsync()
+        {
+            return await _ctx.Products.Select(l => l.Type).Distinct().ToListAsync();
+        }
     }
 
 }

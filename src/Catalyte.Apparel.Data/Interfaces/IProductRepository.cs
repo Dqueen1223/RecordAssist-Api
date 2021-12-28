@@ -14,5 +14,7 @@ namespace Catalyte.Apparel.Data.Interfaces
         Task<IEnumerable<Product>> GetProductsAsync();
 
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
+
+        Task<List<string>> GetAllUniqueProductTypesAsync();
     }
 }

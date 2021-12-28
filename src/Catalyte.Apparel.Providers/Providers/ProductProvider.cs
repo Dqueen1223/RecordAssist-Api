@@ -70,14 +70,28 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             return categories;
         }
+        public async Task<List<string>> GetAllUniqueProductTypesAsync()
+        {
+            List<string> categories;
+
+            try
+            {
+                categories = await _productRepository.GetAllUniqueProductTypesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
 
 
-
-        /// <summary>
-        /// Asynchronously retrieves all products from the database.
-        /// </summary>
-        /// <returns>All products in the database.</returns>
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+            /// <summary>
+            /// Asynchronously retrieves all products from the database.
+            /// </summary>
+            /// <returns>All products in the database.</returns>
+            public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             IEnumerable<Product> products;
 

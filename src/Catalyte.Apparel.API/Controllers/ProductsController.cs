@@ -52,11 +52,20 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet("/products/categories")]
-        public async Task<ActionResult<IEnumerable<string>>> GetAllUniqueProductCategories()
+        public async Task<ActionResult<IEnumerable<string>>> GetAllUniqueProductCategoriesAsync()
         {
-            _logger.LogInformation($"Request received for GetAllUniqueProductCategories");
+            _logger.LogInformation($"Request received for GetAllUniqueProductCategoriesAsync");
             var productCategories = await _productProvider.GetAllUniqueProductCategoriesAsync();
             return Ok(productCategories);
+
+        }
+
+        [HttpGet("/products/types")]
+        public async Task<ActionResult<IEnumerable<string>>> GetAllUniqueProductTypesAsync()
+        {
+            _logger.LogInformation($"Request received for GetAllUniqueProductTypesAsync");
+            var productTypes = await _productProvider.GetAllUniqueProductTypesAsync();
+            return Ok(productTypes);
 
         }
 
