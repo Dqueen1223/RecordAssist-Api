@@ -23,5 +23,11 @@ namespace Catalyte.Apparel.Data.Filters
         {
             return products.Where(i => i.Demographic == productDemographic).AsQueryable();
         }
+
+        public static IQueryable<Product> WhereProductColorEquals(this IEnumerable<Product> products, string productColor)
+        {
+            return products.Where(i => i.PrimaryColorCode == productColor || i.SecondaryColorCode == productColor).AsQueryable();
+        }
+
     }
 }
