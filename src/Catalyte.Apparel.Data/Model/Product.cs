@@ -34,6 +34,16 @@ namespace Catalyte.Apparel.Data.Model
 
         public bool Active { get; set; }
 
+        public string Brand { get; set; }
+
+        public string ImageSrc { get; set; }
+
+        public string Material { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int Quantity { get; set; }
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
@@ -65,6 +75,12 @@ namespace Catalyte.Apparel.Data.Model
                 hashCode.Add(obj.StyleNumber);
                 hashCode.Add(obj.GlobalProductCode);
                 hashCode.Add(obj.Active);
+                hashCode.Add(obj.Brand);
+                hashCode.Add(obj.ImageSrc);
+                hashCode.Add(obj.Material);
+                hashCode.Add(obj.Price);
+                hashCode.Add(obj.Quantity);
+
                 return hashCode.ToHashCode();
             }
         }
