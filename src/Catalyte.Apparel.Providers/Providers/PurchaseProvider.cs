@@ -1,5 +1,7 @@
-﻿using Catalyte.Apparel.Data.Interfaces;
+﻿using AutoMapper;
+using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
+using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
@@ -16,11 +18,15 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<PurchaseProvider> _logger;
         private readonly IPurchaseRepository _purchaseRepository;
+        private readonly IProductProvider _productProvider;
+        private readonly IMapper _mapper;
 
-        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger)
+        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger, IProductProvider productProvider, IMapper mapper)
         {
             _logger = logger;
             _purchaseRepository = purchaseRepository;
+            _productProvider = productProvider;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -66,6 +72,26 @@ namespace Catalyte.Apparel.Providers.Providers
             }
 
             return savedPurchase;
+        }
+
+        /// <summary>
+        /// Checks purchase to see if it contains inactive products
+        /// </summary>
+        /// <param name="newPurchase">Purchase is the purchase to check.</param>
+        /// <returns>list of line items from purchase that are inactive</returns>
+        public async Task<List<LineItemDTO>> CheckForInactiveProductsAsync(Purchase newPurchase)
+        {
+            List<LineItemDTO> inactiveProducts = new();
+
+            foreach (var lineItem in newPurchase.LineItems)
+            {
+                var product = await _productProvider.GetProductByIdAsync(lineItem.ProductId);
+                if (!product.Active)
+                {
+                    inactiveProducts.Add(_mapper.Map<LineItemDTO>(lineItem));
+                }
+            }
+            return inactiveProducts;
         }
     }
 }
