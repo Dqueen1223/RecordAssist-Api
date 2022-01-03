@@ -3,6 +3,7 @@ using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Repositories
@@ -22,6 +23,11 @@ namespace Catalyte.Apparel.Data.Repositories
         public async Task<Product> GetProductByIdAsync(int productId)
         {
             return await _ctx.Products.FindAsync(productId);
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        {
+            return await _ctx.Products.Where(p => p.Demographic == productDemographic).ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()

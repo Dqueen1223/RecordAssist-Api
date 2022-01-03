@@ -40,7 +40,7 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(productDTOs);
         }
 
-        [HttpGet("/products/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProductByIdAsync(int id)
         {
             _logger.LogInformation($"Request received for GetProductByIdAsync for id: {id}");
@@ -49,6 +49,17 @@ namespace Catalyte.Apparel.API.Controllers
             var productDTO = _mapper.Map<ProductDTO>(product);
 
             return Ok(productDTO);
+        }
+
+        [HttpGet("demographics/{demographic}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByDemographicAsync(string demographic)
+        {
+            _logger.LogInformation($"Request received for GetProductsByDemographicAsync for demographic: {demographic}");
+
+            var products = await _productProvider.GetProductsByDemographicAsync(demographic);
+            var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
+
+            return Ok(productDTOs);
         }
     }
 }

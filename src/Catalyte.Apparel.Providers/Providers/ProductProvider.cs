@@ -75,5 +75,27 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided demographic from the database.
+        /// </summary>
+        /// <param name="productDemographic">The demographic of the products to retrieve.</param>
+        /// <returns>The products with the given demographic.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByDemographicAsync(productDemographic);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
     }
 }
