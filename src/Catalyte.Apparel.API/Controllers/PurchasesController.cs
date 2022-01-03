@@ -1,7 +1,7 @@
-﻿﻿using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;

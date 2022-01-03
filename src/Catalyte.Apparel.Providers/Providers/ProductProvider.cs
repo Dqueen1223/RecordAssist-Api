@@ -1,14 +1,10 @@
-﻿using AutoMapper;
-using Catalyte.Apparel.Data.Interfaces;
+﻿using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Utilities;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Providers.Providers
@@ -67,7 +63,7 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 categories = await _productRepository.GetAllUniqueProductCategoriesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
@@ -96,11 +92,11 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
 
-            /// <summary>
-            /// Asynchronously retrieves all products from the database.
-            /// </summary>
-            /// <returns>All products in the database.</returns>
-            public async Task<IEnumerable<Product>> GetProductsAsync()
+        /// <summary>
+        /// Asynchronously retrieves all products from the database.
+        /// </summary>
+        /// <returns>All products in the database.</returns>
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             IEnumerable<Product> products;
 

@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using Catalyte.Apparel.DTOs.Products;
-using Xunit;
-using Catalyte.Apparel.Providers.Providers;
-using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.Data.Context;
-using AutoMapper;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Catalyte.Apparel.API.Controllers;
-using Catalyte.Apparel.Data.Repositories;
 using Catalyte.Apparel.Data.Interfaces;
+using Catalyte.Apparel.Providers.Interfaces;
+using Catalyte.Apparel.Providers.Providers;
+using Catalyte.Apparel.Utilities.HttpResponseExceptions;
+using Microsoft.Extensions.Logging;
 using Moq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
 namespace Test.Unit
 {
     public class ProductUnitTest
@@ -23,9 +16,9 @@ namespace Test.Unit
         private readonly Mock<ILogger<ProductProvider>> _loggerMock = new();
 
         [Fact]
-        public async Task GetAllUniqueProductCategory_NoProducts_ReturnEmpty()
+        public async Task GetAllUniqueProductCategory_returnListOfStrings()
         {
-            var test = new List<string> {"test","test2"};
+            var test = new List<string> { "test", "test2" };
             //arrange
             _repositoryMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
                 .ReturnsAsync(test);
@@ -36,26 +29,59 @@ namespace Test.Unit
             var actual = await provider.GetAllUniqueProductCategoriesAsync();
 
             //Assert
-            Assert.Equal(test,actual);
+            Assert.Equal(test, actual);
         }
-      }
-        /*[Fact]
-        public async Task GetAllUniqueProductCategory_duplicateCatgories_returnSingleCategory() 
+
+        [Fact]
+        public async Task GetAllUniqueProductCategory_returnException()
         {
             //arrange
-            var testList = new List<string>() { "test" };
+            _repositoryMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
+                    .ThrowsAsync(new ServiceUnavailableException("error"));
 
-            _productProviderMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
-                    .ReturnsAsync(testList);
-
-            var controller = new ProductsController(_loggerMock.Object, _productProviderMock.Object, mapper);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
 
 
             //act
-            var actual = await controller.GetAllUniqueProductCategoriesAsync();
+            Task actual() => provider.GetAllUniqueProductCategoriesAsync();
 
             //Assert
-            Assert.Equal(testList, actual.Value);
-        }*/
+            await Assert.ThrowsAsync<ServiceUnavailableException>(actual);
+        }
+
+        [Fact]
+        public async Task GetAllUniqueProductType_returnListOfStrings()
+        {
+            //arrange
+            _repositoryMock.Setup(repo => repo.GetAllUniqueProductTypesAsync())
+                    .ThrowsAsync(new ServiceUnavailableException("error"));
+
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+
+
+            //act
+            Task actual() => provider.GetAllUniqueProductTypesAsync();
+
+            //Assert
+            await Assert.ThrowsAsync<ServiceUnavailableException>(actual);
+        }
+
+        [Fact]
+        public async Task GetAllUniqueProductType_returnException()
+        {
+            //arrange
+            _repositoryMock.Setup(repo => repo.GetAllUniqueProductTypesAsync())
+                    .ThrowsAsync(new ServiceUnavailableException("error"));
+
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+
+
+            //act
+            Task actual() => provider.GetAllUniqueProductTypesAsync();
+
+            //Assert
+            await Assert.ThrowsAsync<ServiceUnavailableException>(actual);
+        }
+    }
 }
 

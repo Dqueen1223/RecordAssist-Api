@@ -1,8 +1,8 @@
 using Catalyte.Apparel.DTOs.Products;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Xunit;
 using System.Linq;
 
@@ -33,12 +33,9 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var content = await response.Content.ReadAsAsync<List<string>>();
-            var expected = new List<string> {"Golf", "Soccer", "Basketball", "Hockey", "Football", "Running",
-            "Baseball", "Skateboarding", "Boxing", "Weightlifting"};
-            expected.Sort();
             content.Sort();
 
-            Assert.Equal(expected,content);
+            Assert.True(content.Distinct().Count()==content.Count());
         }
         [Fact]
         public async Task GetAllUniqueProductTypes_ReturnsNoDuplicates()
@@ -47,12 +44,8 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var content = await response.Content.ReadAsAsync<List<string>>();
-            var expected = new List<string> {"Pant", "Short", "Shoe", "Glove", "Jacket", "Tank Top", "Sock", "Sunglasses",
-            "Hat", "Helmet", "Belt", "Visor", "Shin Guard", "Elbow Pad", "Headband", "Wristband", "Hoodie", "Flip Flop", 
-            "Pool Noodle"};
-            expected.Sort();
-            content.Sort();
-            Assert.Equal(expected, content);
+
+            Assert.True(content.Distinct().Count() == content.Count());
         }
     }
 }
