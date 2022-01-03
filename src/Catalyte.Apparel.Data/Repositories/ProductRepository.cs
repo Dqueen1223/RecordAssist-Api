@@ -25,9 +25,14 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Products.FindAsync(productId);
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            return await _ctx.Products.Where(p => p.Demographic == productDemographic).ToListAsync();
+            return await _ctx.Products.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByBrandAsync(string productBrand)
+        {
+            return await _ctx.Products.Where(p => p.Brand == productBrand).ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string productCategory)
@@ -35,9 +40,29 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Products.Where(p => p.Category == productCategory).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProductsByColorAsync(string productColor)
         {
-            return await _ctx.Products.ToListAsync();
+            return await _ctx.Products.Where(p => p.PrimaryColorCode == productColor || p.SecondaryColorCode == productColor).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        {
+            return await _ctx.Products.Where(p => p.Demographic == productDemographic).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByMaterialAsync(string productMaterial)
+        {
+            return await _ctx.Products.Where(p => p.Material == productMaterial).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByPriceAsync(decimal productPrice)
+        {
+            return await _ctx.Products.Where(p => p.Price == productPrice).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByTypeAsync(string productType)
+        {
+            return await _ctx.Products.Where(p => p.Type == productType).ToListAsync();
         }
     }
 

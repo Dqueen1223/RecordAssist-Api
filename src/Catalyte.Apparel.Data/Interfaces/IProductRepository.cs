@@ -11,11 +11,21 @@ namespace Catalyte.Apparel.Data.Interfaces
     {
         Task<Product> GetProductByIdAsync(int productId);
 
-        Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic);
+        Task<IEnumerable<Product>> GetProductsAsync();
+
+        Task<IEnumerable<Product>> GetProductsByBrandAsync(string productBrand);
 
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(string productCategory);
 
+        Task<IEnumerable<Product>> GetProductsByColorAsync(string productColor);
 
-        Task<IEnumerable<Product>> GetProductsAsync();
+        Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic);
+
+        Task<IEnumerable<Product>> GetProductsByMaterialAsync(string productMaterial);
+
+        Task<IEnumerable<Product>> GetProductsByPriceAsync(decimal productPrice);
+
+        Task<IEnumerable<Product>> GetProductsByTypeAsync(string productType);
+
     }
 }

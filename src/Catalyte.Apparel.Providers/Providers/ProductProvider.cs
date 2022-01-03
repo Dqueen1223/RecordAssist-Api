@@ -77,17 +77,17 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
         /// <summary>
-        /// Asynchronously retrieves the products with the provided demographic from the database.
+        /// Asynchronously retrieves the products with the provided brand from the database.
         /// </summary>
-        /// <param name="productDemographic">The demographic of the products to retrieve.</param>
-        /// <returns>The products with the given demographic.</returns>
-        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        /// <param name="productBrand">The brand of the products to retrieve.</param>
+        /// <returns>The products with the given brand.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByBrandAsync(string productBrand)
         {
             IEnumerable<Product> products;
 
             try
             {
-                products = await _productRepository.GetProductsByDemographicAsync(productDemographic);
+                products = await _productRepository.GetProductsByBrandAsync(productBrand);
             }
             catch (Exception ex)
             {
@@ -110,6 +110,116 @@ namespace Catalyte.Apparel.Providers.Providers
             try
             {
                 products = await _productRepository.GetProductsByCategoryAsync(productCategory);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided color from the database.
+        /// </summary>
+        /// <param name="productColor">The color of the products to retrieve.</param>
+        /// <returns>The products with the given color.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByColorAsync(string productColor)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByColorAsync(productColor);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided demographic from the database.
+        /// </summary>
+        /// <param name="productDemographic">The demographic of the products to retrieve.</param>
+        /// <returns>The products with the given demographic.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByDemographicAsync(string productDemographic)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByDemographicAsync(productDemographic);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided material from the database.
+        /// </summary>
+        /// <param name="productMaterial">The material of the products to retrieve.</param>
+        /// <returns>The products with the given material.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByMaterialAsync(string productMaterial)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByMaterialAsync(productMaterial);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided price from the database.
+        /// </summary>
+        /// <param name="productPrice">The price of the products to retrieve.</param>
+        /// <returns>The products with the given price.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByPriceAsync(decimal productPrice)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByPriceAsync(productPrice);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided type from the database.
+        /// </summary>
+        /// <param name="productType">The type of the products to retrieve.</param>
+        /// <returns>The products with the given type.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByTypeAsync(string productType)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByTypeAsync(productType);
             }
             catch (Exception ex)
             {
