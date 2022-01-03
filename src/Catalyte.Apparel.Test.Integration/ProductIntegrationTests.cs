@@ -27,7 +27,7 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(1, content.Id);
         }
         [Fact]
-        public async Task GetAllUniqueProductCategoriesAsync()
+        public async Task GetAllUniqueProductCategoriesAsync_ReturnsNoDuplicates()
         {
             var response = await _client.GetAsync("/products/categories");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -41,7 +41,7 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(expected,content);
         }
         [Fact]
-        public async Task GetAllUniqueProductTypesc()
+        public async Task GetAllUniqueProductTypes_ReturnsNoDuplicates()
         {
             var response = await _client.GetAsync("/products/types");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -52,7 +52,6 @@ namespace Catalyte.Apparel.Test.Integration
             "Pool Noodle"};
             expected.Sort();
             content.Sort();
-
             Assert.Equal(expected, content);
         }
     }

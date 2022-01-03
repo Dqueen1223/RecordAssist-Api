@@ -10,31 +10,52 @@ using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Catalyte.Apparel.API.Controllers;
+using Catalyte.Apparel.Data.Repositories;
+using Catalyte.Apparel.Data.Interfaces;
+using Moq;
 namespace Test.Unit
 {
     public class ProductUnitTest
     {
-        private readonly ILogger<ProductUnitTest> _logger;
-        private readonly IProductProvider _productProvider;
-        private readonly IMapper _mapper;
-        public ProductUnitTest(
-            ILogger<ProductUnitTest> logger,
-            IProductProvider productProvider,
-            IMapper mapper)
+        private readonly Mock<IProductRepository> _repositoryMock = new();
+        private readonly Mock<IProductProvider> _productProviderMock = new();
+        private readonly Mock<ILogger<ProductProvider>> _loggerMock = new();
+
+        [Fact]
+        public async Task GetAllUniqueProductCategory_NoProducts_ReturnEmpty()
         {
-            _logger = logger;
-            _mapper = mapper;
-            _productProvider = productProvider;
+            var test = new List<string> {"test","test2"};
+            //arrange
+            _repositoryMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
+                .ReturnsAsync(test);
+
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+
+            //Act
+            var actual = await provider.GetAllUniqueProductCategoriesAsync();
+
+            //Assert
+            Assert.Equal(test,actual);
         }
-        
-            [Fact]
-        public void GetAllUniqueProductCategory_NoProducts_ReturnEmpty()
+      }
+        /*[Fact]
+        public async Task GetAllUniqueProductCategory_duplicateCatgories_returnSingleCategory() 
         {
-            ProductDTO product = new ProductDTO();
-            product.Category = "test";
-            var actual = _productProvider.GetAllUniqueProductCategoriesAsync();
-            var expected = new IEnumerable<List<string>>
-            Assert.Equal(expected, actual);
-        }
-    }
+            //arrange
+            var testList = new List<string>() { "test" };
+
+            _productProviderMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
+                    .ReturnsAsync(testList);
+
+            var controller = new ProductsController(_loggerMock.Object, _productProviderMock.Object, mapper);
+
+
+            //act
+            var actual = await controller.GetAllUniqueProductCategoriesAsync();
+
+            //Assert
+            Assert.Equal(testList, actual.Value);
+        }*/
 }
+
