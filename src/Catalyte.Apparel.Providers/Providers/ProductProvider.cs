@@ -97,5 +97,27 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+
+        /// <summary>
+        /// Asynchronously retrieves the products with the provided category from the database.
+        /// </summary>
+        /// <param name="productCategory">The category of the products to retrieve.</param>
+        /// <returns>The products with the given category.</returns>
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string productCategory)
+        {
+            IEnumerable<Product> products;
+
+            try
+            {
+                products = await _productRepository.GetProductsByCategoryAsync(productCategory);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return products;
+        }
     }
 }

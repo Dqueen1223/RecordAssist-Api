@@ -30,6 +30,11 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Products.Where(p => p.Demographic == productDemographic).ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string productCategory)
+        {
+            return await _ctx.Products.Where(p => p.Category == productCategory).ToListAsync();
+        }
+
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             return await _ctx.Products.ToListAsync();
