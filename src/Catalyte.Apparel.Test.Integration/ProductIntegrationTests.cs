@@ -33,7 +33,6 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var content = await response.Content.ReadAsAsync<List<string>>();
-            content.Sort();
 
             Assert.True(content.Distinct().Count()==content.Count());
         }
