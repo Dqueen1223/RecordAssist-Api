@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Catalyte.Apparel.Data.Model
 {
@@ -40,6 +41,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Material { get; set; }
 
+        [Column(TypeName = "numeric(5, 2)")]
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
