@@ -60,7 +60,6 @@ namespace Catalyte.Apparel.API.Controllers
                 var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
                 return Created($"/purchases/", purchaseDTO);
             }
-            return Created($"/purchases/", purchaseDTO);
         }
     }
 }
