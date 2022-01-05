@@ -1,8 +1,7 @@
-﻿using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Purchases;
-using Catalyte.Apparel.Utilities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Catalyte.Apparel.Data.Model;
+using Catalyte.Apparel.DTOs.Purchases;
 
 namespace Catalyte.Apparel.Providers.Interfaces
 {

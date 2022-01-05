@@ -1,6 +1,6 @@
-﻿using Catalyte.Apparel.Data.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Catalyte.Apparel.Data.Model;
 
 namespace Catalyte.Apparel.Data.Filters
 {
@@ -19,10 +19,10 @@ namespace Catalyte.Apparel.Data.Filters
             return products.Where(i => i.Category == productCategory).AsQueryable();
         }
 
-        public static IQueryable<Product> WhereProductDemographicEquals(this IEnumerable<Product> products, string productDemographic)
-        {
-            return products.Where(i => i.Demographic == productDemographic).AsQueryable();
-        }
+        //public static IQueryable<Product> WhereProductDemographicEquals(this IEnumerable<Product> products, string productDemographic)
+        // {
+        //     return products.Where(i => i.Demographic == productDemographic).AsQueryable();
+        //}
 
         public static IQueryable<Product> WhereProductColorEquals(this IEnumerable<Product> products, string productColor)
         {

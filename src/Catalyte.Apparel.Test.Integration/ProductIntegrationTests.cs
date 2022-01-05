@@ -1,7 +1,7 @@
-using Catalyte.Apparel.DTOs.Products;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Catalyte.Apparel.DTOs.Products;
 using Xunit;
 
 namespace Catalyte.Apparel.Test.Integration

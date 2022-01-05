@@ -48,7 +48,7 @@ namespace Catalyte.Apparel.API.Controllers
             _logger.LogInformation("Request received for CreatePurchase");
 
             var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);
-           
+
             List<LineItemDTO> inactiveProducts = await _purchaseProvider.CheckForInactiveProductsAsync(newPurchase);
             if (inactiveProducts.Count > 0)
             {
