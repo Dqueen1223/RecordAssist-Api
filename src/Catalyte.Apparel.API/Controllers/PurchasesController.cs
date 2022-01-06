@@ -48,19 +48,10 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation("Request received for CreatePurchase");
 
-            var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);
-           
-            List<LineItemDTO> inactiveProducts = await _purchaseProvider.CheckForInactiveProductsAsync(newPurchase);
-            if (inactiveProducts.Count > 0)
-            {
-                return UnprocessableEntity(inactiveProducts);
-            }
-            else
-            {
-                var savedPurchase = await _purchaseProvider.CreatePurchasesAsync(newPurchase);
-                var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
-                return Created($"/purchases/", purchaseDTO);
-            }
+            var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);        
+            var savedPurchase = await _purchaseProvider.CreatePurchasesAsync(newPurchase);
+            var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
+            return Created($"/purchases/", purchaseDTO);
         }
     }
 }
