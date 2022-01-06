@@ -7,6 +7,7 @@ using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+
 namespace Catalyte.Apparel.API.Controllers
 {
     /// <summary>
@@ -32,11 +33,11 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PurchaseDTO>>> GetAllPurchasesAsync()
+        public async Task<ActionResult<List<PurchaseDTO>>> GetAllPurchasesByEmailAsync(string email)
         {
             _logger.LogInformation("Request received for GetAllPurchasesAsync");
 
-            var purchases = await _purchaseProvider.GetAllPurchasesAsync();
+            var purchases = await _purchaseProvider.GetAllPurchasesByEmailAsync(email);
             var purchaseDTOs = _mapper.MapPurchasesToPurchaseDtos(purchases);
 
             return Ok(purchaseDTOs);
@@ -60,7 +61,6 @@ namespace Catalyte.Apparel.API.Controllers
                 var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
                 return Created($"/purchases/", purchaseDTO);
             }
-
         }
     }
 }

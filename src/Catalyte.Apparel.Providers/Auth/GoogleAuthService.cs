@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
