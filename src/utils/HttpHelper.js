@@ -13,7 +13,7 @@ export default (route, method, payload) => fetch(Constants.BASE_URL_API + route,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': `${Constants.BASE_URL_API}`
   },
   body: JSON.stringify(payload)
 });
