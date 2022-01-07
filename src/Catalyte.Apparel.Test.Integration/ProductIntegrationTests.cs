@@ -1,12 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 using Catalyte.Apparel.DTOs.Products;
 using System.Collections.Generic;
 >>>>>>> 3b03e093792d667ad458c550d27e6eb7af67b5ab
+=======
+using Catalyte.Apparel.DTOs.Products;
+using System.Collections.Generic;
+>>>>>>> 42f716e55b4d3466a4d271c875ec0eff3e39bcd4
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Catalyte.Apparel.DTOs.Products;
 using Xunit;
 using System.Linq;
 

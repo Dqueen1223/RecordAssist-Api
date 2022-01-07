@@ -1,4 +1,6 @@
-﻿using Catalyte.Apparel.Data.Model;
+﻿using System.Collections.Generic;
+using Catalyte.Apparel.Data.Model;
+using Catalyte.Apparel.DTOs.Purchases;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Catalyte.Apparel.DTOs.Purchases;

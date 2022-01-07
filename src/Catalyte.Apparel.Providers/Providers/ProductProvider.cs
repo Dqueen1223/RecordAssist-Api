@@ -6,7 +6,8 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
-using System.Linq;
+
+
 
 namespace Catalyte.Apparel.Providers.Providers
 {
@@ -118,26 +119,7 @@ namespace Catalyte.Apparel.Providers.Providers
             return products;
         }
 
-        ///// <summary>
-        ///// Asynchronously retrieves all products from the database.
-        ///// </summary>
-        ///// <returns>All products in the database.</returns>
-        //public async Task<IEnumerable<Product>> GetProductsAsync()
-        //{
-        //    IEnumerable<Product> products;
-
-        //    try
-        //    {
-        //        products = await _productRepository.GetProductsAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-
-        //    return products;
-        //}
+        
 
     }
 }
