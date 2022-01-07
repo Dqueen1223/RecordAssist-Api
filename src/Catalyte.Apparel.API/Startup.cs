@@ -101,12 +101,12 @@ namespace Catalyte.Apparel.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalyte.Apparel.API v1"));
 
                 //Enable CORS
-                app.UseCors(options => options.WithOrigins().AllowAnyMethod().AllowAnyHeader());
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
             if (env.IsProduction())
             {
                 //Enable CORS
-                app.UseCors(options => options.WithOrigins().AllowAnyMethod().AllowAnyHeader());
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
 
             // Resets data on API startup
