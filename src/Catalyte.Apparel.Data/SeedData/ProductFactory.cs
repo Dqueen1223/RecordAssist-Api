@@ -98,8 +98,38 @@ namespace Catalyte.Apparel.Data.SeedData
             "KJ",
             "SM",
             "RD",
-            "LRG",
-            "SM"
+            "LRG"
+        };
+
+        private List<string> _brands = new()
+        {
+            "Nike",
+            "Reebok",
+            "Asics",
+            "Brooks",
+            "Skechers",
+            "Puma",
+            "Under Armor",
+            "Adidas"
+        };
+
+        private List<string> _materials = new()
+        {
+            "Cotton",
+            "Polyester",
+            "Microfiber",
+            "Nylon",
+            "Synthetic",
+            "Gore-Tex",
+            "Spandex",
+            "Calico",
+            "Bamboo-Fiber"
+        };
+
+        private List<bool> _active = new()
+        {
+            true,
+            false
         };
 
         /// <summary>
@@ -113,7 +143,7 @@ namespace Catalyte.Apparel.Data.SeedData
             builder.Append('-');
             builder.Append(RandomString(3));
             builder.Append('-');
-            builder.Append(_skuMods[_rand.Next(0, 6)]);
+            builder.Append(_skuMods[_rand.Next(0, _skuMods.Count)]);
 
             return builder.ToString().ToUpper();
         }
@@ -124,7 +154,7 @@ namespace Catalyte.Apparel.Data.SeedData
         /// <returns>A demographic string.</returns>
         private string GetDemographic()
         {
-            return _demographics[_rand.Next(0, 2)];
+            return _demographics[_rand.Next(0, _demographics.Count)];
         }
 
         /// <summary>
@@ -145,7 +175,98 @@ namespace Catalyte.Apparel.Data.SeedData
             return "sc" + RandomString(5);
         }
 
+        /// <summary>
+        /// Generates a random price between 19.99 and 199.99.
+        /// </summary>
+        /// <returns>A price double.</returns>
+        private decimal GetPrice()
+        {
 
+            double minValue = 19.99;
+            double maxValue = 200;
+            double random = _rand.NextDouble();
+            double price = minValue + (random * (maxValue - minValue));
+            var priceString = String.Format("{0:0.00}", price);
+
+            return Decimal.Parse(priceString);
+        }
+        /// <summary>
+        /// Generates a random integer less than 10000 for the quantity field .
+        /// </summary>
+        /// <returns>A quantity integer</returns>
+        private int GetQuantity()
+        {
+            return _rand.Next(0, 10000);
+        }
+
+        private DateTime GetReleaseDate()
+        {
+            //sets the minimum date to 1/1/2020
+            var minDate = new DateTime(2020, 1, 1);
+            //sets the maximum date to the current date
+            var maxDate = DateTime.Now;
+            //sets the range that release dates can be to any day between minDate and maxDate in daye
+            var range = Convert.ToInt32(maxDate.Subtract(minDate).TotalDays);
+            //returns a random day from the range of days starting at the minDate
+            return minDate.AddDays(_rand.Next(range));
+
+
+        }
+
+        /// <summary>
+        /// Assigns the image source based on the {type} of product.
+        /// </summary>
+        /// <param name="type">type of product</param>
+        /// <returns>a string that is a URL to an image source</returns>
+        private string GetImageSrc(string type)
+        {
+            string source;
+            switch (type)
+            {
+                case "Pant": source = "https://m.media-amazon.com/images/I/51cxynn5yIL._AC_UX569_.jpg";
+                    break;
+                case "Short": source = "https://m.media-amazon.com/images/I/71c0K11eDeS._AC_UX569_.jpg";
+                    break;
+                case "Shoe": source = "https://m.media-amazon.com/images/I/41huVYB16VL._AC_.jpg";
+                    break;
+                case "Glove": source = "https://m.media-amazon.com/images/I/81blOUiYdaL._AC_SX679_.jpg";
+                    break;
+                case "Jacket": source = "https://m.media-amazon.com/images/I/61ZNBEQpQ0L._AC_UX679_.jpg";
+                    break;
+                case "Tank Top": source = "https://m.media-amazon.com/images/I/81WMOaI0zbL._AC_UX466_.jpg";
+                    break;
+                case "Sock": source = "https://m.media-amazon.com/images/I/81+Yg21pxJL._AC_UX679_.jpg";
+                    break;
+                case "Sunglasses": source = "https://m.media-amazon.com/images/I/61tta3M0geS._AC_SX522_.jpg";
+                    break;
+                case "Hat": source = "https://m.media-amazon.com/images/I/71LPDt9QbAL._AC_SX466._SX._UX._SY._UY_.jpg";
+                    break;
+                case "Helmet": source = "https://m.media-amazon.com/images/I/711+u8SbLnL._AC_SX679_.jpg";
+                    break;
+                case "Belt": source = "https://m.media-amazon.com/images/I/81tjDxwjErS._AC_UX466_.jpg";
+                    break;
+                case "Visor": source = "https://m.media-amazon.com/images/I/81kQfSNbNAL._AC_UY445_.jpg";
+                    break;
+                case "Shin Guard": source = "https://m.media-amazon.com/images/I/41tDyH7SZPL._AC_.jpg";
+                    break;
+                case "Elbow Pad": source = "https://m.media-amazon.com/images/I/81wiqyEka0S._AC_SL1500_.jpg";
+                    break;
+                case "Headband": source = "https://m.media-amazon.com/images/I/61az40d6MGL._AC_SX679_.jpg";
+                    break;
+                case "Wristband": source = "https://m.media-amazon.com/images/I/91j6AUptoLL._AC_UX466_.jpg";
+                    break;
+                case "Hoodie": source = "https://m.media-amazon.com/images/I/81rc97tuOhL._AC_UX569_.jpg";
+                    break;
+                case "Flip Flop": source = "https://m.media-amazon.com/images/I/61Sh6GpKroL._AC_UY500_.jpg";
+                    break;
+                case "Pool Noodle": source = "https://m.media-amazon.com/images/I/81t6UzFSWQL._AC_SY679_.jpg";
+                    break;
+                default: source = "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png";
+                    break;
+            }
+
+            return source;
+        }
         /// <summary>
         /// Generates a number of random products based on input.
         /// </summary>
@@ -171,19 +292,34 @@ namespace Catalyte.Apparel.Data.SeedData
         /// <returns>A randomly generated product.</returns>
         private Product CreateRandomProduct(int id)
         {
+            var cat = _categories[_rand.Next(0, _categories.Count)];
+            var adj = _adjectives[_rand.Next(0, _adjectives.Count)];
+            var demo = GetDemographic();
+            var type = _types[_rand.Next(0, _types.Count)];
+
+
             return new Product
             {
                 Id = id,
-                Category = _categories[_rand.Next(0, 9)],
-                Type = "Short",
+                Category = cat,
+                Type = type,
                 Sku = GetRandomSku(),
-                Demographic = GetDemographic(),
+                Demographic = demo,
                 GlobalProductCode = GetRandomProductId(),
                 StyleNumber = GetStyleCode(),
-                ReleaseDate = DateTime.Now,
+                ReleaseDate = GetReleaseDate(),
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
-                Active = false,
+                Active = _active[_rand.Next(0, _active.Count)],
+                Description = cat + " " + demo + " " + adj,
+                Name = adj + " " + cat + " " + type,
+                PrimaryColorCode = _colors[_rand.Next(0, _colors.Count)],
+                SecondaryColorCode = _colors[_rand.Next(0, _colors.Count)],
+                Brand = _brands[_rand.Next(0, _brands.Count)],
+                Material = _materials[_rand.Next(0, _materials.Count)],
+                Price = GetPrice(),
+                Quantity = GetQuantity(),
+                ImageSrc = GetImageSrc(type)
             };
         }
 
@@ -227,3 +363,4 @@ namespace Catalyte.Apparel.Data.SeedData
         }
     }
 }
+

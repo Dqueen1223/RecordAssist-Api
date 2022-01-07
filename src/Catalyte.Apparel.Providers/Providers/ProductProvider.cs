@@ -6,6 +6,7 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace Catalyte.Apparel.Providers.Providers
 {
@@ -50,6 +51,47 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return product;
         }
+        /// <summary>
+        /// Asynchronously retrieves all unique product categories in the database 
+        /// </summary>
+        /// <returns>list of strings of categories</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
+        {
+            List<string> categories;
+
+            try
+            {
+                categories = await _productRepository.GetAllUniqueProductCategoriesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
+        /// <summary>
+        /// Asynchronously retrieves all unique product types in the database 
+        /// </summary>
+        /// <returns>list of strings of categories</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        public async Task<List<string>> GetAllUniqueProductTypesAsync()
+        {
+            List<string> categories;
+
+            try
+            {
+                categories = await _productRepository.GetAllUniqueProductTypesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
+
 
         /// <summary>
         /// Asynchronously retrieves all products from the database.
@@ -75,5 +117,27 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+
+        ///// <summary>
+        ///// Asynchronously retrieves all products from the database.
+        ///// </summary>
+        ///// <returns>All products in the database.</returns>
+        //public async Task<IEnumerable<Product>> GetProductsAsync()
+        //{
+        //    IEnumerable<Product> products;
+
+        //    try
+        //    {
+        //        products = await _productRepository.GetProductsAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.Message);
+        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
+        //    }
+
+        //    return products;
+        //}
+
     }
 }
