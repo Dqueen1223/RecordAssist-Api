@@ -7,6 +7,11 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Catalyte.Apparel.Utilities.Validation;
+using System.Linq;
 
 namespace Catalyte.Apparel.Providers.Providers
 {
@@ -60,6 +65,10 @@ namespace Catalyte.Apparel.Providers.Providers
                     + inactiveProducts);
             }
 
+            List<string> errors = Validation.CreditCardValidation(newPurchase);
+            if (errors.Count > 0)
+                throw new BadRequestException(string.Join(' ', errors));
+
             try
             {
                 savedPurchase = await _purchaseRepository.CreatePurchaseAsync(newPurchase);
@@ -69,7 +78,6 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-
             return savedPurchase;
         }
 

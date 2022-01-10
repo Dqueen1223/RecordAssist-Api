@@ -43,7 +43,7 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Products.Where(p =>
             (p.Brand == brand || brand == null) &&
             (p.Category == category || category == null) &&
-            (p.PrimaryColorCode == (string)color || p.SecondaryColorCode == (string)color || color == null) &&
+            (p.PrimaryColorCode == color || p.SecondaryColorCode == color || color == null) &&
             (p.Demographic == demographic || demographic == null) &&
             (p.Material == material || material == null) &&
             (p.Price == price || price.Equals(0)) &&
