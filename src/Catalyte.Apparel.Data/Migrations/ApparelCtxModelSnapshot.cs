@@ -260,8 +260,8 @@ namespace Catalyte.Apparel.Data.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("CardNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)");
+                        .HasMaxLength(19)
+                        .HasColumnType("character varying(19)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
