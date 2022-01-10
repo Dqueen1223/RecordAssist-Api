@@ -49,6 +49,7 @@ namespace Catalyte.Apparel.Data.Repositories
             (p.Price == price || price.Equals(0)) &&
             (p.Type == type || type == null)).ToListAsync();
         }
+
     }
 
 }
