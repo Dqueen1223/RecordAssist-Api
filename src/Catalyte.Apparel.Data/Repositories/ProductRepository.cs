@@ -3,7 +3,6 @@ using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Repositories
@@ -28,16 +27,6 @@ namespace Catalyte.Apparel.Data.Repositories
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             return await _ctx.Products.ToListAsync();
-        }
-
-        public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
-        {
-            return await _ctx.Products.Select(l => l.Category).Distinct().ToListAsync();
-        }
-
-        public async Task<List<string>> GetAllUniqueProductTypesAsync()
-        {
-            return await _ctx.Products.Select(l => l.Type).Distinct().ToListAsync();
         }
     }
 
