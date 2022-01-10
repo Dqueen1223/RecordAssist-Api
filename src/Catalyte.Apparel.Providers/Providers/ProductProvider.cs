@@ -1,14 +1,10 @@
-﻿using AutoMapper;
-using Catalyte.Apparel.Data.Interfaces;
+﻿using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Utilities;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Providers.Providers
@@ -54,6 +50,47 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return product;
         }
+        /// <summary>
+        /// Asynchronously retrieves all unique product categories in the database 
+        /// </summary>
+        /// <returns>list of strings of categories</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
+        {
+            List<string> categories;
+
+            try
+            {
+                categories = await _productRepository.GetAllUniqueProductCategoriesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
+        /// <summary>
+        /// Asynchronously retrieves all unique product types in the database 
+        /// </summary>
+        /// <returns>list of strings of categories</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        public async Task<List<string>> GetAllUniqueProductTypesAsync()
+        {
+            List<string> categories;
+
+            try
+            {
+                categories = await _productRepository.GetAllUniqueProductTypesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return categories;
+        }
+
 
         /// <summary>
         /// Asynchronously retrieves all products from the database.

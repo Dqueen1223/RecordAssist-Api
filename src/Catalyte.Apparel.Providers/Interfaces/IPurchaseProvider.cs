@@ -1,6 +1,5 @@
 ﻿using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Purchases;
-using Catalyte.Apparel.Utilities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,8 +10,10 @@ namespace Catalyte.Apparel.Providers.Interfaces
     /// </summary>
     public interface IPurchaseProvider
     {
-        Task<IEnumerable<Purchase>> GetAllPurchasesAsync();
+        Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email);
 
         Task<Purchase> CreatePurchasesAsync(Purchase model);
+
+        Task<List<LineItemDTO>> CheckForInactiveProductsAsync(Purchase purchase);
     }
 }

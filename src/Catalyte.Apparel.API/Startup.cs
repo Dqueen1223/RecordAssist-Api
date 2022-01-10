@@ -1,5 +1,5 @@
-﻿using Catalyte.Apparel.API.Filters;
 ﻿using System.Net.Mime;
+using Catalyte.Apparel.API.Filters;
 using Catalyte.Apparel.Data;
 using Catalyte.Apparel.Data.Context;
 using Catalyte.Apparel.Providers;
@@ -100,9 +100,11 @@ namespace Catalyte.Apparel.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalyte.Apparel.API v1"));
 
-                //Enable CORS
-                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+             
             }
+
+              //Enable CORS
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             // Resets data on API startup
             db.Database.ExecuteSqlRaw("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");

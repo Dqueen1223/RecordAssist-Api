@@ -1,6 +1,4 @@
 ﻿using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Products;
-using Catalyte.Apparel.Utilities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +12,9 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<Product> GetProductByIdAsync(int productId);
 
         Task<IEnumerable<Product>> GetProductsAsync();
+
+        Task<List<string>> GetAllUniqueProductCategoriesAsync();
+
+        Task<List<string>> GetAllUniqueProductTypesAsync();
     }
 }
