@@ -24,8 +24,8 @@ namespace Catalyte.Apparel.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "CardNumber",
                 table: "Purchases",
-                type: "character varying(16)",
-                maxLength: 16,
+                type: "character varying(19)",
+                maxLength: 19,
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
