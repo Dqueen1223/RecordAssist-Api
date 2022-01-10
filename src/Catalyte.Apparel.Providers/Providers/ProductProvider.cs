@@ -103,7 +103,9 @@ namespace Catalyte.Apparel.Providers.Providers
                                                                  decimal price, string type)
         {
             IEnumerable<Product> products;
-            string hexColor = "#" + color;
+            string hexColor = color;
+            if (color != null) hexColor = "#" + color;
+
             try
             {
                 products = await _productRepository.GetProductsAsync(brand, category, hexColor,
@@ -118,8 +120,6 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-
-        
 
     }
 }
