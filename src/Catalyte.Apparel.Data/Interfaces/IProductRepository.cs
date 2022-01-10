@@ -15,6 +15,7 @@ namespace Catalyte.Apparel.Data.Interfaces
                                                     string demographic, string material,
                                                     decimal price, string type);
 
+
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
 
         Task<List<string>> GetAllUniqueProductTypesAsync();
