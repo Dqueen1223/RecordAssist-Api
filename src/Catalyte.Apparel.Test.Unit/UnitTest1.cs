@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Catalyte.Apparel.Test.Unit
 {
+
     public class ProductFactoryTests
     {
         /// <summary>
