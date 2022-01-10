@@ -1,26 +1,12 @@
-<<<<<<< HEAD
-using System;
-=======
 using Catalyte.Apparel.Data.SeedData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
->>>>>>> 9cd1104ee696d24ca1f441ac5bc9c09335588fd8
 using Xunit;
 
 namespace Catalyte.Apparel.Test.Unit
 {
-<<<<<<< HEAD
-    public class UnitTest1
-    {
-        [Fact]
-        public void Test1()
-        {
 
-        }
-    }
-}
-=======
     public class ProductFactoryTests
     {
         /// <summary>
@@ -558,4 +544,3 @@ namespace Catalyte.Apparel.Test.Unit
 
         }
     }
->>>>>>> 9cd1104ee696d24ca1f441ac5bc9c09335588fd8
