@@ -98,38 +98,8 @@ namespace Catalyte.Apparel.Data.SeedData
             "KJ",
             "SM",
             "RD",
-            "LRG"
-        };
-
-        private List<string> _brands = new()
-        {
-            "Nike",
-            "Reebok",
-            "Asics",
-            "Brooks",
-            "Skechers",
-            "Puma",
-            "Under Armor",
-            "Adidas"
-        };
-
-        private List<string> _materials = new()
-        {
-            "Cotton",
-            "Polyester",
-            "Microfiber",
-            "Nylon",
-            "Synthetic",
-            "Gore-Tex",
-            "Spandex",
-            "Calico",
-            "Bamboo-Fiber"
-        };
-
-        private List<bool> _active = new()
-        {
-            true,
-            false
+            "LRG",
+            "SM"
         };
 
         /// <summary>
@@ -143,7 +113,7 @@ namespace Catalyte.Apparel.Data.SeedData
             builder.Append('-');
             builder.Append(RandomString(3));
             builder.Append('-');
-            builder.Append(_skuMods[_rand.Next(0, _skuMods.Count)]);
+            builder.Append(_skuMods[_rand.Next(0, 6)]);
 
             return builder.ToString().ToUpper();
         }
@@ -154,7 +124,7 @@ namespace Catalyte.Apparel.Data.SeedData
         /// <returns>A demographic string.</returns>
         private string GetDemographic()
         {
-            return _demographics[_rand.Next(0, _demographics.Count)];
+            return _demographics[_rand.Next(0, 2)];
         }
 
         /// <summary>
@@ -175,43 +145,6 @@ namespace Catalyte.Apparel.Data.SeedData
             return "sc" + RandomString(5);
         }
 
-        /// <summary>
-        /// Generates a random price between 19.99 and 199.99.
-        /// </summary>
-        /// <returns>A price double.</returns>
-        private decimal GetPrice()
-        {
-
-            double minValue = 19.99;
-            double maxValue = 200;
-            double random = _rand.NextDouble();
-            double price = minValue + (random * (maxValue - minValue));
-            var priceString = String.Format("{0:0.00}", price);
-
-            return Decimal.Parse(priceString);
-        }
-        /// <summary>
-        /// Generates a random integer less than 10000 for the quantity field .
-        /// </summary>
-        /// <returns>A quantity integer</returns>
-        private int GetQuantity()
-        {
-            return _rand.Next(0, 10000);
-        }
-
-        private DateTime GetReleaseDate()
-        {
-            //sets the minimum date to 1/1/2020
-            var minDate = new DateTime(2020, 1, 1);
-            //sets the maximum date to the current date
-            var maxDate = DateTime.Now;
-            //sets the range that release dates can be to any day between minDate and maxDate in daye
-            var range = Convert.ToInt32(maxDate.Subtract(minDate).TotalDays);
-            //returns a random day from the range of days starting at the minDate
-            return minDate.AddDays(_rand.Next(range));
-
-
-        }
         /// <summary>
         /// Generates a number of random products based on input.
         /// </summary>
@@ -237,34 +170,19 @@ namespace Catalyte.Apparel.Data.SeedData
         /// <returns>A randomly generated product.</returns>
         private Product CreateRandomProduct(int id)
         {
-            var cat = _categories[_rand.Next(0, _categories.Count)];
-            var adj = _adjectives[_rand.Next(0, _adjectives.Count)];
-            var demo = GetDemographic();
-            var type = _types[_rand.Next(0, _types.Count)];
-
-
-
             return new Product
             {
                 Id = id,
-                Category = cat,
-                Type = type,
+                Category = _categories[_rand.Next(0, 9)],
+                Type = "Short",
                 Sku = GetRandomSku(),
-                Demographic = demo,
+                Demographic = GetDemographic(),
                 GlobalProductCode = GetRandomProductId(),
                 StyleNumber = GetStyleCode(),
-                ReleaseDate = GetReleaseDate(),
+                ReleaseDate = DateTime.Now,
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
-                Active = _active[_rand.Next(0, _active.Count)],
-                Description = cat + " " + demo + " " + adj,
-                Name = adj + " " + cat + " " + type,
-                PrimaryColorCode = _colors[_rand.Next(0, _colors.Count)],
-                SecondaryColorCode = _colors[_rand.Next(0, _colors.Count)],
-                Brand = _brands[_rand.Next(0, _brands.Count)],
-                Material = _materials[_rand.Next(0, _materials.Count)],
-                Price = GetPrice(),
-                Quantity = GetQuantity(),
+                Active = false
             };
         }
 
