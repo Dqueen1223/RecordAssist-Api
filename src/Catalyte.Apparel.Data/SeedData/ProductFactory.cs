@@ -212,61 +212,6 @@ namespace Catalyte.Apparel.Data.SeedData
 
 
         }
-
-        /// <summary>
-        /// Assigns the image source based on the {type} of product.
-        /// </summary>
-        /// <param name="type">type of product</param>
-        /// <returns>a string that is a URL to an image source</returns>
-        private string GetImageSrc(string type)
-        {
-            string source;
-            switch (type)
-            {
-                case "Pant": source = "https://m.media-amazon.com/images/I/51cxynn5yIL._AC_UX569_.jpg";
-                    break;
-                case "Short": source = "https://m.media-amazon.com/images/I/71c0K11eDeS._AC_UX569_.jpg";
-                    break;
-                case "Shoe": source = "https://m.media-amazon.com/images/I/41huVYB16VL._AC_.jpg";
-                    break;
-                case "Glove": source = "https://m.media-amazon.com/images/I/81blOUiYdaL._AC_SX679_.jpg";
-                    break;
-                case "Jacket": source = "https://m.media-amazon.com/images/I/61ZNBEQpQ0L._AC_UX679_.jpg";
-                    break;
-                case "Tank Top": source = "https://m.media-amazon.com/images/I/81WMOaI0zbL._AC_UX466_.jpg";
-                    break;
-                case "Sock": source = "https://m.media-amazon.com/images/I/81+Yg21pxJL._AC_UX679_.jpg";
-                    break;
-                case "Sunglasses": source = "https://m.media-amazon.com/images/I/61tta3M0geS._AC_SX522_.jpg";
-                    break;
-                case "Hat": source = "https://m.media-amazon.com/images/I/71LPDt9QbAL._AC_SX466._SX._UX._SY._UY_.jpg";
-                    break;
-                case "Helmet": source = "https://m.media-amazon.com/images/I/711+u8SbLnL._AC_SX679_.jpg";
-                    break;
-                case "Belt": source = "https://m.media-amazon.com/images/I/81tjDxwjErS._AC_UX466_.jpg";
-                    break;
-                case "Visor": source = "https://m.media-amazon.com/images/I/81kQfSNbNAL._AC_UY445_.jpg";
-                    break;
-                case "Shin Guard": source = "https://m.media-amazon.com/images/I/41tDyH7SZPL._AC_.jpg";
-                    break;
-                case "Elbow Pad": source = "https://m.media-amazon.com/images/I/81wiqyEka0S._AC_SL1500_.jpg";
-                    break;
-                case "Headband": source = "https://m.media-amazon.com/images/I/61az40d6MGL._AC_SX679_.jpg";
-                    break;
-                case "Wristband": source = "https://m.media-amazon.com/images/I/91j6AUptoLL._AC_UX466_.jpg";
-                    break;
-                case "Hoodie": source = "https://m.media-amazon.com/images/I/81rc97tuOhL._AC_UX569_.jpg";
-                    break;
-                case "Flip Flop": source = "https://m.media-amazon.com/images/I/61Sh6GpKroL._AC_UY500_.jpg";
-                    break;
-                case "Pool Noodle": source = "https://m.media-amazon.com/images/I/81t6UzFSWQL._AC_SY679_.jpg";
-                    break;
-                default: source = "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png";
-                    break;
-            }
-
-            return source;
-        }
         /// <summary>
         /// Generates a number of random products based on input.
         /// </summary>
@@ -298,6 +243,7 @@ namespace Catalyte.Apparel.Data.SeedData
             var type = _types[_rand.Next(0, _types.Count)];
 
 
+
             return new Product
             {
                 Id = id,
@@ -319,7 +265,6 @@ namespace Catalyte.Apparel.Data.SeedData
                 Material = _materials[_rand.Next(0, _materials.Count)],
                 Price = GetPrice(),
                 Quantity = GetQuantity(),
-                ImageSrc = GetImageSrc(type)
             };
         }
 
@@ -363,4 +308,3 @@ namespace Catalyte.Apparel.Data.SeedData
         }
     }
 }
-
