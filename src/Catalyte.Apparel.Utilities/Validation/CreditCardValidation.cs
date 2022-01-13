@@ -43,6 +43,10 @@ namespace Catalyte.Apparel.Utilities.Validation
 
                 var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
                 var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
+                if (int.Parse(CardYear) < 72)
+                    CardYear = $"/19{CardYear}";
+                else
+                    CardYear = $"/20{CardYear}";
                 if (Purchase.Expiration.Trim() != "" && DateTime.Now >= DateTime.Parse($"{CardMonth}/20{CardYear}"))
                         errors.Add("This credit card is expired. ");
             }
