@@ -15,6 +15,10 @@ namespace Catalyte.Apparel.Utilities.Validation
         /// </summary>
         public static List<string> CreditCardValidation(Purchase Purchase)
         {
+            var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
+            var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
+            var CurrentMonth = DateTime.Now.Month;
+            var CurrentYear = DateTime.Now.Year;
             List<string> errors = new();
             //Card number validation
             try
@@ -41,13 +45,11 @@ namespace Catalyte.Apparel.Utilities.Validation
                 if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
                     errors.Add("The expiration field must not be empty or whitespace. ");
 
-                var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
-                var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
-                if (int.Parse(CardYear) < 72)
+                if (int.Parse(CardYear) > 72)
                     CardYear = $"/19{CardYear}";
                 else
                     CardYear = $"/20{CardYear}";
-                if (Purchase.Expiration.Trim() != "" && DateTime.Now >= DateTime.Parse($"{CardMonth}/20{CardYear}"))
+                if (Purchase.Expiration.Trim() != "" && DateTime.Parse($"{CurrentMonth}/{CurrentYear}") > DateTime.Parse($"{CardMonth}{CardYear}"))
                         errors.Add("This credit card is expired. ");
             }
             catch (FormatException)
