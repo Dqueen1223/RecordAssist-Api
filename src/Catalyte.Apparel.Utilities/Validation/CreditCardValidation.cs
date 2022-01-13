@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using System.Globalization;
 
 namespace Catalyte.Apparel.Utilities.Validation
 {
@@ -20,7 +19,7 @@ namespace Catalyte.Apparel.Utilities.Validation
             //Card number validation
             try
             {
-                if (Purchase.CardNumber.Trim() == "")
+                if (Purchase.CardNumber.Trim() == "" || Purchase.CardNumber == null)
                     errors.Add("The card number field must not be empty or whitespace. ");
 
                 if (Purchase.CardNumber.Trim() != "" && Purchase.CardNumber.Trim().Length < 16 || Purchase.CardNumber.Trim().Length > 19)
@@ -39,7 +38,7 @@ namespace Catalyte.Apparel.Utilities.Validation
             //Expiration Validation
             try
             {
-                if (Purchase.Expiration.Trim() == "")
+                if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
                     errors.Add("The expiration field must not be empty or whitespace. ");
 
                 var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
@@ -60,7 +59,7 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The card holder field must not be empty or whitespace. ");
 
 
-            if (Purchase.CVV.Length == 0)
+            if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
                 errors.Add("The CVV field must not be empty or white space. ");
 
             if (Purchase.CVV.Length != 0 && Purchase.CVV.Trim().Length != 3)
