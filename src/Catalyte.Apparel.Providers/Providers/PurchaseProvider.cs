@@ -54,7 +54,7 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<Purchase> CreatePurchasesAsync(Purchase newPurchase)
         {
             Purchase savedPurchase;
-
+           
             var inactiveProducts = await CheckForInactiveProductsAsync(newPurchase);
             if (inactiveProducts != string.Empty)
             {

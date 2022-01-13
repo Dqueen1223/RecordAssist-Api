@@ -7,7 +7,7 @@ namespace Catalyte.Apparel.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AddColumn<string>(
                 name: "CVV",
                 table: "Purchases",
                 type: "integer",
