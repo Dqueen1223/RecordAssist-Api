@@ -19,30 +19,33 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<PurchaseProvider> _logger;
         private readonly IPurchaseRepository _purchaseRepository;
-        private readonly IProductProvider _productProvider;
-        private readonly IMapper _mapper;
 
-        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger, IProductProvider productProvider, IMapper mapper)
+        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger)
         {
             _logger = logger;
             _purchaseRepository = purchaseRepository;
-            _productProvider = productProvider;
-            _mapper = mapper;
         }
 
         /// <summary>
         /// Retrieves all purchases from the database.
         /// </summary>
-        /// <param name="email">An existing email </param>
+        /// <param name="page">Number of pages.</param>
+        /// <param name="pageSize">How many purchases per page.</param>
         /// <returns>All purchases.</returns>
-        public async Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email)
+        public async Task<IEnumerable<Purchase>> GetAllPurchasesAsync()
         {
             List<Purchase> purchases;
-            if (string.IsNullOrEmpty(email))
+
+            try
             {
-                throw new NotFoundException("No email specified for request.");
+                purchases = await _purchaseRepository.GetAllPurchasesAsync();
             }
-            purchases = await _purchaseRepository.GetAllPurchasesByEmailAsync(email);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
             return purchases;
         }
 

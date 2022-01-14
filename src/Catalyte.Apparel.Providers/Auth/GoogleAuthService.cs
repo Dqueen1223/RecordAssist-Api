@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Google.Apis.Auth;
 
 namespace Catalyte.Apparel.Providers.Auth
