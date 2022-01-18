@@ -98,8 +98,38 @@ namespace Catalyte.Apparel.Data.SeedData
             "KJ",
             "SM",
             "RD",
-            "LRG",
-            "SM"
+            "LRG"
+        };
+
+        private List<string> _brands = new()
+        {
+            "Nike",
+            "Reebok",
+            "Asics",
+            "Brooks",
+            "Skechers",
+            "Puma",
+            "Under Armor",
+            "Adidas"
+        };
+
+        private List<string> _materials = new()
+        {
+            "Cotton",
+            "Polyester",
+            "Microfiber",
+            "Nylon",
+            "Synthetic",
+            "Gore-Tex",
+            "Spandex",
+            "Calico",
+            "Bamboo-Fiber"
+        };
+
+        private List<bool> _active = new()
+        {
+            true,
+            false
         };
 
         /// <summary>
@@ -113,7 +143,7 @@ namespace Catalyte.Apparel.Data.SeedData
             builder.Append('-');
             builder.Append(RandomString(3));
             builder.Append('-');
-            builder.Append(_skuMods[_rand.Next(0, 6)]);
+            builder.Append(_skuMods[_rand.Next(0, _skuMods.Count)]);
 
             return builder.ToString().ToUpper();
         }
@@ -124,7 +154,7 @@ namespace Catalyte.Apparel.Data.SeedData
         /// <returns>A demographic string.</returns>
         private string GetDemographic()
         {
-            return _demographics[_rand.Next(0, 2)];
+            return _demographics[_rand.Next(0, _demographics.Count)];
         }
 
         /// <summary>
@@ -143,6 +173,30 @@ namespace Catalyte.Apparel.Data.SeedData
         private string GetStyleCode()
         {
             return "sc" + RandomString(5);
+        }
+
+        /// <summary>
+        /// Generates a random price between 19.99 and 199.99.
+        /// </summary>
+        /// <returns>A price double.</returns>
+        private decimal GetPrice()
+        {
+
+            double minValue = 19.99;
+            double maxValue = 200;
+            double random = _rand.NextDouble();
+            double price = minValue + (random * (maxValue - minValue));
+            var priceString = String.Format("{0:0.00}", price);
+
+            return Decimal.Parse(priceString);
+        }
+        /// <summary>
+        /// Generates a random integer less than 10000 for the quantity field .
+        /// </summary>
+        /// <returns>A quantity integer</returns>
+        private int GetQuantity()
+        {
+            return _rand.Next(0, 10000);
         }
 
         private DateTime GetReleaseDate()
@@ -169,45 +223,65 @@ namespace Catalyte.Apparel.Data.SeedData
             string source;
             switch (type)
             {
-                case "Pant": source = "https://m.media-amazon.com/images/I/51cxynn5yIL._AC_UX569_.jpg";
+                case "Pant":
+                    source = "https://m.media-amazon.com/images/I/51cxynn5yIL._AC_UX569_.jpg";
                     break;
-                case "Short": source = "https://m.media-amazon.com/images/I/71c0K11eDeS._AC_UX569_.jpg";
+                case "Short":
+                    source = "https://m.media-amazon.com/images/I/71c0K11eDeS._AC_UX569_.jpg";
                     break;
-                case "Shoe": source = "https://m.media-amazon.com/images/I/41huVYB16VL._AC_.jpg";
+                case "Shoe":
+                    source = "https://m.media-amazon.com/images/I/41huVYB16VL._AC_.jpg";
                     break;
-                case "Glove": source = "https://m.media-amazon.com/images/I/81blOUiYdaL._AC_SX679_.jpg";
+                case "Glove":
+                    source = "https://m.media-amazon.com/images/I/81blOUiYdaL._AC_SX679_.jpg";
                     break;
-                case "Jacket": source = "https://m.media-amazon.com/images/I/61ZNBEQpQ0L._AC_UX679_.jpg";
+                case "Jacket":
+                    source = "https://m.media-amazon.com/images/I/61ZNBEQpQ0L._AC_UX679_.jpg";
                     break;
-                case "Tank Top": source = "https://m.media-amazon.com/images/I/81WMOaI0zbL._AC_UX466_.jpg";
+                case "Tank Top":
+                    source = "https://m.media-amazon.com/images/I/81WMOaI0zbL._AC_UX466_.jpg";
                     break;
-                case "Sock": source = "https://m.media-amazon.com/images/I/81+Yg21pxJL._AC_UX679_.jpg";
+                case "Sock":
+                    source = "https://m.media-amazon.com/images/I/81+Yg21pxJL._AC_UX679_.jpg";
                     break;
-                case "Sunglasses": source = "https://m.media-amazon.com/images/I/61tta3M0geS._AC_SX522_.jpg";
+                case "Sunglasses":
+                    source = "https://m.media-amazon.com/images/I/61tta3M0geS._AC_SX522_.jpg";
                     break;
-                case "Hat": source = "https://m.media-amazon.com/images/I/71LPDt9QbAL._AC_SX466._SX._UX._SY._UY_.jpg";
+                case "Hat":
+                    source = "https://m.media-amazon.com/images/I/71LPDt9QbAL._AC_SX466._SX._UX._SY._UY_.jpg";
                     break;
-                case "Helmet": source = "https://m.media-amazon.com/images/I/711+u8SbLnL._AC_SX679_.jpg";
+                case "Helmet":
+                    source = "https://m.media-amazon.com/images/I/711+u8SbLnL._AC_SX679_.jpg";
                     break;
-                case "Belt": source = "https://m.media-amazon.com/images/I/81tjDxwjErS._AC_UX466_.jpg";
+                case "Belt":
+                    source = "https://m.media-amazon.com/images/I/81tjDxwjErS._AC_UX466_.jpg";
                     break;
-                case "Visor": source = "https://m.media-amazon.com/images/I/81kQfSNbNAL._AC_UY445_.jpg";
+                case "Visor":
+                    source = "https://m.media-amazon.com/images/I/81kQfSNbNAL._AC_UY445_.jpg";
                     break;
-                case "Shin Guard": source = "https://m.media-amazon.com/images/I/41tDyH7SZPL._AC_.jpg";
+                case "Shin Guard":
+                    source = "https://m.media-amazon.com/images/I/41tDyH7SZPL._AC_.jpg";
                     break;
-                case "Elbow Pad": source = "https://m.media-amazon.com/images/I/81wiqyEka0S._AC_SL1500_.jpg";
+                case "Elbow Pad":
+                    source = "https://m.media-amazon.com/images/I/81wiqyEka0S._AC_SL1500_.jpg";
                     break;
-                case "Headband": source = "https://m.media-amazon.com/images/I/61az40d6MGL._AC_SX679_.jpg";
+                case "Headband":
+                    source = "https://m.media-amazon.com/images/I/61az40d6MGL._AC_SX679_.jpg";
                     break;
-                case "Wristband": source = "https://m.media-amazon.com/images/I/91j6AUptoLL._AC_UX466_.jpg";
+                case "Wristband":
+                    source = "https://m.media-amazon.com/images/I/91j6AUptoLL._AC_UX466_.jpg";
                     break;
-                case "Hoodie": source = "https://m.media-amazon.com/images/I/81rc97tuOhL._AC_UX569_.jpg";
+                case "Hoodie":
+                    source = "https://m.media-amazon.com/images/I/81rc97tuOhL._AC_UX569_.jpg";
                     break;
-                case "Flip Flop": source = "https://m.media-amazon.com/images/I/61Sh6GpKroL._AC_UY500_.jpg";
+                case "Flip Flop":
+                    source = "https://m.media-amazon.com/images/I/61Sh6GpKroL._AC_UY500_.jpg";
                     break;
-                case "Pool Noodle": source = "https://m.media-amazon.com/images/I/81t6UzFSWQL._AC_SY679_.jpg";
+                case "Pool Noodle":
+                    source = "https://m.media-amazon.com/images/I/81t6UzFSWQL._AC_SY679_.jpg";
                     break;
-                default: source = "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png";
+                default:
+                    source = "https://www.signfix.com.au/wp-content/uploads/2017/09/placeholder-600x400.png";
                     break;
             }
 
@@ -247,13 +321,13 @@ namespace Catalyte.Apparel.Data.SeedData
             return new Product
             {
                 Id = id,
-                Category = _categories[_rand.Next(0, 9)],
-                Type = "Short",
+                Category = cat,
+                Type = type,
                 Sku = GetRandomSku(),
-                Demographic = GetDemographic(),
+                Demographic = demo,
                 GlobalProductCode = GetRandomProductId(),
                 StyleNumber = GetStyleCode(),
-                ReleaseDate = DateTime.Now,
+                ReleaseDate = GetReleaseDate(),
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
                 Active = _active[_rand.Next(0, _active.Count)],
@@ -309,4 +383,6 @@ namespace Catalyte.Apparel.Data.SeedData
         }
     }
 }
+
+
 

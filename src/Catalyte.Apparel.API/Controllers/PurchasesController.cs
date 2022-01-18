@@ -1,11 +1,12 @@
-﻿﻿using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
 
 namespace Catalyte.Apparel.API.Controllers
 {
@@ -32,11 +33,11 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PurchaseDTO>>> GetAllPurchasesAsync()
+        public async Task<ActionResult<List<PurchaseDTO>>> GetAllPurchasesByEmailAsync(string email)
         {
             _logger.LogInformation("Request received for GetAllPurchasesAsync");
 
-            var purchases = await _purchaseProvider.GetAllPurchasesAsync();
+            var purchases = await _purchaseProvider.GetAllPurchasesByEmailAsync(email);
             var purchaseDTOs = _mapper.MapPurchasesToPurchaseDtos(purchases);
 
             return Ok(purchaseDTOs);
@@ -50,13 +51,10 @@ namespace Catalyte.Apparel.API.Controllers
             var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);
             var savedPurchase = await _purchaseProvider.CreatePurchasesAsync(newPurchase);
             var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
-
-            if (purchaseDTO != null)
-            {
-                return NoContent();
-            }
-
             return Created($"/purchases/", purchaseDTO);
         }
     }
 }
+
+
+

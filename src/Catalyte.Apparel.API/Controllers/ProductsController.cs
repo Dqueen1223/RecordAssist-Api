@@ -44,7 +44,7 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(productDTOs);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProductByIdAsync(int id)
         {
             _logger.LogInformation($"Request received for GetProductByIdAsync for id: {id}");
@@ -54,5 +54,6 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(productDTO);
         }
+
     }
 }

@@ -19,33 +19,30 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<PurchaseProvider> _logger;
         private readonly IPurchaseRepository _purchaseRepository;
+        private readonly IProductProvider _productProvider;
+        private readonly IMapper _mapper;
 
-        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger)
+        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger, IProductProvider productProvider, IMapper mapper)
         {
             _logger = logger;
             _purchaseRepository = purchaseRepository;
+            _productProvider = productProvider;
+            _mapper = mapper;
         }
 
         /// <summary>
         /// Retrieves all purchases from the database.
         /// </summary>
-        /// <param name="page">Number of pages.</param>
-        /// <param name="pageSize">How many purchases per page.</param>
+        /// <param name="email">An existing email </param>
         /// <returns>All purchases.</returns>
-        public async Task<IEnumerable<Purchase>> GetAllPurchasesAsync()
+        public async Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email)
         {
             List<Purchase> purchases;
-
-            try
+            if (string.IsNullOrEmpty(email))
             {
-                purchases = await _purchaseRepository.GetAllPurchasesAsync();
+                throw new NotFoundException("No email specified for request.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-
+            purchases = await _purchaseRepository.GetAllPurchasesByEmailAsync(email);
             return purchases;
         }
 
@@ -94,13 +91,13 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 var product = await _productProvider.GetProductByIdAsync(lineItem.ProductId);
                 if (!product.Active)
-                {                    
-                    inactives += (product.Name + " , " );
+                {
+                    inactives += (product.Name + " , ");
                 }
             }
             if (inactives != string.Empty)
             {
-                return inactives.Remove(inactives.Length -3);
+                return inactives.Remove(inactives.Length - 3);
             }
             else
             {
@@ -109,3 +106,4 @@ namespace Catalyte.Apparel.Providers.Providers
         }
     }
 }
+
