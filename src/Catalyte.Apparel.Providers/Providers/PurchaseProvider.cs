@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using Microsoft.Extensions.Logging;
 using Catalyte.Apparel.Utilities.Validation;
-using System.Linq;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Providers.Providers
 {
@@ -91,13 +90,13 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 var product = await _productProvider.GetProductByIdAsync(lineItem.ProductId);
                 if (!product.Active)
-                {                    
-                    inactives += (product.Name + " , " );
+                {
+                    inactives += (product.Name + " , ");
                 }
             }
             if (inactives != string.Empty)
             {
-                return inactives.Remove(inactives.Length -3);
+                return inactives.Remove(inactives.Length - 3);
             }
             else
             {

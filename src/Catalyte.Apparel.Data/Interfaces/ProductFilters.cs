@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Catalyte.Apparel.Data.Model;
+using System.Collections.Generic;
 using System.Linq;
-using Catalyte.Apparel.Data.Model;
 
 namespace Catalyte.Apparel.Data.Filters
 {
