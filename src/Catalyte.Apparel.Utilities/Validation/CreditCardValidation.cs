@@ -40,18 +40,22 @@ namespace Catalyte.Apparel.Utilities.Validation
             {
                 if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
                     errors.Add("The expiration field must not be empty or whitespace. ");
+                if (Purchase.Expiration.Trim().Length == 5 && Purchase.Expiration.Trim().Substring(2, 1) == "/")
+                {
+                    var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
+                    var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
+                    var CurrentMonth = DateTime.Now.Month;
+                    var CurrentYear = DateTime.Now.Year;
+                    if (int.Parse(CardYear) > CurrentYear + 50)
+                        CardYear = $"/19{CardYear}";
+                    else
+                        CardYear = $"/20{CardYear}";
 
-                var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
-                var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
-                var CurrentMonth = DateTime.Now.Month;
-                var CurrentYear = DateTime.Now.Year;
-                if (int.Parse(CardYear) > CurrentYear + 50)
-                    CardYear = $"/19{CardYear}";
+                    if (Purchase.Expiration.Trim() != "" && DateTime.Parse($"{CurrentMonth}/{CurrentYear}") > DateTime.Parse($"{CardMonth}{CardYear}"))
+                        errors.Add("This credit card is expired. ");
+                }
                 else
-                    CardYear = $"/20{CardYear}";
-
-                if (Purchase.Expiration.Trim() != "" && DateTime.Parse($"{CurrentMonth}/{CurrentYear}") > DateTime.Parse($"{CardMonth}{CardYear}"))
-                    errors.Add("This credit card is expired. ");
+                    errors.Add("Correct format for date is MM/YY ");
             }
             catch (FormatException)
             {
