@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using Catalyte.Apparel.API;
+﻿using Catalyte.Apparel.API;
 using Catalyte.Apparel.Data.Context;
 using Catalyte.Apparel.Test.Integration.Utilities;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
+using System.Net.Http;
 
 namespace Catalyte.Apparel.Test.Integration
 {

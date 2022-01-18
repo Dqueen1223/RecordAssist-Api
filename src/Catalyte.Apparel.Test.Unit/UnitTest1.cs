@@ -542,5 +542,5 @@ namespace Catalyte.Apparel.Test.Unit
         }
 
 
-        }
     }
+}

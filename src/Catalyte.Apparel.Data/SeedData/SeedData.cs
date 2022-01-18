@@ -1,7 +1,7 @@
-﻿using System;
-using Catalyte.Apparel.Data.Model;
+﻿using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Catalyte.Apparel.Data.Context
 {

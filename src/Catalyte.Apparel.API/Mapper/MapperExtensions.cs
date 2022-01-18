@@ -42,7 +42,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             {
                 OrderDate = DateTime.UtcNow,
             };
-            if(purchaseDTO.CreditCard == null)
+            if (purchaseDTO.CreditCard == null)
             {
                 throw new BadRequestException("No credit card associated with this purchase");
             }
