@@ -55,11 +55,11 @@ namespace Catalyte.Apparel.Utilities.Validation
             }
             catch (FormatException)
             {
-                errors.Add("This date is invalid. ");
+                errors.Add("Correct format for date is MM/YY ");
             }
             catch (Exception)
             {
-                errors.Add("This date is invalid. ");
+                errors.Add("Correct format for date is MM/YY ");
             }
 
             if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")
