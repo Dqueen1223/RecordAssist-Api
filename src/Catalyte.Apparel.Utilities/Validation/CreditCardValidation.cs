@@ -15,10 +15,7 @@ namespace Catalyte.Apparel.Utilities.Validation
         /// </summary>
         public static List<string> CreditCardValidation(Purchase Purchase)
         {
-            var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
-            var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
-            var CurrentMonth = DateTime.Now.Month;
-            var CurrentYear = DateTime.Now.Year;
+
             List<string> errors = new();
             //Card number validation
             try
@@ -45,7 +42,11 @@ namespace Catalyte.Apparel.Utilities.Validation
                 if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
                     errors.Add("The expiration field must not be empty or whitespace. ");
 
-                if (int.Parse(CardYear) > 72)
+                var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
+                var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
+                var CurrentMonth = DateTime.Now.Month;
+                var CurrentYear = DateTime.Now.Year;
+                if (int.Parse(CardYear) > CurrentYear + 50)
                     CardYear = $"/19{CardYear}";
                 else
                     CardYear = $"/20{CardYear}";
@@ -64,14 +65,19 @@ namespace Catalyte.Apparel.Utilities.Validation
             if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")
                 errors.Add("The card holder field must not be empty or whitespace. ");
 
-
-            if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
-                errors.Add("The CVV field must not be empty or white space. ");
-
+            try
+            {
+                if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
+                    errors.Add("The CVV field must not be empty or white space. ");
+            }
+            catch (Exception)
+            {
+               errors.Add("The CVV field must not be empty or white space. ");
+            }
             if (Purchase.CVV.Length != 0 && Purchase.CVV.Trim().Length != 3)
                 errors.Add("CVV must be 3 digits long. ");
 
-            if (Purchase.CardNumber.Trim() != "" && !Purchase.CardNumber.Trim().All(char.IsDigit))
+            if (Purchase.CVV.Trim() != "" && !Purchase.CVV.Trim().All(char.IsDigit))
                 errors.Add("CVV must be only numbers. ");
 
             if (Purchase.CVV == null && Purchase.CardNumber == null && Purchase.Expiration == null && Purchase.CardHolder == null)
