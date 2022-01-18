@@ -38,8 +38,8 @@ namespace Catalyte.Apparel.Data.Repositories
         }
 
 
-        public async Task<IEnumerable<Product>> GetProductsAsync(string brand, string category, string color, 
-                                                                 string demographic, string material, 
+        public async Task<IEnumerable<Product>> GetProductsAsync(string brand, string category, string color,
+                                                                 string demographic, string material,
                                                                  decimal price, string type)
         {
             return await _ctx.Products.Where(p =>

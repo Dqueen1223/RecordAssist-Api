@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Catalyte.Apparel.Data.Model;
+﻿using Catalyte.Apparel.Data.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -16,7 +16,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
                                                     string demographic, string material,
                                                     decimal price, string type);
 
-        
+
 
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
 
