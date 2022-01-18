@@ -1,7 +1,7 @@
+using Catalyte.Apparel.Data.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Model;
-
+using System;
 namespace Catalyte.Apparel.Data.Interfaces
 {
     /// <summary>
@@ -11,7 +11,7 @@ namespace Catalyte.Apparel.Data.Interfaces
     {
         Task<Product> GetProductByIdAsync(int productId);
 
-        Task<IEnumerable<Product>> GetProductsAsync(string brand, string category, string color,
+        Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
                                                     string demographic, string material,
                                                     decimal price, string type);
 
