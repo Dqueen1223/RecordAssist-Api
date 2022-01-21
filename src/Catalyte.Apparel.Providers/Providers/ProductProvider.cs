@@ -121,5 +121,27 @@ namespace Catalyte.Apparel.Providers.Providers
             return products;
         }
 
+        /// <summary>
+        /// Persists a purchase to the database.
+        /// </summary>
+        /// <param name="model">PurchaseDTO used to build the purchase.</param>
+        /// <returns>The persisted purchase with IDs.</returns>
+        public async Task<Product> CreateProductAsync(Product newProduct)
+        {
+            Product savedProduct;
+
+            try
+            {
+                savedProduct = await _productRepository.CreateProductAsync(newProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            
+            return savedProduct;
+        }
+
     }
 }

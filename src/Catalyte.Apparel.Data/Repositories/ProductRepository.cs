@@ -49,6 +49,13 @@ namespace Catalyte.Apparel.Data.Repositories
             (p.Price == price || price.Equals(0)) &&
             (p.Type == type || type == null)).ToListAsync();
         }
+        public async Task<Product> CreateProductAsync(Product product)
+        {
+            await _ctx.Products.AddAsync(product);
+            await _ctx.SaveChangesAsync();
+
+            return product;
+        }
 
     }
 
