@@ -57,13 +57,9 @@ namespace Catalyte.Apparel.Utilities.Validation
                 else
                     errors.Add("Correct format for date is MM/YY ");
             }
-            catch (FormatException)
-            {
-                errors.Add("Correct format for date is MM/YY ");
-            }
             catch (Exception)
             {
-                errors.Add("Correct format for date is MM/YY ");
+                errors.Add("The card number field must not be empty or whitespace. ");
             }
 
             if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")
