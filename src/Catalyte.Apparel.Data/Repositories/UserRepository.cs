@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Context;
+﻿using Catalyte.Apparel.Data.Context;
 using Catalyte.Apparel.Data.Filters;
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Repositories
 {

@@ -48,11 +48,11 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation("Request received for CreatePurchase");
 
-            var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);        
+            var newPurchase = _mapper.MapCreatePurchaseDtoToPurchase(model);
             var savedPurchase = await _purchaseProvider.CreatePurchasesAsync(newPurchase);
             var purchaseDTO = _mapper.MapPurchaseToPurchaseDto(savedPurchase);
             return Created($"/purchases/", purchaseDTO);
-        } 
+        }
     }
 }
 

@@ -1,7 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Model;
+﻿using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Context
 {
