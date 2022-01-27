@@ -31,13 +31,13 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, [FromQuery(Name = "brands")] string[] brands, string category, string color,
                                                                                   string demographic, string material,
                                                                                   decimal price, string type)
         {
             _logger.LogInformation("Request received for GetProductsAsync");
 
-            var products = await _productProvider.GetProductsAsync(active, brand, category, color,
+            var products = await _productProvider.GetProductsAsync(active, brands, category, color,
                                                                    demographic, material,
                                                                    price, type);
             var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
