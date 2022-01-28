@@ -27,6 +27,8 @@ namespace Catalyte.Apparel.API
             CreateMap<User, UserDTO>().ReverseMap();
 
             CreateMap<Promo, PromoDTO>();
+
+            CreateMap<CreatePromoDTO, Promo>();
         }
 
     }

@@ -1,8 +1,5 @@
 ﻿using Catalyte.Apparel.Data.Model;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
-
 
 namespace Catalyte.Apparel.Providers.Interfaces
 {
@@ -13,6 +10,6 @@ namespace Catalyte.Apparel.Providers.Interfaces
     {
         Task<Promo> CreatePromoAsync(Promo model);
 
-        Task<Promo> GetAllPromosByNameAsync(Promo model);
+        //Task<Promo> GetAllPromosByNameAsync(string Name);
     }
 }

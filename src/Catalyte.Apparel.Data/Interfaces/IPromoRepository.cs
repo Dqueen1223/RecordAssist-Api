@@ -10,8 +10,8 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface IPromoRepository
     {
-        Task<Purchase> CreatePromoAsync(Promo model);
+        Task<Promo> CreatePromoAsync(Promo model);
 
-        Task<Purchase> GetPromo(Promo model);
+        //Task<Promo> GetAllPromosByName(string name);
     }
 }
