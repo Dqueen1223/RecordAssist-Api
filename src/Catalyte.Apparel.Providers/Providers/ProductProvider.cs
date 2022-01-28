@@ -5,6 +5,7 @@ using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -98,17 +99,23 @@ namespace Catalyte.Apparel.Providers.Providers
         /// Asynchronously retrieves all products from the database.
         /// </summary>
         /// <returns>All products in the database.</returns>
-        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string[] brands, string category, string color,
-                                                                 string demographic, string material,
-                                                                 decimal price, string type)
+        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal price, List<string> type)
         {
             IEnumerable<Product> products;
-            string hexColor = color;
-            if (color != null) hexColor = "#" + color;
+            List<string> hexColor = new List<string>();
+            if (color.Count() > 0)
+            {
+                foreach(var colorItem in color)
+                {
+                    hexColor.Add("#" + colorItem);
+                }
+            }
 
             try
             {
-                products = await _productRepository.GetProductsAsync(active, brands, category, hexColor,
+                products = await _productRepository.GetProductsAsync(active, brand, category, hexColor,
                                                                  demographic, material,
                                                                  price, type);
             }

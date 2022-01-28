@@ -37,20 +37,19 @@ namespace Catalyte.Apparel.Data.Repositories
         }
 
 
-        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string[] brands, string category, string color,
-                                                                 string demographic, string material,
-                                                                 decimal price, string type)
+        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal price, List<string> type)
         {
             return await _ctx.Products.Where(p =>
             (p.Active == active || active == null) &&
-            //(p.Brand == brands[2] || brands == null) &&
-            (brands.Contains(p.Brand) || brands == null) &&
-            (p.Category == category || category == null) &&
-            (p.PrimaryColorCode == color || p.SecondaryColorCode == color || color == null) &&
-            (p.Demographic == demographic || demographic == null) &&
-            (p.Material == material || material == null) &&
+            (brand.Contains(p.Brand) || brand.Count() == 0) &&
+            (category.Contains(p.Category) || category.Count() == 0) &&
+            (color.Contains(p.PrimaryColorCode) || color.Contains(p.SecondaryColorCode) || color.Count() == 0) &&
+            (demographic.Contains(p.Demographic) || demographic.Count() == 0) &&
+            (material.Contains(p.Material) || material.Count() == 0) &&
             (p.Price == price || price.Equals(0)) &&
-            (p.Type == type || type == null)).ToListAsync();
+            (type.Contains(p.Type) || type.Count() == 0)).ToListAsync();
         }
 
     }

@@ -12,9 +12,9 @@ namespace Catalyte.Apparel.Data.Interfaces
     {
         Task<Product> GetProductByIdAsync(int productId);
 
-        Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string[] brands, string category, string color,
-                                                    string demographic, string material,
-                                                    decimal price, string type);
+        Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal price, List<string> type);
 
 
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
