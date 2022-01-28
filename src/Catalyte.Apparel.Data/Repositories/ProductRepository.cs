@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 
 
@@ -38,11 +39,12 @@ namespace Catalyte.Apparel.Data.Repositories
         }
 
 
-        public async Task<IEnumerable<Product>> GetProductsAsync(string brand, string category, string color,
+        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
                                                                  string demographic, string material,
                                                                  decimal price, string type)
         {
             return await _ctx.Products.Where(p =>
+            (p.Active == active || active == null) &&
             (p.Brand == brand || brand == null) &&
             (p.Category == category || category == null) &&
             (p.PrimaryColorCode == color || p.SecondaryColorCode == color || color == null) &&
