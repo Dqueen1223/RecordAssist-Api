@@ -104,20 +104,29 @@ namespace Catalyte.Apparel.Providers.Providers
                                                                  decimal minPrice, decimal maxPrice, List<string> type)
         {
             IEnumerable<Product> products;
+
+            // Convert input color code to hex format to match database column label
             List<string> hexColor = new List<string>();
             if (color.Count() > 0)
             {
                 foreach(var colorItem in color)
                 {
-                    hexColor.Add("#" + colorItem);
+                    hexColor.Add("#" + colorItem.ToLower());
                 }
             }
 
+            // Convert all strings to lowercase for simplified query parameter matching
+            List<string> brandLower = brand.ConvertAll(x => x.ToLower());
+            List<string> categoryLower = category.ConvertAll(x => x.ToLower());
+            List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
+            List<string> materialLower = material.ConvertAll(x => x.ToLower());
+            List<string> typeLower = type.ConvertAll(x => x.ToLower());
+
             try
             {
-                products = await _productRepository.GetProductsAsync(active, brand, category, hexColor,
-                                                                 demographic, material,
-                                                                 minPrice, maxPrice, type);
+                products = await _productRepository.GetProductsAsync(active, brandLower, categoryLower, hexColor,
+                                                                 demographicLower, materialLower,
+                                                                 minPrice, maxPrice, typeLower);
             }
             catch (Exception ex)
             {
