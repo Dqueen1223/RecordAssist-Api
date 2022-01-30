@@ -101,7 +101,7 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <returns>All products in the database.</returns>
         public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
-                                                                 decimal price, List<string> type)
+                                                                 decimal minPrice, decimal maxPrice, List<string> type)
         {
             IEnumerable<Product> products;
             List<string> hexColor = new List<string>();
@@ -117,7 +117,7 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 products = await _productRepository.GetProductsAsync(active, brand, category, hexColor,
                                                                  demographic, material,
-                                                                 price, type);
+                                                                 minPrice, maxPrice, type);
             }
             catch (Exception ex)
             {

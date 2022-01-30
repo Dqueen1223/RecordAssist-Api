@@ -39,7 +39,7 @@ namespace Catalyte.Apparel.Data.Repositories
 
         public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
-                                                                 decimal price, List<string> type)
+                                                                 decimal minPrice, decimal maxPrice, List<string> type)
         {
             return await _ctx.Products.Where(p =>
             (p.Active == active || active == null) &&
@@ -48,7 +48,7 @@ namespace Catalyte.Apparel.Data.Repositories
             (color.Contains(p.PrimaryColorCode) || color.Contains(p.SecondaryColorCode) || color.Count() == 0) &&
             (demographic.Contains(p.Demographic) || demographic.Count() == 0) &&
             (material.Contains(p.Material) || material.Count() == 0) &&
-            (p.Price == price || price.Equals(0)) &&
+            ((p.Price >= minPrice || minPrice.Equals(0)) && (p.Price <= maxPrice || maxPrice.Equals(0))) &&
             (type.Contains(p.Type) || type.Count() == 0)).ToListAsync();
         }
 
