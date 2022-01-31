@@ -89,13 +89,13 @@ namespace Test.Unit
         public async Task GetProductsAsync_returnsException()
         {
             //arrange 
-            _repositoryMock.Setup(repo => repo.GetProductsAsync(true, null, null, null, null, null, 0, null))
+            _repositoryMock.Setup(repo => repo.GetProductsAsync(true, null, null, null, null, null, 0, 0, null))
                 .ThrowsAsync(new ServiceUnavailableException("There was a problem connecting to the database."));
 
             var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
 
             //act
-            Task actual() => provider.GetProductsAsync(true, null, null, null, null, null, 0, null);
+            Task actual() => provider.GetProductsAsync(true, null, null, null, null, null, 0, 0, null);
 
             //assert 
             await Assert.ThrowsAsync<ServiceUnavailableException>(actual);

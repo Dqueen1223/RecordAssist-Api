@@ -122,7 +122,7 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (minPrice < 0 || maxPrice < 0)
             {
-                throw new ArgumentOutOfRangeException("Price cannot be negative.");
+                throw new ArgumentOutOfRangeException("Prices cannot be negative.");
             }
 
             // Convert all strings to lowercase for simplified query parameter matching
