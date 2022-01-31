@@ -1,11 +1,7 @@
 ﻿using Catalyte.Apparel.Data.Context;
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System;
 
 namespace Catalyte.Apparel.Data.Repositories
 {

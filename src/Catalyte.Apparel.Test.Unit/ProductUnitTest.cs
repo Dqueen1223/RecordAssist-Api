@@ -1,5 +1,4 @@
 using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Providers.Providers;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
@@ -8,8 +7,6 @@ using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using Catalyte.Apparel.Data.Repositories;
-using Catalyte.Apparel.API.Controllers;
 namespace Test.Unit
 {
     public class ProductUnitTest

@@ -2,8 +2,8 @@
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs;
 using Catalyte.Apparel.DTOs.Products;
-using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.DTOs.Promos;
+using Catalyte.Apparel.DTOs.Purchases;
 
 namespace Catalyte.Apparel.API
 {

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Catalyte.Apparel.Data.Model
 {
     /// <summary>
-    /// Describes the object for the delivery address of the purchase.
+    /// Describes the object for a promotional discount
     /// </summary>
     public class Promo : BaseEntity
     {
