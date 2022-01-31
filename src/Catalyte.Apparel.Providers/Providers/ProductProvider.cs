@@ -115,6 +115,16 @@ namespace Catalyte.Apparel.Providers.Providers
                 }
             }
 
+            // Check that minPrice is not greater than maxPrice and minPrice is non-negative
+            if (minPrice > maxPrice && !maxPrice.Equals(0))
+            {
+                throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
+            }
+            if (minPrice < 0 || maxPrice < 0)
+            {
+                throw new ArgumentOutOfRangeException("Price cannot be negative.");
+            }
+
             // Convert all strings to lowercase for simplified query parameter matching
             List<string> brandLower = brand.ConvertAll(x => x.ToLower());
             List<string> categoryLower = category.ConvertAll(x => x.ToLower());
