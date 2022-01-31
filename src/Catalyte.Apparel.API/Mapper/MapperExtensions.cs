@@ -49,7 +49,7 @@ namespace Catalyte.Apparel.API.DTOMappings
                 StyleNumber = product.StyleNumber,
                 ReleaseDate = product.ReleaseDate,
                 DateCreated = product.DateCreated,
-                DateModified = product.DateCreated,
+                DateModified = product.DateModified,
                 Active = product.Active,
                 Description = product.Description,
                 Name = product.Name,
@@ -79,12 +79,12 @@ namespace Catalyte.Apparel.API.DTOMappings
         public static Product MapCreateProductDtoToProduct(this IMapper mapper, ProductDTO productDTO)
         {
             var product = new Product
-            {   
-                DateCreated = DateTime.UtcNow,
+            {
+                DateCreated = DateTime.Now,
                 DateModified = productDTO.DateCreated,
             };
             product = mapper.Map(productDTO, product);
-           
+            
 
             return product;
         }
