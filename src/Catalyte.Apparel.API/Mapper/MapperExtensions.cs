@@ -28,12 +28,13 @@ namespace Catalyte.Apparel.API.DTOMappings
         {
             return new PromoDTO()
             {
-                Id = promo.Id,
+                Id = promo.ID,
                 Name = promo.Name,
+                Code = promo.Code,
+                Type = promo.Type,
                 Discount = promo.Discount,
-                Description = promo.Description,
                 StartDate = promo.StartDate,
-                EndDate = promo.EndDate,
+                EndDate = promo.EndDate
             };
         }
         public static Promo MapCreatePromoDtoToPromo(this IMapper mapper, CreatePromoDTO promoDTO)
