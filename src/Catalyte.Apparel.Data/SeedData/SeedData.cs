@@ -1,7 +1,7 @@
-﻿using System;
-using Catalyte.Apparel.Data.Model;
+﻿using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Catalyte.Apparel.Data.Context
 {
@@ -50,7 +50,7 @@ namespace Catalyte.Apparel.Data.Context
                 CardHolder = "Max Perkins",
                 CardNumber = "1435678998761234",
                 Expiration = "11/21",
-                CVV = 456,
+                CVV = "456",
                 OrderDate = new DateTime(2021, 5, 4)
             };
 

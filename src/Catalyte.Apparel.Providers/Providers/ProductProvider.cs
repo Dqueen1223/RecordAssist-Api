@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Interfaces;
+﻿using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 
@@ -98,7 +98,7 @@ namespace Catalyte.Apparel.Providers.Providers
         /// Asynchronously retrieves all products from the database.
         /// </summary>
         /// <returns>All products in the database.</returns>
-        public async Task<IEnumerable<Product>> GetProductsAsync(string brand, string category, string color,
+        public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
                                                                  string demographic, string material,
                                                                  decimal price, string type)
         {
@@ -108,7 +108,7 @@ namespace Catalyte.Apparel.Providers.Providers
 
             try
             {
-                products = await _productRepository.GetProductsAsync(brand, category, hexColor,
+                products = await _productRepository.GetProductsAsync(active, brand, category, hexColor,
                                                                  demographic, material,
                                                                  price, type);
             }
