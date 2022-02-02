@@ -11,6 +11,12 @@ namespace Catalyte.Apparel.Data.Repositories
     public class PromoRepository : IPromoRepository
     {
         private readonly IApparelCtx _ctx;
+
+        public PromoRepository(IApparelCtx ctx)
+        {
+            _ctx = ctx;
+        }
+
         public async Task<Promo> CreatePromoAsync(Promo model)
         {
             await _ctx.Promos.AddAsync(model);
