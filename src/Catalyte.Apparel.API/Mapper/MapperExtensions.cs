@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Purchases;
+using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Catalyte.Apparel.DTOs.Products;
 
 namespace Catalyte.Apparel.API.DTOMappings
@@ -68,6 +69,10 @@ namespace Catalyte.Apparel.API.DTOMappings
             {
                 OrderDate = DateTime.UtcNow,
             };
+            if (purchaseDTO.CreditCard == null)
+            {
+                throw new BadRequestException("No credit card associated with this purchase");
+            }
             purchase = mapper.Map(purchaseDTO.DeliveryAddress, purchase);
             purchase = mapper.Map(purchaseDTO.BillingAddress, purchase);
             purchase = mapper.Map(purchaseDTO.CreditCard, purchase);

@@ -32,20 +32,41 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
-                                                                                  string demographic, string material,
-                                                                                  decimal price, string type)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, [FromQuery] List<string> brand, 
+                                                                                  [FromQuery] List<string> category, 
+                                                                                  [FromQuery] List<string> color,
+                                                                                  [FromQuery] List<string> demographic,
+                                                                                  [FromQuery] List<string> material,
+                                                                                  decimal minPrice, decimal maxPrice, 
+                                                                                  [FromQuery] List<string> type, int?range)
         {
             _logger.LogInformation("Request received for GetProductsAsync");
 
             var products = await _productProvider.GetProductsAsync(active, brand, category, color,
                                                                    demographic, material,
-                                                                   price, type);
+                                                                   minPrice,maxPrice, type, range);
+
             var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
             return Ok(productDTOs);
         }
+        [HttpGet("/products/count")]
+        public async Task<ActionResult<int>> GetProductsCountAsync(Nullable<bool> active, [FromQuery] List<string> brand,
+                                                                                  [FromQuery] List<string> category,
+                                                                                  [FromQuery] List<string> color,
+                                                                                  [FromQuery] List<string> demographic,
+                                                                                  [FromQuery] List<string> material,
+                                                                                  decimal minPrice, decimal maxPrice,
+                                                                                  [FromQuery] List<string> type, int? range)
+        {
+            _logger.LogInformation("Request received for GetProductsAsync");
 
+            var productsCount = await _productProvider.GetProductsCountAsync(active, brand, category, color,
+                                                                   demographic, material,
+                                                                   minPrice, maxPrice, type, range);
+
+            return Ok(productsCount);
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProductByIdAsync(int id)
         {
