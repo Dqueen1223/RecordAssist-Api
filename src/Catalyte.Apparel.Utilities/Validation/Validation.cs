@@ -105,7 +105,7 @@ namespace Catalyte.Apparel.Utilities.Validation
             {
                 errors.Add("A promotional code may only consist of alphanumeric characters");
             }
-            if (promo.Discount == default);
+            if (promo.Discount == default) 
             {
                 errors.Add("The discount field is required. ");
                 count++;

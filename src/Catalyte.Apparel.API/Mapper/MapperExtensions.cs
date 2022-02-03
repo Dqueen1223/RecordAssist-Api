@@ -29,7 +29,6 @@ namespace Catalyte.Apparel.API.DTOMappings
             return new PromoDTO()
             {
                 Id = promo.ID,
-                Name = promo.Name,
                 Code = promo.Code,
                 Type = promo.Type,
                 Discount = promo.Discount,
