@@ -13,7 +13,7 @@ namespace Catalyte.Apparel.UnitTesting
         {
             Purchase creditCard = new();
             creditCard.CardHolder = "Mary Jpnes";
-            creditCard.CVV = 1234;
+            creditCard.CVV = "1234";
             creditCard.CardNumber = "";
             creditCard.Expiration = "11/20";
 
@@ -31,7 +31,7 @@ namespace Catalyte.Apparel.UnitTesting
         {
             Purchase creditCard = new();
             creditCard.CardHolder = "Mary Jones";
-            creditCard.CVV = 123;
+            creditCard.CVV = "123";
             creditCard.CardNumber = "4123123412341234";
             creditCard.Expiration = "11/22";
             var Actual = Validation.CreditCardValidation(creditCard);
@@ -43,7 +43,7 @@ namespace Catalyte.Apparel.UnitTesting
         {
             Purchase creditCard = new();
             creditCard.CardHolder = "";
-            creditCard.CVV = 123;
+            creditCard.CVV = "123";
             creditCard.CardNumber = "";
             creditCard.Expiration = "";
             var Actual = Validation.CreditCardValidation(creditCard);
@@ -51,6 +51,7 @@ namespace Catalyte.Apparel.UnitTesting
             {
                 "The card number field must not be empty or whitespace. ",
                 "The expiration field must not be empty or whitespace. ",
+                "Correct format for date is MM/YY ",
                 "The card holder field must not be empty or whitespace. ",
             };
             Assert.Equal(Expected, Actual);
@@ -60,16 +61,13 @@ namespace Catalyte.Apparel.UnitTesting
         {
             Purchase creditCard = new();
             creditCard.CardHolder = null;
-            creditCard.CVV = 0;
+            creditCard.CVV = null;
             creditCard.CardNumber = null;
             creditCard.Expiration = null;
             var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
-                "The card number field must not be empty or whitespace. ",
-                "The expiration field must not be empty or whitespace. ",
-                "The card holder field must not be empty or whitespace. ",
-                "The CVV field must not be empty or white space. "
+                "No credit card provided. "
             };
             Assert.Equal(Expected, Actual);
         }
