@@ -41,17 +41,5 @@ namespace Catalyte.Apparel.API.Controllers
             var promoDTO = _mapper.MapPromoToPromoDto(savedPromo);
             return Created($"/promo/", promoDTO);
         }
-        //[HttpGet]
-        //public async Task<ActionResult<List<PromoDTO>>> GetAllPromosByName(string Name)
-        //{
-        //    _logger.LogInformation("Request received for GetAllPurchasesAsync");
-
-        //    var promos = await _PromoProvider.GetAllPromosByNameAsync(Name);
-        //    var promoDTOs = _mapper.MapPromosToPromoDtos(promos);
-
-        //    return Ok(promoDTOs);
-        //}
-
-
     }
 }

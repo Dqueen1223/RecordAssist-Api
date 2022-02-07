@@ -23,10 +23,5 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.SaveChangesAsync();
             return model;
         }
-
-        //public async Task<Promo> GetAllPromosByName(string name)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

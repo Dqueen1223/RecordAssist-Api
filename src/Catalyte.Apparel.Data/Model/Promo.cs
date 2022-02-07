@@ -13,7 +13,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Code { get; set; }
 
-        public int? Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         public string Type { get; set; }
 
