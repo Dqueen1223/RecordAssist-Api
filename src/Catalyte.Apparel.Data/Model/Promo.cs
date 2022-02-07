@@ -9,16 +9,16 @@ namespace Catalyte.Apparel.Data.Model
     public class Promo
     {
         [Key]
-        public int ID  { get; set; }
+        public int ID { get; set; }
 
         public string Code { get; set; }
 
-        public int Discount { get; set; }
+        public int? Discount { get; set; }
 
         public string Type { get; set; }
-        
-        public DateTimeOffset StartDate { get; set; }
 
-        public DateTimeOffset EndDate { get; set; }
+        public DateTimeOffset? StartDate { get; set; }
+
+        public DateTimeOffset? EndDate { get; set; }
     }
 }

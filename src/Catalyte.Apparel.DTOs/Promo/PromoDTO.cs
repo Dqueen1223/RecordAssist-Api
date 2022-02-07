@@ -11,12 +11,12 @@ namespace Catalyte.Apparel.DTOs.Promos
 
         public string Code { get; set; }
 
-        public int Discount { get; set; }
+        public int? Discount { get; set; }
 
         public string Type { get; set; }
 
-        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset? StartDate { get; set; }
 
-        public DateTimeOffset EndDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
     }
 }
