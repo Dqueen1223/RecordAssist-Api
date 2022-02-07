@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace Catalyte.Apparel.API.Controllers
 {
@@ -31,8 +31,8 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, [FromQuery] List<string> brand, 
-                                                                                  [FromQuery] List<string> category, 
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsAsync(Nullable<bool> active, [FromQuery] List<string> brand,
+                                                                                  [FromQuery] List<string> category,
                                                                                   [FromQuery] List<string> color,
                                                                                   [FromQuery] List<string> demographic,
                                                                                   [FromQuery] List<string> material,
