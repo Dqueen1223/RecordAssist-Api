@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.DTOs.Reviews;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +47,6 @@ namespace Catalyte.Apparel.API.Controllers
         public async Task<ActionResult<ReviewsDTO>> GetReviewByIdAsync(int reviewId)
         {
             _logger.LogInformation($"Request received for GetReviewByIdAsync for id: {reviewId}");
-
             var review = await _reviewsProvider.GetReviewByIdAsync(reviewId);
             var reviewsDTOs = _mapper.Map<ReviewsDTO>(review);
 

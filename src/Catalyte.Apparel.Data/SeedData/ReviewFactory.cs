@@ -36,30 +36,6 @@ namespace Catalyte.Apparel.Data.SeedData
             "don't waste your time",
             "NEVER AGAIN"
         };
-        /// Returns a random rating from the list of ratings.
-        /// </summary>
-        /// <returns>A review rating</returns>
-        /// Uses random generators to build a random review.
-        /// </summary>
-        /// <param name="id">ID to assign to the review.</param>
-        /// <returns>A randomly generated product.</returns>
-        public Review CreateRandomReview(int id)
-        {
-            var rating = _rating[_rand.Next(1, _rating.Count)];
-            var title = _title[_rand.Next(1, _title.Count)];
-            var reviewsDescription = _reviewsDescription[_rand.Next(1, _reviewsDescription.Count)];
-
-
-
-            return new Review
-            {   
-                Id = id,
-                Rating = rating,
-                Title = title,
-                ReviewsDescription= reviewsDescription
-            };
-        }
-
         /// <summary>
         /// Generates a number of random reviews based on input.
         /// </summary>
@@ -77,6 +53,30 @@ namespace Catalyte.Apparel.Data.SeedData
 
             return reviewList;
         }
+        /// Returns a random rating from the list of ratings.
+        /// </summary>
+        /// <returns>A review rating</returns>
+        /// Uses random generators to build a random review.
+        /// </summary>
+        /// <param name="id">ID to assign to the review.</param>
+        /// <returns>A randomly generated product.</returns>
+        private Review CreateRandomReview(int id)
+        {
+            var rating = _rating[_rand.Next(0, _rating.Count)];
+            var title = _title[_rand.Next(0, _title.Count)];
+            var reviewsDescription = _reviewsDescription[_rand.Next(0, _reviewsDescription.Count)];
+
+
+
+            return new Review
+            {   
+                Id = id,
+                Rating = rating,
+                Title = title,
+                ReviewsDescription= reviewsDescription
+            };
+        }
+
 
     }
 }

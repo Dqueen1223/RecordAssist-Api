@@ -41,6 +41,8 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Material { get; set; }
 
+        public string Reviews { get; set; }
+
         [Column(TypeName = "numeric(5, 2)")]
         public decimal Price { get; set; }
 

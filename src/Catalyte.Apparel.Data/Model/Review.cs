@@ -12,12 +12,13 @@ namespace Catalyte.Apparel.Data.Model
     public class Review : BaseEntity
     {
         [JsonRequired]
+        public int ReviewId { get; set; }
         public int Rating { get; set; }
 
         public string Title { get; set; }
 
         public string ReviewsDescription { get; set; }
-
+        
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

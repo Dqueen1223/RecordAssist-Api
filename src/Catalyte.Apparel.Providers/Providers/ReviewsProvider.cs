@@ -43,11 +43,11 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-
+            
             if (review == null || review == default)
             {
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
-                throw new NotFoundException($"Review with id: {reviewId} could not be found.");
+                throw new NotFoundException($"Review {reviewId} could not be found.");
             }
             return review;
 
