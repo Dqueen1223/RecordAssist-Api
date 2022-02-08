@@ -118,13 +118,20 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The discount field is required.");
                 count++;
             }
-            else if (promo.Type == "$" && Regex.IsMatch(promo.Discount.ToString(), @"\."))
+            else
+            {
+                if (promo.Discount <= 0 && promo.Type == "$")
                 {
-                if (!Regex.IsMatch(promo.Discount.ToString(), @"^\d+\.\d{2}?$"))
-                {
-                    errors.Add("If the desired discount has a decimal, it must specify to exactly 2 decimal places.");
+                    errors.Add("A flat discount must be greater than 0.");
                 }
-            }          
+                else if (promo.Type == "$" && Regex.IsMatch(promo.Discount.ToString(), @"\."))
+                {
+                    if (!Regex.IsMatch(promo.Discount.ToString(), @"^\d+\.\d{2}?$"))
+                    {
+                        errors.Add("If the desired discount has a decimal, it must specify to exactly 2 decimal places.");
+                    }
+                }
+            }
             if (count == 0)
             {
                 if (promo.Type == "%" && (promo.Discount < 1 || promo.Discount > 100))
@@ -138,7 +145,7 @@ namespace Catalyte.Apparel.Utilities.Validation
             }
             else if (promo.StartDate >= DateTime.UtcNow)
             {
-                errors.Add("The start date must be in the past or today");
+                errors.Add("The start date must be in the past or today.");
             }
             if (promo.EndDate == null)
             {
