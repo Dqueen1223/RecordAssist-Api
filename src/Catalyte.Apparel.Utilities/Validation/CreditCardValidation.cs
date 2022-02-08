@@ -59,7 +59,7 @@ namespace Catalyte.Apparel.Utilities.Validation
             }
             catch (Exception)
             {
-                errors.Add("The card number field must not be empty or whitespace. ");
+                errors.Add("This card must be a valid date in MM/YY format. ");
             }
 
             if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")

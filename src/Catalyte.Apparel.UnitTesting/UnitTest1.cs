@@ -2,16 +2,18 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Utilities.Validation;
 using System.Collections.Generic;
 using Xunit;
+using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System;
 
+
+
 namespace Catalyte.Apparel.UnitTesting
 {
     public class UnitTests
     {
-
         [Fact]
         public void CreditCardValidationTestNoneValid()
         {
@@ -55,25 +57,12 @@ namespace Catalyte.Apparel.UnitTesting
             {
                 "The card number field must not be empty or whitespace. ",
                 "The expiration field must not be empty or whitespace. ",
-                "The card holder field must not be empty or whitespace. ",
+                "Correct format for date is MM/YY ",
+                "The card holder field must not be empty or whitespace. "
             };
             Assert.Equal(Expected, Actual);
         }
-        [Fact]
-        public void CreditCardValidationTestNull()
-        {
-            Purchase creditCard = new();
-            creditCard.CardHolder = null;
-            creditCard.CVV = null;
-            creditCard.CardNumber = null;
-            creditCard.Expiration = null;
-            var Actual = Validation.CreditCardValidation(creditCard);
-            List<string> Expected = new()
-            {
-                "No credit card provided. "
-            };
-            Assert.Equal(Expected, Actual);
-        }
+            
         [Fact]
         public void CreditCardExpirationAboveYear72ReturnsError()
         {
