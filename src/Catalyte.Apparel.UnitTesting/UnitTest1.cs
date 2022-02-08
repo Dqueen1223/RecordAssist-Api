@@ -51,6 +51,7 @@ namespace Catalyte.Apparel.UnitTesting
             {
                 "The card number field must not be empty or whitespace. ",
                 "The expiration field must not be empty or whitespace. ",
+                "Correct format for date is MM/YY ",
                 "The card holder field must not be empty or whitespace. ",
             };
             Assert.Equal(Expected, Actual);
@@ -60,16 +61,13 @@ namespace Catalyte.Apparel.UnitTesting
         {
             Purchase creditCard = new();
             creditCard.CardHolder = null;
-            creditCard.CVV = "0";
+            creditCard.CVV = null;
             creditCard.CardNumber = null;
             creditCard.Expiration = null;
             var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
-                "The card number field must not be empty or whitespace. ",
-                "The expiration field must not be empty or whitespace. ",
-                "The card holder field must not be empty or whitespace. ",
-                "The CVV field must not be empty or white space. "
+                "No credit card provided. "
             };
             Assert.Equal(Expected, Actual);
         }
