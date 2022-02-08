@@ -93,6 +93,67 @@ namespace Catalyte.Apparel.UnitTesting
             Assert.Equal(Expected, Actual);
         }
         [Fact]
+        public void NullCVVReturnserror ()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "";
+            creditCard.CardNumber = "4132402120390213";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "The CVV field must not be empty or white space. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void UnsupportedCreditCardReturnsError()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "1111222233334444";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "This credit card provider is not supported. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void shortCardLengthreturnserror()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "411122223333444";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "Card number length must be between 16 and 19 characters. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void longCardLengthreturnserror()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "41112222333344445555";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "Card number length must be between 16 and 19 characters. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+
+        [Fact]
         public void ThisMonthAndThisYearReturnsTrue()
         {
             var CurrentMonth = DateTime.Now.Month;
