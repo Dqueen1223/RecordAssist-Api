@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.DTOs.Purchases;
+using Catalyte.Apparel.DTOs.Reviews;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,12 +19,12 @@ namespace Catalyte.Apparel.API.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly ILogger<ReviewsController> _logger;
-        private readonly IReviewsProvider _reviewsProvider;
+        private readonly IReviewProvider _reviewsProvider;
         private readonly IMapper _mapper;
 
         public ReviewsController(
             ILogger<ReviewsController> logger,
-            IReviewsProvider reviewsProvider,
+            IReviewProvider reviewsProvider,
             IMapper mapper
         )
         {
@@ -31,14 +32,25 @@ namespace Catalyte.Apparel.API.Controllers
             _reviewsProvider = reviewsProvider;
             _mapper = mapper;
         }
-
         [HttpGet]
-        public async Task<ActionResult<List<ReviewsDTO>>> GetAllReviewsByEmailAsync(string email)
+        public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetAllReviewsAsync()
         {
             _logger.LogInformation("Request received for GetAllReviewsAsync");
 
-            var reviews = await _reviewsProvider.GetAllReviewsByEmailAsync(email);
-            var reviewsDTOs = _mapper.MapPurchasesToReviewsDtos(reviews);
+            var reviews = await _reviewsProvider.GetAllReviewsAsync();
+            var reviewsDTOs = _mapper.Map<IEnumerable<ReviewsDTO>>(reviews);
+
+            return Ok(reviewsDTOs);
+        }
+
+        // /reviews/idNumber
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ReviewsDTO>> GetReviewByIdAsync(int reviewId)
+        {
+            _logger.LogInformation($"Request received for GetReviewByIdAsync for id: {reviewId}");
+
+            var review = await _reviewsProvider.GetReviewByIdAsync(reviewId);
+            var reviewsDTOs = _mapper.Map<ReviewsDTO>(review);
 
             return Ok(reviewsDTOs);
         }

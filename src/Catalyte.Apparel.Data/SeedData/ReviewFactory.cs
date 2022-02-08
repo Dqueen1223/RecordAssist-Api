@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catalyte.Apparel.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.SeedData
 {
+    /// <summary>
+    /// This class provides tools for generating random reviews.
+    /// </summary>
     public class ReviewFactory
     {
         Random _rand = new();
@@ -35,24 +39,43 @@ namespace Catalyte.Apparel.Data.SeedData
         /// Returns a random rating from the list of ratings.
         /// </summary>
         /// <returns>A review rating</returns>
-        /// Uses random generators to build a products.
+        /// Uses random generators to build a random review.
         /// </summary>
-        /// <param name="id">ID to assign to the product.</param>
+        /// <param name="id">ID to assign to the review.</param>
         /// <returns>A randomly generated product.</returns>
-        private Review CreateRandomReview(int id)
+        public Review CreateRandomReview(int id)
         {
-            var rating = _rating[_rand.Next(0, _rating.Count)];
-            var title = _title[_rand.Next(0, _title.Count)];
-            var reviewsDescription = _reviewsDescription[_rand.Next(0, _reviewsDescription.Count)];
+            var rating = _rating[_rand.Next(1, _rating.Count)];
+            var title = _title[_rand.Next(1, _title.Count)];
+            var reviewsDescription = _reviewsDescription[_rand.Next(1, _reviewsDescription.Count)];
 
 
 
             return new Review
-            {
+            {   
+                Id = id,
                 Rating = rating,
                 Title = title,
                 ReviewsDescription= reviewsDescription
             };
+        }
+
+        /// <summary>
+        /// Generates a number of random reviews based on input.
+        /// </summary>
+        /// <param name="numberOfReviews">The number of random reviews to generate.</param>
+        /// <returns>A list of random products.</returns>
+        public List<Review> GenerateRandomReview(int numberOfReviews)
+        {
+
+            var reviewList = new List<Review>();
+
+            for (var i = 0; i <= numberOfReviews; i++)
+            {
+                reviewList.Add(CreateRandomReview(i + 1));
+            }
+
+            return reviewList;
         }
 
     }

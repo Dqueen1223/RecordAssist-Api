@@ -10,14 +10,9 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface IReviewsRepository
     {
-        Task<Review> GetReviewsByIdAsync(int reviewsId);
+        Task<Review> GetReviewByIdAsync(int reviewsId);
 
-        Task<IEnumerable<Review>> GetReviewsAsync(int rating, string title, string ReviewsDescription);
-
-
-        Task<List<string>> GetAllUniqueReviewTitlesAsync();
-
-        Task<List<string>> GetAllUniqueReviewsDescriptionAsync();
+        Task<IEnumerable<Review>> GetAllReviewsAsync();
 
     }
 }
