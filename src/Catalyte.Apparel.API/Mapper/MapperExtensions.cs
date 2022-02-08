@@ -53,6 +53,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             return new PurchaseDTO()
             {
                 Id = purchase.Id,
+                TotalCost = purchase.TotalCost,
                 OrderDate = purchase.OrderDate,
                 LineItems = mapper.Map<List<LineItemDTO>>(purchase.LineItems),
                 DeliveryAddress = mapper.Map<DeliveryAddressDTO>(purchase),
@@ -71,6 +72,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             {
                 throw new BadRequestException("No credit card associated with this purchase");
             }
+            purchase.TotalCost = purchaseDTO.TotalCost;
             purchase = mapper.Map(purchaseDTO.DeliveryAddress, purchase);
             purchase = mapper.Map(purchaseDTO.BillingAddress, purchase);
             purchase = mapper.Map(purchaseDTO.CreditCard, purchase);
