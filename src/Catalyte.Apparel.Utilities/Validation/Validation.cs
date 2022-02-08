@@ -118,11 +118,11 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The discount field is required.");
                 count++;
             }
-            else if (Regex.IsMatch(promo.Discount.ToString(), "/."))
+            else if (promo.Type == "$" && Regex.IsMatch(promo.Discount.ToString(), @"\."))
                 {
-                if (!Regex.IsMatch(promo.Discount.ToString(), "^/d +/./d{2}?$"))
+                if (!Regex.IsMatch(promo.Discount.ToString(), @"^\d+\.\d{2}?$"))
                 {
-                    errors.Add("If the desired discount has a decimal, it must specify to 2 decimal places.");
+                    errors.Add("If the desired discount has a decimal, it must specify to exactly 2 decimal places.");
                 }
             }          
             if (count == 0)
