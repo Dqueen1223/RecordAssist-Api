@@ -3,6 +3,7 @@ using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Catalyte.Apparel.Utilities.Validation
 {
@@ -70,7 +71,6 @@ namespace Catalyte.Apparel.Utilities.Validation
                 if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
                     errors.Add("The CVV field must not be empty or white space. ");
 
-
                 if (Purchase.CVV.Length != 0 && Purchase.CVV.Trim().Length != 3)
                     errors.Add("CVV must be 3 digits long. ");
 
@@ -84,6 +84,77 @@ namespace Catalyte.Apparel.Utilities.Validation
             if (Purchase.CVV == null && Purchase.CardNumber == null && Purchase.Expiration == null && Purchase.CardHolder == null)
                 throw new BadRequestException("No credit card provided. ");
 
+            return errors;
+        }
+        /// <summary>
+        /// This function validates that promos are valid based on multiple criteria.
+        /// if invalid, it returns a list of strings. otherwise it returns an empty list.
+        /// </summary>
+        public static List<string> PromoValidation(Promo promo)
+        {
+            List<string> errors = new();
+            var count = 0;
+            //check for null or default values
+            if (promo.Type == null || promo.Type.Trim() == "")
+            {
+                errors.Add("The type field can't be empty or whitspace.");
+                count++;
+            }
+            else if (promo.Type != "%" && promo.Type != "$")
+            {
+                errors.Add("The type field expects either % or $.");
+                count++;
+            }
+            if (promo.Code == null || promo.Code.Trim() == "")
+            {
+                errors.Add("The code field can't be empty or whitspace.");
+            }
+            else if (!Regex.IsMatch(promo.Code, "^[a-zA-Z0-9]*$"))
+            {
+                errors.Add("A promotional code may only consist of alphanumeric characters.");
+            }
+            if (promo.Discount == null)
+            {
+                errors.Add("The discount field is required.");
+                count++;
+            }
+            else
+            {
+                if (promo.Discount <= 0 && promo.Type == "$")
+                {
+                    errors.Add("A flat discount must be greater than 0.");
+                }
+                else if (promo.Type == "$" && Regex.IsMatch(promo.Discount.ToString(), @"\."))
+                {
+                    if (!Regex.IsMatch(promo.Discount.ToString(), @"^\d+\.\d{2}?$"))
+                    {
+                        errors.Add("If the desired discount has a decimal, it must specify to exactly 2 decimal places.");
+                    }
+                }
+            }
+            if (count == 0)
+            {
+                if (promo.Type == "%" && (promo.Discount < 1 || promo.Discount > 100))
+                {
+                    errors.Add("If Discount type is %, the discount must be between 1 and 100.");
+                }
+            }
+            if (promo.StartDate == null)
+            {
+                errors.Add("The start date field is required.");
+            }
+            else if (promo.StartDate >= DateTime.UtcNow)
+            {
+                errors.Add("The start date must be in the past or today.");
+            }
+            if (promo.EndDate == null)
+            {
+                errors.Add("The end date field is required.");
+            }
+            else if (promo.EndDate < DateTime.UtcNow)
+            {
+                errors.Add("The end date must be in the future");
+            }
             return errors;
         }
     }
