@@ -11,6 +11,8 @@ namespace Catalyte.Apparel.Data.Model
     {
         public DateTime OrderDate { get; set; }
 
+        public decimal TotalCost { get; set; }
+
         [MaxLength(100)]
         public string BillingStreet { get; set; }
 
