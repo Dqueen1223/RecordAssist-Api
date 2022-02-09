@@ -540,7 +540,5 @@ namespace Catalyte.Apparel.Test.Unit
 
             Assert.Equal(list, present);
         }
-
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Catalyte.Apparel.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
 
 namespace Catalyte.Apparel.Providers.Interfaces
@@ -13,11 +13,14 @@ namespace Catalyte.Apparel.Providers.Interfaces
     {
         Task<Product> GetProductByIdAsync(int productId);
 
-        Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, string brand, string category, string color,
-                                                    string demographic, string material,
-                                                    decimal price, string type);
+        Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal minPrice, decimal maxPrice, List<string> type, int? range);
 
 
+        Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal minPrice, decimal maxPrice, List<string> type, int? range);
 
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
 
