@@ -94,27 +94,85 @@ namespace Catalyte.Apparel.Providers.Providers
             return categories;
         }
 
+        public async Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
+                                                                 List<string> color, List<string> demographic, List<string> material,
+                                                                 decimal minPrice, decimal maxPrice, List<string> type, int? range)
+        {
+            {
+                int productsCount;
 
+                int returnProducts = 20;
+                if (range == null)
+                {
+                    returnProducts = 100000;
+                    range = 0;
+                }
+                // Convert input color code to hex format to match database column label
+                List<string> hexColor = new List<string>();
+                if (color.Count() > 0)
+                {
+                    foreach (var colorItem in color)
+                    {
+                        hexColor.Add("#" + colorItem.ToLower());
+                    }
+                }
+
+                List<string> brandLower = brand.ConvertAll(x => x.ToLower());
+                List<string> categoryLower = category.ConvertAll(x => x.ToLower());
+                List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
+                List<string> materialLower = material.ConvertAll(x => x.ToLower());
+                List<string> typeLower = type.ConvertAll(x => x.ToLower());
+
+                // Check that minPrice is not greater than maxPrice and minPrice is non-negative
+                if (minPrice > maxPrice && !maxPrice.Equals(0))
+                {
+                    throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
+                }
+                if (minPrice < 0 || maxPrice < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Prices cannot be negative.");
+                }
+
+                try
+                {
+                    productsCount = await _productRepository.GetProductsCountAsync(active, brandLower, categoryLower, hexColor,
+                                                                 demographicLower, materialLower,
+                                                                 minPrice, maxPrice, typeLower, range, returnProducts);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message);
+                    throw new ServiceUnavailableException("There was a problem connecting to the database.");
+                }
+
+                return productsCount;
+            }
+        }
         /// <summary>
         /// Asynchronously retrieves all products from the database.
         /// </summary>
         /// <returns>All products in the database.</returns>
         public async Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
-                                                                 decimal minPrice, decimal maxPrice, List<string> type)
+                                                                 decimal minPrice, decimal maxPrice, List<string> type, int? range)
         {
             IEnumerable<Product> products;
 
+            int returnProducts = 20;
+            if (range == null)
+            {
+                returnProducts = 100000;
+                range = 0;
+            }
             // Convert input color code to hex format to match database column label
             List<string> hexColor = new List<string>();
             if (color.Count() > 0)
             {
-                foreach(var colorItem in color)
+                foreach (var colorItem in color)
                 {
                     hexColor.Add("#" + colorItem.ToLower());
                 }
             }
-
             // Check that minPrice is not greater than maxPrice and minPrice is non-negative
             if (minPrice > maxPrice && !maxPrice.Equals(0))
             {
@@ -136,7 +194,7 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 products = await _productRepository.GetProductsAsync(active, brandLower, categoryLower, hexColor,
                                                                  demographicLower, materialLower,
-                                                                 minPrice, maxPrice, typeLower);
+                                                                 minPrice, maxPrice, typeLower, range, returnProducts);
             }
             catch (Exception ex)
             {
