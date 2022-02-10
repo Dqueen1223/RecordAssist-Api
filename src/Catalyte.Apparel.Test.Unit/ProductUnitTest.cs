@@ -91,7 +91,7 @@ namespace Test.Unit
             //arrange 
             List<string> emptyStringList = new List<string>();
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, emptyStringList, emptyStringList, emptyStringList,
-                emptyStringList, emptyStringList, 0, 100, emptyStringList, null, 100000))
+                emptyStringList, emptyStringList, 0, 100, emptyStringList, 0, 100000))
                 .ThrowsAsync(new ServiceUnavailableException("There was a problem connecting to the database."));
 
             var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
