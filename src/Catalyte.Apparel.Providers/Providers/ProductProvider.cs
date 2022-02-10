@@ -124,15 +124,15 @@ namespace Catalyte.Apparel.Providers.Providers
                 List<string> typeLower = type.ConvertAll(x => x.ToLower());
 
                 // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-                if (minPrice > maxPrice && !maxPrice.Equals(0))
-                {
-                    _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
-                    throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
-                }
                 if (minPrice < 0 || maxPrice < 0)
                 {
                     _logger.LogInformation("Prices cannot be negative.");
                     throw new BadRequestException("Prices cannot be negative.");
+                }
+                if (minPrice > maxPrice && !maxPrice.Equals(0))
+                {
+                    _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+                    throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
                 }
 
                 try
