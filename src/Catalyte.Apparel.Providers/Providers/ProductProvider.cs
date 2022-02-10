@@ -204,6 +204,39 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+        public async Task<Product> UpdateProductAsync(int id, Product updatedProduct)
+        {
+            Product existingProduct;
 
+            try
+            {
+                existingProduct = await _productRepository.GetProductByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (existingProduct == default)
+            {
+                _logger.LogInformation($"Product with id: {id} does not exist.");
+                throw new NotFoundException($"Product with id:{id} not found.");
+            }
+            if (updatedProduct.Id == default)
+            {
+                updatedProduct.Id = id;
+            }
+
+            try
+            {
+                await _productRepository.UpdateProductAsync(id, updatedProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return updatedProduct;
+        }
     }
 }
