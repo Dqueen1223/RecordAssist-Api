@@ -227,5 +227,21 @@ namespace Catalyte.Apparel.Providers.Providers
             return savedProduct;
         }
 
+        public async Task<Product> DeleteProductByIdAsync(int id)
+        {
+            Product product;
+            try
+            {
+                product = await _productRepository.DeleteProductByIdAsync(product.id);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return product;
+        }
+
     }
 }

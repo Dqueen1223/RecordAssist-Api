@@ -105,6 +105,17 @@ namespace Catalyte.Apparel.API.Controllers
             var productDTO = _mapper.MapProductToProductDto(savedProduct);
             return Created($"/maintenance", productDTO);
         }
-        
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ProductDTO>> DeleteProductByIdAsync(int id)
+        {
+            _logger.LogInformation($"Request received for DeleteProductByIdAsync for id: {id}");
+
+            var product = await _productProvider.DeleteProductByIdAsync(id);
+            var productDTO = _mapper.Map<ProductDTO>(product);
+
+            return Ok(productDTO);
+        }
+
     }
 }
