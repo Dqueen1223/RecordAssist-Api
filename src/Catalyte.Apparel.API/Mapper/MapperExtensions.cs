@@ -5,6 +5,7 @@ using AutoMapper;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
+using Catalyte.Apparel.DTOs.Reviews;
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 
