@@ -30,6 +30,11 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Reviews.ToListAsync();
         }
 
+        public void DeleteReveiew(int reviewId)
+        {
+            _ctx.Reviews.Remove(Review)
+        }
+
     }
 
 }

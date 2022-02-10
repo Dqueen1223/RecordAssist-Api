@@ -52,5 +52,13 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(reviewsDTOs);
         }
+
+        // /reviews/delete
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteReviewByIdAsync(int reviewId)
+        {
+
+        }
+
     }
 }
