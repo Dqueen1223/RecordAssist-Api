@@ -54,6 +54,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             return new PurchaseDTO()
             {
                 Id = purchase.Id,
+                TotalCost = purchase.TotalCost,
                 OrderDate = purchase.OrderDate,
                 LineItems = mapper.Map<List<LineItemDTO>>(purchase.LineItems),
                 DeliveryAddress = mapper.Map<DeliveryAddressDTO>(purchase),
@@ -75,7 +76,7 @@ namespace Catalyte.Apparel.API.DTOMappings
                 StyleNumber = product.StyleNumber,
                 ReleaseDate = product.ReleaseDate,
                 DateCreated = product.DateCreated,
-                DateModified = product.DateCreated,
+                DateModified = product.DateModified,
                 Active = product.Active,
                 Description = product.Description,
                 Name = product.Name,
@@ -98,6 +99,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             {
                 throw new BadRequestException("No credit card associated with this purchase");
             }
+            purchase.TotalCost = purchaseDTO.TotalCost;
             purchase = mapper.Map(purchaseDTO.DeliveryAddress, purchase);
             purchase = mapper.Map(purchaseDTO.BillingAddress, purchase);
             purchase = mapper.Map(purchaseDTO.CreditCard, purchase);
@@ -109,12 +111,12 @@ namespace Catalyte.Apparel.API.DTOMappings
         public static Product MapCreateProductDtoToProduct(this IMapper mapper, ProductDTO productDTO)
         {
             var product = new Product
-            {   
-                DateCreated = DateTime.UtcNow,
+            {
+                DateCreated = DateTime.Now,
                 DateModified = productDTO.DateCreated,
             };
             product = mapper.Map(productDTO, product);
-           
+            
 
             return product;
         }

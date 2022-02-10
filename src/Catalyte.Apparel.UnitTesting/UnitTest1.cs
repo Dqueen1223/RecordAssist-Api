@@ -2,12 +2,18 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Utilities.Validation;
 using System.Collections.Generic;
 using Xunit;
+using Catalyte.Apparel.Utilities.HttpResponseExceptions;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.Serialization;
+using System;
+
+
 
 namespace Catalyte.Apparel.UnitTesting
 {
     public class UnitTests
     {
-
         [Fact]
         public void CreditCardValidationTestNoneValid()
         {
@@ -52,14 +58,19 @@ namespace Catalyte.Apparel.UnitTesting
                 "The card number field must not be empty or whitespace. ",
                 "The expiration field must not be empty or whitespace. ",
                 "Correct format for date is MM/YY ",
-                "The card holder field must not be empty or whitespace. ",
+                "The card holder field must not be empty or whitespace. "
             };
             Assert.Equal(Expected, Actual);
         }
+            
         [Fact]
-        public void CreditCardValidationTestNull()
+        public void CreditCardExpirationAboveYear72ReturnsError()
         {
             Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "4132402120390213";
+            creditCard.Expiration = "02/73";
             creditCard.CardHolder = null;
             creditCard.CVV = null;
             creditCard.CardNumber = null;
@@ -67,7 +78,129 @@ namespace Catalyte.Apparel.UnitTesting
             var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
-                "No credit card provided. "
+                "This credit card is expired. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void CreditCardExpirationBelowYear72DoesntReturnError()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "4132402120390213";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void NullCVVReturnserror ()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "";
+            creditCard.CardNumber = "4132402120390213";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "The CVV field must not be empty or white space. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void UnsupportedCreditCardReturnsError()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "1111222233334444";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "This credit card provider is not supported. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void shortCardLengthreturnserror()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "411122223333444";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "Card number length must be between 16 and 19 characters. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void longCardLengthreturnserror()
+        {
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "41112222333344445555";
+            creditCard.Expiration = "02/72";
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "Card number length must be between 16 and 19 characters. "
+            };
+            Assert.Equal(Expected, Actual);
+        }
+
+        [Fact]
+        public void ThisMonthAndThisYearReturnsTrue()
+        {
+            var CurrentMonth = DateTime.Now.Month;
+            
+            var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "4132402120390213";
+            if (CurrentMonth < 10)
+            {
+                creditCard.Expiration = $"0{CurrentMonth}/{CurrentYear}";
+            }
+            else
+                creditCard.Expiration = $"{CurrentMonth}/{CurrentYear}";
+
+              var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+            };
+            Assert.Equal(Expected, Actual);
+        }
+        [Fact]
+        public void ThisYearLastMonthReturnError()
+        {
+            var CurrentMonth = DateTime.Now.Month -1;
+
+            var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
+            Purchase creditCard = new();
+            creditCard.CardHolder = "Json";
+            creditCard.CVV = "123";
+            creditCard.CardNumber = "4132402120390213";
+            if (CurrentMonth < 10)
+            {
+                creditCard.Expiration = $"0{CurrentMonth}/{CurrentYear}";
+            }
+            else
+                creditCard.Expiration = $"{CurrentMonth}/{CurrentYear}";
+
+            var Actual = Validation.CreditCardValidation(creditCard);
+            List<string> Expected = new()
+            {
+                "This credit card is expired. "
             };
             Assert.Equal(Expected, Actual);
         }
