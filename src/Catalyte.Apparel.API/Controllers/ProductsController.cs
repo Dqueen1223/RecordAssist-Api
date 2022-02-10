@@ -36,14 +36,14 @@ namespace Catalyte.Apparel.API.Controllers
                                                                                   [FromQuery] List<string> color,
                                                                                   [FromQuery] List<string> demographic,
                                                                                   [FromQuery] List<string> material,
-                                                                                  decimal minPrice, decimal maxPrice, 
-                                                                                  [FromQuery] List<string> type, int?range)
+                                                                                  decimal minPrice, decimal maxPrice,
+                                                                                  [FromQuery] List<string> type, int? range)
         {
             _logger.LogInformation("Request received for GetProductsAsync");
 
             var products = await _productProvider.GetProductsAsync(active, brand, category, color,
                                                                    demographic, material,
-                                                                   minPrice,maxPrice, type, range);
+                                                                   minPrice, maxPrice, type, range);
 
             var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
