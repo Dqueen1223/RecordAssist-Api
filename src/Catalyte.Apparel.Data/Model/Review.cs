@@ -12,7 +12,6 @@ namespace Catalyte.Apparel.Data.Model
     public class Review : BaseEntity
     {
         [JsonRequired]
-        public int ReviewId { get; set; }
         public int Rating { get; set; }
 
         public string Title { get; set; }
@@ -20,7 +19,10 @@ namespace Catalyte.Apparel.Data.Model
         public string ReviewsDescription { get; set; }
 
         public string Email { get; set; }
-        
+        public int ProductId { get; set; }
+        public int UserId { get; set; }
+
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
