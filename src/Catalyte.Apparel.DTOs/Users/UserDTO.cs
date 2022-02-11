@@ -20,5 +20,7 @@ namespace Catalyte.Apparel.DTOs
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public Purchases.BillingAddressDTO UserBillingAddress { get; set; }
     }
 }

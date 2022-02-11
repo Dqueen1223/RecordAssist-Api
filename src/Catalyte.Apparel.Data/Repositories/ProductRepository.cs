@@ -40,7 +40,6 @@ namespace Catalyte.Apparel.Data.Repositories
                                                                          List<string> color, List<string> demographic, List<string> material,
                                                                          decimal minPrice, decimal maxPrice, List<string> type, int? range, int returnProducts)
         {
-
             return await _ctx.Products.Where(p =>
             (p.Active == active || active == null) &&
             (brand.Contains(p.Brand.ToLower()) || brand.Count() == 0) &&

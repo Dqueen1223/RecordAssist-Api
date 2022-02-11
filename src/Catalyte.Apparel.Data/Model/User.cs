@@ -18,6 +18,8 @@ namespace Catalyte.Apparel.Data.Model
 
         public string LastName { get; set; }
 
+        public BillingAddress UserBillingAddress { get; set; }
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
