@@ -14,5 +14,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<Review> GetReviewByIdAsync(int reviewId);
 
         Task<IEnumerable<Review>> GetAllReviewsAsync();
+
+        Task<Review> DeleteReviewByIdAsync(int reviewId);
     }
 }

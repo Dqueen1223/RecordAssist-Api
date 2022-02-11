@@ -73,6 +73,32 @@ namespace Catalyte.Apparel.Providers.Providers
             return reviews;
         }
 
-        
+        /// <summary>
+        /// Asynchronously delete a review from the database.
+        /// </summary>
+        /// <returns>Nothing </returns>
+        public async Task<Review> DeleteReviewByIdAsync(int reviewId)
+        {
+            Review review;
+            try
+            {
+                review = await _ReviewsRepository.DeleteReviewAsync(reviewId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (review == null || review == default)
+            {
+                _logger.LogInformation($"Review with id: {reviewId} could not be found.");
+                throw new NotFoundException($"Review {reviewId} could not be found.");
+            }
+
+            return null;
+        }
+
+
     }
 }
