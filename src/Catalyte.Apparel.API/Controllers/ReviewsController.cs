@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Reviews;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -52,5 +53,16 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(reviewsDTOs);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ReviewsDTO>> UpdateReviewByIdAsync(int id, [FromBody] ReviewsDTO reviewToUpdate)
+        {
+            _logger.LogInformation($"Request received for UpdateReviewByIdAsync for id: {id}");
+            var review = _mapper.Map<Review>(reviewToUpdate);
+            var updatedReview = await _reviewsProvider.UpdateReviewAsync(id, review);
+            var reviewsDTOs = _mapper.Map<ReviewsDTO>(updatedReview);
+            return Ok(reviewsDTOs);
+        }
+
     }
 }

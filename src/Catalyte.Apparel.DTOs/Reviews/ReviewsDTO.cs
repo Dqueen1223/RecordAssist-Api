@@ -15,5 +15,7 @@ namespace Catalyte.Apparel.DTOs.Reviews
         public string Title { get; set; }
 
         public string ReviewsDescription { get; set; }
+
+        public string Email { get; set; }
 }
 }
