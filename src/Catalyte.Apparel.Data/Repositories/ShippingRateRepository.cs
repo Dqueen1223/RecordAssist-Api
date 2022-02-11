@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Catalyte.Apparel.Data.Repositories
 {
     /// <summary>
-    /// This class handles methods for making requests to the product repository.
+    /// This class handles methods for making requests to the Shipping Rate repository.
     /// </summary>
     public class ShippingRateRepository : IShippingRateRepository
     {

@@ -7,6 +7,9 @@ using Catalyte.Apparel.Providers.Interfaces;
 using AutoMapper;
 namespace Catalyte.Apparel.API.Controllers
 {
+    /// <summary>
+    /// The ShippingRateController exposes endpoints for shipping rate related actions.
+    /// </summary>
     [ApiController]
     [Route("/shipping-rate")]
     public class ShippingRateController : ControllerBase
