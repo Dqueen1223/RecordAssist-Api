@@ -217,7 +217,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            if (existingProduct == default)
+            if (existingProduct == null)
             {
                 _logger.LogInformation($"Product with id: {id} does not exist.");
                 throw new NotFoundException($"Product with id:{id} not found.");
