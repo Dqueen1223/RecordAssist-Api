@@ -111,10 +111,9 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation($"Request received for DeleteProductByIdAsync for id: {id}");
 
-            var product = await _productProvider.DeleteProductByIdAsync(id);
-            var productDTO = _mapper.Map<ProductDTO>(product);
+            await _productProvider.DeleteProductByIdAsync(id);
 
-            return Ok(productDTO);
+            return Ok();
         }
 
     }

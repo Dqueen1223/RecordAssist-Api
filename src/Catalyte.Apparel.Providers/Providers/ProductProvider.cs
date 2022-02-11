@@ -237,14 +237,20 @@ namespace Catalyte.Apparel.Providers.Providers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
-                    throw new ServiceUnavailableException("There was a problem connecting to the database.");
-                }
-                if (existingProduct == null)
+                    if(_productRepository.DeleteProductByIdAsync(id) == null)
                 {
                     _logger.LogInformation($"Product with id: {id} does not exist.");
                     throw new NotFoundException($"Product with id:{id} not found.");
                 }
+                else
+                {
+                    _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+
+                }
+               
+                    
+            }
 
             return existingProduct;
         }
