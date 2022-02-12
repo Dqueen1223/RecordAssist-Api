@@ -72,17 +72,19 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return reviews;
         }
-
         /// <summary>
-        /// Asynchronously delete a review from the database.
+        /// Asynchronously updates the review with the provided id from the database.
         /// </summary>
-        /// <returns>Nothing </returns>
-        public async Task<Review> DeleteReviewByIdAsync(int reviewId)
+        /// <param name="updatedReview">The updated review.</param>
+        /// <returns>The review.</returns>
+        public async Task<Review> UpdateReviewAsync(int reviewId, Review updatedReview)
         {
             Review review;
+
             try
             {
-                review = await _ReviewsRepository.DeleteReviewAsync(reviewId);
+                //review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
+                review = await _ReviewsRepository.UpdateReviewAsync(updatedReview);
             }
             catch (Exception ex)
             {
@@ -95,10 +97,36 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
                 throw new NotFoundException($"Review {reviewId} could not be found.");
             }
+            return review;
 
-            return null;
         }
 
+        /// <summary>
+        /// Asynchronously deletes the review with the provided id from the database.
+        /// </summary>
+        /// <param name="reviewId">The id of the product to retrieve.</param>
+        /// <returns>The review.</returns>
+        public async Task DeleteReviewByIdAsnc(int reviewId)
+        {
+            Review review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
+            try
+            {
+                await _ReviewsRepository.DeleteReviewByIdAsync(reviewId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (review == null || review == default)
+            {
+                _logger.LogInformation($"Review with id: {reviewId} could not be found.");
+                throw new NotFoundException($"Review {reviewId} could not be found.");
+            }
+        }
 
     }
+
+
 }

@@ -12,13 +12,17 @@ namespace Catalyte.Apparel.Data.Model
     public class Review : BaseEntity
     {
         [JsonRequired]
-        public int ReviewId { get; set; }
         public int Rating { get; set; }
 
         public string Title { get; set; }
 
         public string ReviewsDescription { get; set; }
-        
+
+        public string Email { get; set; }
+        public int ProductId { get; set; }
+        public int UserId { get; set; }
+
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
@@ -33,7 +37,7 @@ namespace Catalyte.Apparel.Data.Model
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Rating == y.Rating && x.Title == y.Title && x.ReviewsDescription == y.ReviewsDescription;
+                return x.Rating == y.Rating && x.Title == y.Title && x.ReviewsDescription == y.ReviewsDescription && x.Email == y.Email;
             }
 
             public int GetHashCode(Review obj)
@@ -42,6 +46,7 @@ namespace Catalyte.Apparel.Data.Model
                 hashCode.Add(obj.Rating);
                 hashCode.Add(obj.Title);
                 hashCode.Add(obj.ReviewsDescription);
+                hashCode.Add(obj.Email);
 
                 return hashCode.ToHashCode();
             }

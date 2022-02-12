@@ -25,17 +25,24 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Reviews.FindAsync(reviewId);
         }
+        public async Task<Review> UpdateReviewAsync(Review review)
+        {
+            review.DateModified = DateTime.Now;
+            _ctx.Reviews.Update(review);
+            await _ctx.SaveChangesAsync();
+
+            return review;
+        }
         public async Task<IEnumerable<Review>> GetAllReviewsAsync()
         {
             return await _ctx.Reviews.ToListAsync();
         }
 
-        public async Task<Review> DeleteReviewAsync(int reviewId)
+        public async Task DeleteReviewByIdAsync(int reviewId)
         {
             var review = await _ctx.Reviews.FindAsync(reviewId);
             _ctx.Reviews.Remove(review);
             await _ctx.SaveChangesAsync();
-            return review;
         }
 
     }
