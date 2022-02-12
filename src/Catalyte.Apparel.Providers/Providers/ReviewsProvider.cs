@@ -109,6 +109,11 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task DeleteReviewByIdAsnc(int reviewId)
         {
             Review review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
+            if (review == null || review == default)
+            {
+                _logger.LogInformation($"Review with id: {reviewId} could not be found.");
+                throw new NotFoundException($"Review {reviewId} could not be found.");
+            }
             try
             {
                 await _ReviewsRepository.DeleteReviewByIdAsync(reviewId);
@@ -117,12 +122,6 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-
-            if (review == null || review == default)
-            {
-                _logger.LogInformation($"Review with id: {reviewId} could not be found.");
-                throw new NotFoundException($"Review {reviewId} could not be found.");
             }
         }
 
