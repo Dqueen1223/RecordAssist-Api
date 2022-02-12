@@ -64,5 +64,14 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(reviewsDTOs);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<OkResult> DeleteReviewByIdAsync(int id)
+        {
+            _logger.LogInformation($"Request received for DeleteReviewByIdAsync for id: {id}");
+            await _reviewsProvider.DeleteReviewByIdAsnc(id);
+
+            return Ok();
+        }
+
     }
 }
