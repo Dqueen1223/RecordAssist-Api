@@ -25,7 +25,6 @@ namespace Catalyte.Apparel.Data
             services.AddScoped<IReviewsRepository, ReviewsRepository>();
             services.AddScoped<IPromoRepository, PromoRepository>();
 
->>>>>>>>> Temporary merge branch 2
             return services;
 
         }

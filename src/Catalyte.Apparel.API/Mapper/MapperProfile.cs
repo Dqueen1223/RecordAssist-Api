@@ -32,7 +32,6 @@ namespace Catalyte.Apparel.API
             CreateMap<Promo, PromoDTO>();
 
             CreateMap<CreatePromoDTO, Promo>();
->>>>>>>>> Temporary merge branch 2
         }
 
     }

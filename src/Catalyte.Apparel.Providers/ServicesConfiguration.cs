@@ -14,7 +14,6 @@ namespace Catalyte.Apparel.Providers
             services.AddScoped<IProductProvider, ProductProvider>();
             services.AddScoped<IPurchaseProvider, PurchaseProvider>();
             services.AddScoped<IUserProvider, UserProvider>();
-<<<<<<<<< Temporary merge branch 1
             services.AddScoped<IReviewProvider, ReviewsProvider>();
             services.AddScoped<IPromoProvider, PromoProvider>();
 
