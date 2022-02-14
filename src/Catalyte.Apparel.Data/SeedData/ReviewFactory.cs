@@ -34,8 +34,10 @@ namespace Catalyte.Apparel.Data.SeedData
             "this product is bad",
             "would definitely recommend",
             "don't waste your time",
-            "NEVER AGAIN"
+            "NEVER AGAIN",
+            "life changing"
         };
+
         /// <summary>
         /// Generates a number of random reviews based on input.
         /// </summary>
@@ -65,6 +67,7 @@ namespace Catalyte.Apparel.Data.SeedData
             var rating = _rating[_rand.Next(0, _rating.Count)];
             var title = _title[_rand.Next(0, _title.Count)];
             var reviewsDescription = _reviewsDescription[_rand.Next(0, _reviewsDescription.Count)];
+            var productId = _rand.Next(1, 1000);
 
 
 
@@ -73,7 +76,12 @@ namespace Catalyte.Apparel.Data.SeedData
                 Id = id,
                 Rating = rating,
                 Title = title,
-                ReviewsDescription= reviewsDescription
+                ReviewsDescription= reviewsDescription,
+                Email = "customer@customer.home",
+                ProductId = productId,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+                
             };
         }
 

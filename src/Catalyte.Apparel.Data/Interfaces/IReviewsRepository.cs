@@ -12,7 +12,11 @@ namespace Catalyte.Apparel.Data.Interfaces
     {
         Task<Review> GetReviewByIdAsync(int reviewsId);
 
+        Task<Review> UpdateReviewAsync(Review review);
+
         Task<IEnumerable<Review>> GetAllReviewsAsync();
+
+        Task DeleteReviewByIdAsync(int reviewId);
 
     }
 }
