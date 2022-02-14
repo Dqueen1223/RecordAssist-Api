@@ -65,12 +65,16 @@ namespace Catalyte.Apparel.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<OkResult> DeleteReviewByIdAsync(int id)
+        public async Task<ActionResult<IEnumerable<ReviewsDTO>>> DeleteReviewByIdAsync(int id)
         {
             _logger.LogInformation($"Request received for DeleteReviewByIdAsync for id: {id}");
             await _reviewsProvider.DeleteReviewByIdAsnc(id);
 
-            return Ok();
+            //return Ok();
+            var reviews = await _reviewsProvider.GetAllReviewsAsync();
+            var reviewsDTOs = _mapper.Map<IEnumerable<ReviewsDTO>>(reviews);
+
+            return Ok(reviewsDTOs);
         }
 
     }
