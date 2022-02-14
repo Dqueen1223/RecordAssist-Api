@@ -21,6 +21,8 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Promo> Promos { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
     }
 
