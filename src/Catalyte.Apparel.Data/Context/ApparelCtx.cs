@@ -22,9 +22,10 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Promo> Promos { get; set; }
-
+<<<<<<<<< Temporary merge branch 1
         public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Promo> Promos { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
