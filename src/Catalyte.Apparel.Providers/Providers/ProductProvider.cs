@@ -211,6 +211,7 @@ namespace Catalyte.Apparel.Providers.Providers
             try
             {
                 existingProduct = await _productRepository.GetProductByIdAsync(updatedProduct.Id);
+                existingProduct = updatedProduct;
             }
             catch (Exception ex)
             {
