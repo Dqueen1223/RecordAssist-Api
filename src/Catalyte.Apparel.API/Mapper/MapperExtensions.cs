@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Catalyte.Apparel.Data.Model;
+using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using Catalyte.Apparel.DTOs.Products;
 
 namespace Catalyte.Apparel.API.DTOMappings
 {
@@ -116,7 +116,7 @@ namespace Catalyte.Apparel.API.DTOMappings
                 DateModified = productDTO.DateCreated,
             };
             product = mapper.Map(productDTO, product);
-            
+
 
             return product;
         }

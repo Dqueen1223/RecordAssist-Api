@@ -223,21 +223,22 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            
+
             return savedProduct;
         }
 
         public async Task<Product> DeleteProductByIdAsync(int id)
         {
-                Product existingProduct;
+            Product existingProduct;
 
-                try
-                {
-                    existingProduct = await _productRepository.DeleteProductByIdAsync(id);
-                }
-                catch (Exception ex)
-                {
-                    if(_productRepository.DeleteProductByIdAsync(id) == null)
+            try
+            {
+                existingProduct = await _productRepository.DeleteProductByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+
+                if (ex.Message.Contains("Database operation expected to effect 1 row(s) but actually effected 0 row(s)"))
                 {
                     _logger.LogInformation($"Product with id: {id} does not exist.");
                     throw new NotFoundException($"Product with id:{id} not found.");
@@ -245,12 +246,13 @@ namespace Catalyte.Apparel.Providers.Providers
                 else
                 {
                     _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
-
+                    throw new ServiceUnavailableException("There was a problem connecting to the database.");
                 }
-               
-                    
+
+
             }
+
+            
 
             return existingProduct;
         }
