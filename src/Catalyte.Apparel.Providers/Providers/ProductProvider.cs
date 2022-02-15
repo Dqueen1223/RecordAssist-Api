@@ -229,32 +229,27 @@ namespace Catalyte.Apparel.Providers.Providers
 
         public async Task<Product> DeleteProductByIdAsync(int id)
         {
-            Product existingProduct;
-
+           var existingProduct = await _productRepository.GetProductByIdAsync(id);
+           Product deletedProduct;
+            if (existingProduct == null)
+            {
+               _logger.LogInformation($"Product with id: {id} does not exist.");
+               throw new NotFoundException($"Product with id:{id} not found.");
+            }
             try
             {
-                existingProduct = await _productRepository.DeleteProductByIdAsync(id);
+                deletedProduct = await _productRepository.DeleteProductByIdAsync(existingProduct);
             }
             catch (Exception ex)
             {
-
-                if (ex.Message.Contains("Database operation expected to effect 1 row(s) but actually effected 0 row(s)"))
-                {
-                    _logger.LogInformation($"Product with id: {id} does not exist.");
-                    throw new NotFoundException($"Product with id:{id} not found.");
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                    throw new ServiceUnavailableException("There was a problem connecting to the database.");
-                }
-
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
 
             }
 
             
 
-            return existingProduct;
+            return deletedProduct;
         }
 
     }
