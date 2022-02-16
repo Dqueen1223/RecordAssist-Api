@@ -113,7 +113,7 @@ namespace Catalyte.Apparel.API.Controllers
 
             await _productProvider.DeleteProductByIdAsync(id);
 
-            return Ok();
+            return Ok("Product successfully deleted.");
         }
 
     }
