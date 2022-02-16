@@ -488,7 +488,7 @@ namespace Catalyte.Apparel.Data.Context
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
                 ShippingCost = 5,
-                State = "Virgin Island"
+                State = "Virgin Islands"
                 },
                 new ShippingRate
                 {
