@@ -66,6 +66,13 @@ namespace Catalyte.Apparel.Data.Repositories
             ((p.Price >= minPrice || minPrice.Equals(0)) && (p.Price <= maxPrice || maxPrice.Equals(0))) &&
             (type.Contains(p.Type.ToLower()) || type.Count() == 0)).Skip(count: (int)range).Take(returnProducts).ToListAsync();
         }
+        public async Task<Product> CreateProductAsync(Product product)
+        {
+            await _ctx.Products.AddAsync(product);
+            await _ctx.SaveChangesAsync();
+
+            return product;
+        }
 
     }
 

@@ -198,4 +198,4 @@ namespace Catalyte.Apparel.Test.Integration
         }
     }
 }
-                                                                                                             //gi
+//gi
