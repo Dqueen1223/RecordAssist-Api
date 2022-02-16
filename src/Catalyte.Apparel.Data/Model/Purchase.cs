@@ -22,7 +22,6 @@ namespace Catalyte.Apparel.Data.Model
         [MaxLength(50)]
         public string BillingCity { get; set; }
 
-        [MaxLength(2)]
         public string BillingState { get; set; }
 
         [MaxLength(10)]
@@ -49,7 +48,6 @@ namespace Catalyte.Apparel.Data.Model
         [MaxLength(50)]
         public string DeliveryCity { get; set; }
 
-        [MaxLength(2)]
         public string DeliveryState { get; set; }
 
         [MaxLength(10)]
