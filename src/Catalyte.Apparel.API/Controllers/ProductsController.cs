@@ -78,7 +78,7 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(productDTO);
         }
         [HttpPut]
-        public async Task<ActionResult<ProductDTO>> UpdateProductAsync(int id,
+        public async Task<ActionResult<ProductDTO>> UpdateProductAsync(
                         [FromBody] ProductDTO Product)
         {
             _logger.LogInformation("Request received for update user");
@@ -87,7 +87,7 @@ namespace Catalyte.Apparel.API.Controllers
             {
                 _logger.LogInformation("Request recived for update product");
             }
-            var updatedProduct = await _productProvider.UpdateProductAsync(id, productToUpdate);
+            var updatedProduct = await _productProvider.UpdateProductAsync(productToUpdate);
             var productDTO = _mapper.Map<ProductDTO>(updatedProduct);
 
             return Ok(productDTO);

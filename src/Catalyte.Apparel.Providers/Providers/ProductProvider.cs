@@ -204,30 +204,27 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-        public async Task<Product> UpdateProductAsync(int id, Product updatedProduct)
+        public async Task<Product> UpdateProductAsync(Product updatedProduct)
         {
-            Product existingProduct;
+            Product newProduct;
 
+            var existingProduct = await _productRepository.GetProductByIdAsync(updatedProduct.Id);
+            if (existingProduct== null)
+            {
+                _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
+                throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
+            }                                       
             try
             {
-                existingProduct = await _productRepository.GetProductByIdAsync(updatedProduct.Id);
-                existingProduct = updatedProduct;
+                newProduct = await _productRepository.UpdateProductAsync(updatedProduct);
+                newProduct = updatedProduct;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            if (existingProduct == null)
-            {
-                _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
-                throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
-            }
-            if (updatedProduct.Id == default)
-            {
-                updatedProduct.Id = id;
-            }                                                   
-            return updatedProduct;
+            return newProduct;
         }
     }
 }

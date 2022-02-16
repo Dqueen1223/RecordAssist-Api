@@ -17,7 +17,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range);
 
-        Task<Product> UpdateProductAsync(int id, Product updatedProduct);
+        Task<Product> UpdateProductAsync(Product updatedProduct);
         Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range);

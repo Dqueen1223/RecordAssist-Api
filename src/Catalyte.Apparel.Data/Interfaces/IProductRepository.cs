@@ -20,7 +20,7 @@ namespace Catalyte.Apparel.Data.Interfaces
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range, int returnProducts);
 
-        Task<Product> UpdateProductAsync(int id, Product Product);
+        Task<Product> UpdateProductAsync(Product Product);
 
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
         Task<List<string>> GetAllUniqueProductTypesAsync();
