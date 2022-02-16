@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -95,5 +96,15 @@ namespace Catalyte.Apparel.API.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<ActionResult<List<ProductDTO>>> CreateProductAsync([FromBody] ProductDTO model)
+        {
+            _logger.LogInformation("Request received for CreateProduct");
+            var newProduct = _mapper.MapCreateProductDtoToProduct(model);
+            var savedProduct = await _productProvider.CreateProductAsync(newProduct);
+            var productDTO = _mapper.MapProductToProductDto(savedProduct);
+            return Created($"/maintenance", productDTO);
+        }
+        
     }
 }
