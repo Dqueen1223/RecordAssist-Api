@@ -10,7 +10,7 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface IProductRepository
     {
-        Task<Product> GetProductByIdAsync(int productId);
+        Task<Product> NoTrackingGetProductByIdAsync(int productId);
 
         Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,

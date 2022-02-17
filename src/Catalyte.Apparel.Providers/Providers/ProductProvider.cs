@@ -27,17 +27,17 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
         /// <summary>
-        /// Asynchronously retrieves the product with the provided id from the database.
+        /// Asynchronously retrieves nontracked product with the provided id from the database.
         /// </summary>
         /// <param name="productId">The id of the product to retrieve.</param>
         /// <returns>The product.</returns>
-        public async Task<Product> GetProductByIdAsync(int productId)
+        public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
         {
             Product product;
 
             try
             {
-                product = await _productRepository.GetProductByIdAsync(productId);
+                product = await _productRepository.NoTrackingGetProductByIdAsync(productId);
             }
             catch (Exception ex)
             {
@@ -204,20 +204,28 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-        public async Task<Product> UpdateProductAsync(Product updatedProduct)
+        public async Task<Product> UpdateProductAsync (Product updatedProduct)
         {
             Product newProduct;
 
-            var existingProduct = await _productRepository.GetProductByIdAsync(updatedProduct.Id);
-            if (existingProduct== null)
+            Product existingProduct;
+            try
             {
-                _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
-                throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
-            }                                       
+                existingProduct =  await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+                if (existingProduct == null)
+                {
+                    _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
+                    throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
+                }
             try
             {
                 newProduct = await _productRepository.UpdateProductAsync(updatedProduct);
-                newProduct = updatedProduct;
             }
             catch (Exception ex)
             {

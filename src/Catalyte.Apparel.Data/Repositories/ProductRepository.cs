@@ -21,9 +21,9 @@ namespace Catalyte.Apparel.Data.Repositories
             _ctx = ctx;
         }
 
-        public async Task<Product> GetProductByIdAsync(int productId)
+        public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
         {
-            return await _ctx.Products.FindAsync(productId);
+           return  await _ctx.Products.Where(p => p.Id == productId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
 
         public async Task<List<string>> GetAllUniqueProductCategoriesAsync()

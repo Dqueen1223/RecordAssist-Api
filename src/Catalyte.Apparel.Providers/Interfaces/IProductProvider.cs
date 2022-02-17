@@ -11,7 +11,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
     /// </summary>
     public interface IProductProvider
     {
-        Task<Product> GetProductByIdAsync(int productId);
+        Task<Product> NoTrackingGetProductByIdAsync(int productId);
 
         Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
