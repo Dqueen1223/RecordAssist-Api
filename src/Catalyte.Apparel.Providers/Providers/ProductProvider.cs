@@ -31,6 +31,33 @@ namespace Catalyte.Apparel.Providers.Providers
         /// </summary>
         /// <param name="productId">The id of the product to retrieve.</param>
         /// <returns>The product.</returns>
+        ///  /// <summary>
+        /// Asynchronously retrieves the product with the provided id from the database.
+        /// </summary>
+        /// <param name="productId">The id of the product to retrieve.</param>
+        /// <returns>The product.</returns>
+        public async Task<Product> GetProductByIdAsync(int productId)
+        {
+            Product product;
+
+            try
+            {
+                product = await _productRepository.GetProductByIdAsync(productId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (product == null || product == default)
+            {
+                _logger.LogInformation($"Product with id: {productId} could not be found.");
+                throw new NotFoundException($"Product with id: {productId} could not be found.");
+            }
+
+            return product;
+        }
         public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
         {
             Product product;
@@ -124,13 +151,15 @@ namespace Catalyte.Apparel.Providers.Providers
                 List<string> typeLower = type.ConvertAll(x => x.ToLower());
 
                 // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-                if (minPrice > maxPrice && !maxPrice.Equals(0))
-                {
-                    throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
-                }
                 if (minPrice < 0 || maxPrice < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Prices cannot be negative.");
+                    _logger.LogInformation("Prices cannot be negative.");
+                    throw new BadRequestException("Prices cannot be negative.");
+                }
+                if (minPrice > maxPrice && !maxPrice.Equals(0))
+                {
+                    _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+                    throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
                 }
 
                 try
@@ -173,14 +202,17 @@ namespace Catalyte.Apparel.Providers.Providers
                     hexColor.Add("#" + colorItem.ToLower());
                 }
             }
+
             // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-            if (minPrice > maxPrice && !maxPrice.Equals(0))
-            {
-                throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
-            }
             if (minPrice < 0 || maxPrice < 0)
             {
-                throw new ArgumentOutOfRangeException("Prices cannot be negative.");
+                _logger.LogInformation("Prices cannot be negative.");
+                throw new BadRequestException("Prices cannot be negative.");
+            }
+            if (minPrice > maxPrice && !maxPrice.Equals(0))
+            {
+                _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+                throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
             }
 
             // Convert all strings to lowercase for simplified query parameter matching
@@ -234,5 +266,27 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             return newProduct;
         }
+        /// <summary>
+        /// Persists a purchase to the database.
+        /// </summary>
+        /// <param name="model">PurchaseDTO used to build the purchase.</param>
+        /// <returns>The persisted purchase with IDs.</returns>
+        public async Task<Product> CreateProductAsync(Product newProduct)
+        {
+            Product savedProduct;
+
+            try
+            {
+                savedProduct = await _productRepository.CreateProductAsync(newProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            
+            return savedProduct;
+        }
+
     }
 }

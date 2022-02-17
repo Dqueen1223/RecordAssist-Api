@@ -12,7 +12,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
     public interface IProductProvider
     {
         Task<Product> NoTrackingGetProductByIdAsync(int productId);
-
+        Task<Product> GetProductByIdAsync(int productId);
         Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range);
@@ -25,5 +25,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<List<string>> GetAllUniqueProductCategoriesAsync();
 
         Task<List<string>> GetAllUniqueProductTypesAsync();
+
+        Task<Product> CreateProductAsync(Product model);
     }
 }
