@@ -31,13 +31,13 @@ namespace Catalyte.Apparel.Providers.Providers
             /// </summary>
             /// <param name="productId">The id of the product to retrieve.</param>
             /// <returns>The product.</returns>
-            public async Task<Product> GetLineItemsByProductIdAsync(int productId)
+            public async Task<LineItem> GetLineItemsByProductIdAsync(int productId)
             {
-                Product product;
+                LineItem lineItem;
 
                 try
                 {
-                    product = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
+                    lineItem = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
                 }
                 catch (Exception ex)
                 {
@@ -45,13 +45,13 @@ namespace Catalyte.Apparel.Providers.Providers
                     throw new ServiceUnavailableException("There was a problem connecting to the database.");
                 }
 
-                if (product == null || product == default)
+            if (lineItem == null || lineItem == default)
                 {
-                    _logger.LogInformation($"Product with id: {productId} could not be found.");
-                    throw new NotFoundException($"Product with id: {productId} could not be found.");
+                    _logger.LogInformation($"Line item with product id: {productId} could not be found.");
+                    throw new NotFoundException($"Line item with product id: {productId} could not be found.");
                 }
 
-                return product;
+                return lineItem;
             }
-        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Catalyte.Apparel.Data.Context;
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Catalyte.Apparel.Data.Repositories
 
         public async Task<LineItem> GetLineItemsByProductIdAsync(int productId)
         {
-            return await _ctx.LineItems.Where(l => l.ProductId == productId);
+            return await _ctx.LineItems.Where(l => l.ProductId == productId).FirstOrDefaultAsync();
         }
     }
 }

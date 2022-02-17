@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using Catalyte.Apparel.DTOs.Promos;
+using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -30,6 +29,16 @@ namespace Catalyte.Apparel.API.Controllers
             _logger = logger;
             _LineItemsProvider = LineItemsProvider;
             _mapper = mapper;
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LineItemDTO>> GetLineItemsByProductIdAsync(int id)
+        {
+            _logger.LogInformation($"Request received for GetLineItemsByProductIdAsync for id: {id}");
+
+            var lineItem = await _LineItemsProvider.GetLineItemsByProductIdAsync(id);
+            var lineItemDTO = _mapper.Map<LineItemDTO>(lineItem);
+
+            return Ok(lineItemDTO);
         }
 
     }

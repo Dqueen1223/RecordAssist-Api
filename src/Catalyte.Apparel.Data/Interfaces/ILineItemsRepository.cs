@@ -8,6 +8,6 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface ILineItemsRepository
     {
-        Task<Product> GetLineItemsByProductIdAsync(int productId);
+        Task<LineItem> GetLineItemsByProductIdAsync(int productId);
     }
 }
