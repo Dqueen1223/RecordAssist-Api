@@ -27,5 +27,4 @@ namespace Catalyte.Apparel.Test.Integration
             Assert.Equal(1, content.Id);
         }
     }
-}
-                                                                                                             //gi
+}                                                                                                      
