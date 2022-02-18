@@ -79,16 +79,6 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(productDTO);
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<ProductDTO>>> NoTrackingGetProductByIdAsync(int id)
-        //{
-        //    _logger.LogInformation($"Request received for NoTrackingGetProductByIdAsync for id: {id}");
-
-        //    var product = await _productProvider.NoTrackingGetProductByIdAsync(id);
-        //    var productDTO = _mapper.Map<IEnumerable<ProductDTO>>(product);
-
-        //    return Ok(productDTO);
-        //}
         [HttpPut]
         public async Task<ActionResult<ProductDTO>> UpdateProductAsync(
                         [FromBody] ProductDTO Product)
