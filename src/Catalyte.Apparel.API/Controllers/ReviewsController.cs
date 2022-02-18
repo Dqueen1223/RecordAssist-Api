@@ -77,5 +77,16 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(reviewsDTOs);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<List<ReviewsDTO>>> CreateReviewAsync([FromBody] ReviewsDTO model)
+        {
+            _logger.LogInformation("Request received for CreatePromo");
+
+            var newReview = _mapper.Map<Review>(model);
+            var savedPromo = await _reviewsProvider.CreateReviewAsync(newReview);
+            var reviewDTO = _mapper.Map<ReviewsDTO>(savedPromo);
+            return Created($"/reviews/", reviewDTO);
+        }
+
     }
 }

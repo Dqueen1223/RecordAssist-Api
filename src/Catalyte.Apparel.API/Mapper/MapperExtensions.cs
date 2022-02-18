@@ -44,7 +44,6 @@ namespace Catalyte.Apparel.API.DTOMappings
             promo = mapper.Map(promoDTO, promo);
             return promo;
         }
-
         /// <summary>
         /// Helper method to build model for a purchase DTO.
         /// </summary>

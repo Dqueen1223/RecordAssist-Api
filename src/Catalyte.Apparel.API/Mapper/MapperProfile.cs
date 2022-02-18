@@ -32,6 +32,7 @@ namespace Catalyte.Apparel.API
             CreateMap<Promo, PromoDTO>();
 
             CreateMap<CreatePromoDTO, Promo>();
+
         }
 
     }
