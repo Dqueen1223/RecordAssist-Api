@@ -29,5 +29,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<Product> CreateProductAsync(Product model);
 
         Task<Product> DeleteProductByIdAsync(int id);
+
+        Task<string> CheckForPurchasesByProductIdAsync(int productId, Product product);
     }
 }

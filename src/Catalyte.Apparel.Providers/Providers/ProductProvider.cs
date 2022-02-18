@@ -19,11 +19,13 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<ProductProvider> _logger;
         private readonly IProductRepository _productRepository;
+        private readonly ILineItemsRepository _lineItemsRepository;
 
-        public ProductProvider(IProductRepository productRepository, ILogger<ProductProvider> logger)
+        public ProductProvider(IProductRepository productRepository, ILogger<ProductProvider> logger, ILineItemsRepository lineItemsRepository)
         {
             _logger = logger;
             _productRepository = productRepository;
+            _lineItemsRepository = lineItemsRepository;
         }
 
         /// <summary>
@@ -229,28 +231,59 @@ namespace Catalyte.Apparel.Providers.Providers
 
         public async Task<Product> DeleteProductByIdAsync(int id)
         {
-           var existingProduct = await _productRepository.GetProductByIdAsync(id);
-           Product deletedProduct;
-            if (existingProduct == null)
-            {
-               _logger.LogInformation($"Product with id: {id} does not exist.");
-               throw new NotFoundException($"Product with id:{id} not found.");
-            }
             try
             {
-                deletedProduct = await _productRepository.DeleteProductByIdAsync(existingProduct);
+                var existingProduct = await _productRepository.GetProductByIdAsync(id);
+                var purchasedProduct = await CheckForPurchasesByProductIdAsync(id, existingProduct);
+                Product deletedProduct;
+                if (existingProduct == null)
+                {
+                    _logger.LogInformation($"Product with id: {id} does not exist.");
+                    throw new NotFoundException($"Product with id:{id} not found.");
+                }
+                else if (purchasedProduct != String.Empty)
+                {
+                    _logger.LogInformation($"Product with id: {id} has purchases associated with it.");
+                    throw new ArgumentException($"Product with id: {id} has purchases associated with it.");
+                }
+                else
+                {
+                    deletedProduct = await _productRepository.DeleteProductByIdAsync(existingProduct);
+                    return deletedProduct;
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
+        }
+
+        public async Task<string> CheckForPurchasesByProductIdAsync(int productId, Product product)
+        {
+            string purchasedItems = string.Empty;
+            try
+            {
+                var purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
+
+
+                if (purchaseLineItems != null || purchaseLineItems != default)
+                {
+                    purchasedItems += product.Name;
+                    return purchasedItems;
+                }
+                else
+                {
+                    return purchasedItems;
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
-
             }
 
-            
-
-            return deletedProduct;
         }
-
     }
 }
