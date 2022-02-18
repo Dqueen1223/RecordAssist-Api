@@ -56,6 +56,10 @@ namespace Catalyte.Apparel.Data.SeedData
             return reviewList;
         }
         private Random gen = new Random();
+        // <summary>
+        // Generates a random date starting from the year 2021 into the current year.
+        // </summary>
+        // <returns> A list of randomly generated dates
         DateTime RandomDay()
         {
             DateTime start = new DateTime(2021, 1, 1);
