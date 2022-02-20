@@ -77,7 +77,6 @@ namespace Catalyte.Apparel.Data.Repositories
         public async Task<Product> DeleteProductByIdAsync(Product product)
         {
 
-           // Product product = new() { Id = id };
             _ctx.Products.Attach(product);
             _ctx.Products.Remove(product);
             await _ctx.SaveChangesAsync();

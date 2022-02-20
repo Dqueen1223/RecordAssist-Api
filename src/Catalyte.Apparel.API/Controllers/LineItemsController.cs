@@ -30,16 +30,7 @@ namespace Catalyte.Apparel.API.Controllers
             _LineItemsProvider = LineItemsProvider;
             _mapper = mapper;
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<LineItemDTO>> GetLineItemsByProductIdAsync(int id)
-        {
-            _logger.LogInformation($"Request received for GetLineItemsByProductIdAsync for id: {id}");
 
-            var lineItem = await _LineItemsProvider.GetLineItemsByProductIdAsync(id);
-            var lineItemDTO = _mapper.Map<LineItemDTO>(lineItem);
-
-            return Ok(lineItemDTO);
-        }
 
     }
 }

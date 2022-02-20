@@ -11,7 +11,6 @@ namespace Catalyte.Apparel.Providers.Interfaces
     /// </summary>
     public interface ILineItemsProvider
     {
-        Task<LineItem> GetLineItemsByProductIdAsync(int productId);
 
     }
 }

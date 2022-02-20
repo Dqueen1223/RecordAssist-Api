@@ -111,8 +111,9 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation($"Request received for DeleteProductByIdAsync for id: {id}");
             try
-            {
-            await _productProvider.DeleteProductByIdAsync(id);
+            {   
+                var productToBeDeleted = await _productProvider.DeleteProductByIdAsync(id);
+
             }
             catch (Exception ex)
             {

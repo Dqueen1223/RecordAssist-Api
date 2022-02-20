@@ -1,4 +1,5 @@
 ﻿using Catalyte.Apparel.Data.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Interfaces
@@ -8,6 +9,6 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface ILineItemsRepository
     {
-        Task<LineItem> GetLineItemsByProductIdAsync(int productId);
+        Task<List<LineItem>> GetLineItemsByProductIdAsync(int productId);
     }
 }
