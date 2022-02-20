@@ -126,13 +126,15 @@ namespace Catalyte.Apparel.Providers.Providers
                 List<string> typeLower = type.ConvertAll(x => x.ToLower());
 
                 // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-                if (minPrice > maxPrice && !maxPrice.Equals(0))
-                {
-                    throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
-                }
                 if (minPrice < 0 || maxPrice < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Prices cannot be negative.");
+                    _logger.LogInformation("Prices cannot be negative.");
+                    throw new BadRequestException("Prices cannot be negative.");
+                }
+                if (minPrice > maxPrice && !maxPrice.Equals(0))
+                {
+                    _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+                    throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
                 }
 
                 try
@@ -175,14 +177,17 @@ namespace Catalyte.Apparel.Providers.Providers
                     hexColor.Add("#" + colorItem.ToLower());
                 }
             }
+
             // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-            if (minPrice > maxPrice && !maxPrice.Equals(0))
-            {
-                throw new ArgumentOutOfRangeException("The minimum price cannot be greater than the maximum price.");
-            }
             if (minPrice < 0 || maxPrice < 0)
             {
-                throw new ArgumentOutOfRangeException("Prices cannot be negative.");
+                _logger.LogInformation("Prices cannot be negative.");
+                throw new BadRequestException("Prices cannot be negative.");
+            }
+            if (minPrice > maxPrice && !maxPrice.Equals(0))
+            {
+                _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+                throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
             }
 
             // Convert all strings to lowercase for simplified query parameter matching

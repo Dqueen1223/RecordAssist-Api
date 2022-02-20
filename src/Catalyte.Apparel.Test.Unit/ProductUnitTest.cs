@@ -91,7 +91,11 @@ namespace Test.Unit
             //arrange 
             List<string> emptyStringList = new List<string>();
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, emptyStringList, emptyStringList, emptyStringList,
+<<<<<<< HEAD
                 emptyStringList, emptyStringList, 0, 100, emptyStringList, null, 100000))
+=======
+                emptyStringList, emptyStringList, 0, 100, emptyStringList, 0, 100000))
+>>>>>>> e714bf42316e5767c876d0b94a74b7bc7cd846a9
                 .ThrowsAsync(new ServiceUnavailableException("There was a problem connecting to the database."));
 
             var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
@@ -110,14 +114,30 @@ namespace Test.Unit
             //Arrange 
             var stringEmptyList = new List<string>();
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, -25, 0, stringEmptyList, null, 100000))
-           .ThrowsAsync(new ArgumentOutOfRangeException("Prices cannot be negative."));
+           .ThrowsAsync(new BadRequestException("Prices cannot be negative."));
 
             var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
             //Act
             Task actual() => provider.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, -25, 0, stringEmptyList, null);
 
             //Arrange
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(actual);
+            await Assert.ThrowsAsync<BadRequestException>(actual);
+        }
+
+        [Fact]
+        public async Task GetProductAsync_MinGreaterThanMaxReturnsBadArgumentException()
+        {
+            //Arrange 
+            var stringEmptyList = new List<string>();
+            _repositoryMock.Setup(repo => repo.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, 250, 100, stringEmptyList, null, 100000))
+           .ThrowsAsync(new BadRequestException("The minimum price cannot be greater than the maximum price."));
+
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            //Act
+            Task actual() => provider.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, 250, 100, stringEmptyList, null);
+
+            //Arrange
+            await Assert.ThrowsAsync<BadRequestException>(actual);
         }
 
         [Fact]

@@ -67,10 +67,6 @@ namespace Catalyte.Apparel.UnitTesting
             creditCard.CVV = "123";
             creditCard.CardNumber = "4132402120390213";
             creditCard.Expiration = "02/73";
-            creditCard.CardHolder = null;
-            creditCard.CVV = null;
-            creditCard.CardNumber = null;
-            creditCard.Expiration = null;
             var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
