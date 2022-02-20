@@ -16,6 +16,7 @@ namespace Catalyte.Apparel.Providers
             services.AddScoped<IUserProvider, UserProvider>();
             services.AddScoped<IReviewProvider, ReviewsProvider>();
             services.AddScoped<IPromoProvider, PromoProvider>();
+            services.AddScoped<IShippingRateProvider, ShippingRateProvider>();
 
             return services;
         }
