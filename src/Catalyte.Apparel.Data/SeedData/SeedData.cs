@@ -58,9 +58,8 @@ namespace Catalyte.Apparel.Data.Context
 
             modelBuilder.Entity<Purchase>().HasData(purchase);
 
-<<<<<<< HEAD
             modelBuilder.Entity<Review>().HasData(reviewFactory.GenerateRandomReview(1000));
-=======
+
             ShippingRate[] shippingRate =
             {
                 new ShippingRate 
@@ -539,7 +538,6 @@ namespace Catalyte.Apparel.Data.Context
             modelBuilder.Entity<ShippingRate>().HasData(shippingRate);
 
             
->>>>>>> e714bf42316e5767c876d0b94a74b7bc7cd846a9
         }
     }
 }

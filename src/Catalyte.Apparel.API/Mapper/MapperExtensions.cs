@@ -5,10 +5,7 @@ using AutoMapper;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
-<<<<<<< HEAD
 using Catalyte.Apparel.DTOs.Reviews;
-=======
->>>>>>> e714bf42316e5767c876d0b94a74b7bc7cd846a9
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 
