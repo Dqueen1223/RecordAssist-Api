@@ -77,5 +77,15 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(reviewsDTOs);
         }
 
+        [HttpGet("/reviews/product/{productId}")]
+        public async Task<ActionResult<ReviewsDTO>> GetReviewByProductIdAsync(int productId)
+        {
+            _logger.LogInformation($"Request received for GetReviewByProductIdAsync for id: {productId}");
+            var review = await _reviewsProvider.GetReviewByProductIdAsync(productId);
+            var reviewsDTOs = _mapper.Map<ReviewsDTO>(review);
+
+            return Ok(reviewsDTOs);
+        }
+
     }
 }

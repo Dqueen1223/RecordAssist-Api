@@ -125,6 +125,29 @@ namespace Catalyte.Apparel.Providers.Providers
             }
         }
 
+        public async Task<Review> GetReviewByProductIdAsync(int productId)
+        {
+            Review review;
+
+            try
+            {
+                review = await _ReviewsRepository.GetReviewByProductIdAsync(productId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (review == null || review == default)
+            {
+                _logger.LogInformation($"Review with id: {productId} could not be found.");
+                throw new NotFoundException($"Review {productId} could not be found.");
+            }
+            return review;
+
+        }
+
     }
 
 
