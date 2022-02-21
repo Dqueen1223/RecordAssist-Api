@@ -110,15 +110,9 @@ namespace Catalyte.Apparel.API.Controllers
         public async Task<ActionResult<ProductDTO>> DeleteProductByIdAsync(int id)
         {
             _logger.LogInformation($"Request received for DeleteProductByIdAsync for id: {id}");
-            try
-            {   
-                var productToBeDeleted = await _productProvider.DeleteProductByIdAsync(id);
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+                await _productProvider.DeleteProductByIdAsync(id);
+
 
             return Ok("Product successfully deleted.");
         }

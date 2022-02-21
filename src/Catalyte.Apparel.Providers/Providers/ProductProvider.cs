@@ -265,18 +265,10 @@ namespace Catalyte.Apparel.Providers.Providers
                 }
 
             }
-            catch(NotFoundException ex)
-            {
-                throw new NotFoundException(ex.Message);
-            }
-            catch(BadRequestException ex)
-            {
-                throw new BadRequestException(ex.Message);
-            }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+                throw;// new ServiceUnavailableException("There was a problem connecting to the database.");
             }
 
            
