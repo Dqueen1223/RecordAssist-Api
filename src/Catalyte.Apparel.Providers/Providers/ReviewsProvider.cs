@@ -80,11 +80,9 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<Review> UpdateReviewAsync(int reviewId, Review updatedReview)
         {
             Review review;
-
             try
             {
-                //review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
-                review = await _ReviewsRepository.UpdateReviewAsync(updatedReview);
+                review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
             }
             catch (Exception ex)
             {
@@ -97,6 +95,19 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
                 throw new NotFoundException($"Review {reviewId} could not be found.");
             }
+
+            try
+            {
+                //review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
+                review = await _ReviewsRepository.UpdateReviewAsync(updatedReview);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+
             return review;
 
         }
