@@ -20,10 +20,13 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             _ctx = ctx;
         }
-
         public async Task<Product> GetProductByIdAsync(int productId)
         {
             return await _ctx.Products.FindAsync(productId);
+        }
+        public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
+        {
+           return  await _ctx.Products.Where(p => p.Id == productId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
 
         public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
@@ -74,7 +77,13 @@ namespace Catalyte.Apparel.Data.Repositories
 
             return product;
         }
+        public async Task<Product> UpdateProductAsync(Product product)
+        {
+            _ctx.Products.Update(product);
+            await _ctx.SaveChangesAsync();
 
+            return product;
+        }
     }
 
 }
