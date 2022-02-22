@@ -4,8 +4,8 @@ using Catalyte.Apparel.DTOs;
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
-using Catalyte.Apparel.DTOs.Reviews;
 using Catalyte.Apparel.DTOs.ShippingRate;
+using Catalyte.Apparel.DTOs.Reviews;
 
 namespace Catalyte.Apparel.API
 {

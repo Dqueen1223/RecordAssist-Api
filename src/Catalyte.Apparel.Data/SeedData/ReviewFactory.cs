@@ -55,6 +55,17 @@ namespace Catalyte.Apparel.Data.SeedData
 
             return reviewList;
         }
+        private Random gen = new Random();
+        // <summary>
+        // Generates a random date starting from the year 2021 into the current year.
+        // </summary>
+        // <returns> A list of randomly generated dates
+        DateTime RandomDay()
+        {
+            DateTime start = new DateTime(2021, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(gen.Next(range));
+        }
         /// Returns a random rating from the list of ratings.
         /// </summary>
         /// <returns>A review rating</returns>
@@ -79,7 +90,7 @@ namespace Catalyte.Apparel.Data.SeedData
                 ReviewsDescription= reviewsDescription,
                 Email = "customer@customer.home",
                 ProductId = productId,
-                DateCreated = DateTime.Now,
+                DateCreated = RandomDay(),
                 DateModified = DateTime.Now
                 
             };

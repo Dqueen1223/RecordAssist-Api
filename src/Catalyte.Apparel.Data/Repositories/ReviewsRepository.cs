@@ -40,7 +40,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<IEnumerable<Review>> GetAllReviewsAsync()
         {
-            return await _ctx.Reviews.ToListAsync();
+            return await _ctx.Reviews.OrderBy((i)=>i.DateCreated).ToListAsync();
         }
 
         public async Task DeleteReviewByIdAsync(int reviewId)
