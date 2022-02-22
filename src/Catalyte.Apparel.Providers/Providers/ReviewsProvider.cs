@@ -18,11 +18,13 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<ReviewsProvider> _logger;
         private readonly IReviewsRepository _ReviewsRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ReviewsProvider(IReviewsRepository reviewsRepository, ILogger<ReviewsProvider> logger)
+        public ReviewsProvider(IReviewsRepository reviewsRepository, ILogger<ReviewsProvider> logger, IProductRepository productRepository)
         {
             _logger = logger;
             _ReviewsRepository = reviewsRepository;
+            _productRepository = productRepository;
         }
 
         /// <summary>
@@ -125,13 +127,32 @@ namespace Catalyte.Apparel.Providers.Providers
             }
         }
 
-        public async Task<Review> GetReviewByProductIdAsync(int productId)
+        public async Task<List<int>> GetReviewByProductIdAsync()
         {
-            Review review;
+            List<Review> review;
+            IEnumerable<Product> allProducts;
+            var productIds = new List<int>();
 
             try
             {
-                review = await _ReviewsRepository.GetReviewByProductIdAsync(productId);
+               allProducts= await _productRepository.GetAllProductsAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            try
+            {
+                foreach (Product product in allProducts)
+                {
+                review = await _ReviewsRepository.GetReviewByProductIdAsync(product.Id);
+                    if (review.Count > 0)
+                    {
+                        productIds.Add(product.Id);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -139,12 +160,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
 
-            if (review == null || review == default)
-            {
-                _logger.LogInformation($"Review with id: {productId} could not be found.");
-                throw new NotFoundException($"Review {productId} could not be found.");
-            }
-            return review;
+            return productIds;
 
         }
 

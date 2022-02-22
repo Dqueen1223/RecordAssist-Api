@@ -27,5 +27,6 @@ namespace Catalyte.Apparel.Data.Interfaces
         Task<Product> CreateProductAsync(Product newProduct);
 
         Task<Product> DeleteProductByIdAsync(Product product);
+        Task<IEnumerable<Product>> GetAllProductsAsync();
     }
 }

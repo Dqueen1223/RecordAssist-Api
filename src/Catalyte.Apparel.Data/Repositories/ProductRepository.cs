@@ -84,6 +84,12 @@ namespace Catalyte.Apparel.Data.Repositories
             return product;
 
         }
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+
+            return await _ctx.Products.ToListAsync();
+        }
     }
 
 }

@@ -45,11 +45,11 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task<Review> GetReviewByProductIdAsync(int productId)
+        public async Task<List<Review>> GetReviewByProductIdAsync(int productId)
         {
             var reviewedProduct = await _ctx.Reviews
                 .Where(l => l.ProductId == productId)
-                .FirstOrDefaultAsync();
+                .ToListAsync();
 
             return reviewedProduct;
         }

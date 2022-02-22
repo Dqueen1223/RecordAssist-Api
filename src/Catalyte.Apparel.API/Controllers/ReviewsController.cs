@@ -77,15 +77,14 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(reviewsDTOs);
         }
 
-        [HttpGet("/reviews/product/{productId}")]
-        public async Task<ActionResult<ReviewsDTO>> GetReviewByProductIdAsync(int productId)
+        [HttpGet("/reviews/product")] 
+        public async Task<ActionResult<List<int>>>GetReviewByProductIdAsync()
         {
-            _logger.LogInformation($"Request received for GetReviewByProductIdAsync for id: {productId}");
-            var review = await _reviewsProvider.GetReviewByProductIdAsync(productId);
-            var reviewsDTOs = _mapper.Map<ReviewsDTO>(review);
+            _logger.LogInformation($"Request received for GetReviewByProductIdAsync");
+            var isDeletable = await _reviewsProvider.GetReviewByProductIdAsync();
 
-            return Ok(reviewsDTOs);
-        }
 
+            return Ok(isDeletable);
     }
-}
+    }
+    }
