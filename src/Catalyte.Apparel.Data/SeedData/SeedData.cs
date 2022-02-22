@@ -14,6 +14,8 @@ namespace Catalyte.Apparel.Data.Context
         public static void SeedData(this ModelBuilder modelBuilder)
         {
             var productFactory = new ProductFactory();
+            
+            var reviewFactory = new ReviewFactory();
 
             modelBuilder.Entity<Product>().HasData(productFactory.GenerateRandomProducts(1000));
 
@@ -55,6 +57,8 @@ namespace Catalyte.Apparel.Data.Context
             };
 
             modelBuilder.Entity<Purchase>().HasData(purchase);
+
+            modelBuilder.Entity<Review>().HasData(reviewFactory.GenerateRandomReview(1000));
 
             ShippingRate[] shippingRate =
             {
@@ -533,7 +537,6 @@ namespace Catalyte.Apparel.Data.Context
             };
             modelBuilder.Entity<ShippingRate>().HasData(shippingRate);
 
-            
         }
     }
 }

@@ -26,6 +26,8 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<Promo> Promos { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
