@@ -157,5 +157,54 @@ namespace Catalyte.Apparel.Utilities.Validation
             }
             return errors;
         }
+        /// <summary>
+        /// This function validates that reviews are valid
+        /// if invalid, it returns a list of strings. otherwise it returns an empty list.
+        /// </summary>
+        public static List<string> ReviewValidation(Review review)
+        {
+            List<string> errors = new();
+            var count = 0;
+            //check for null or default values
+            if (review.Title == null || review.Title.Trim() == "")
+            {
+                errors.Add("The Title field can't be empty or whitspace.");
+                count++;
+            }
+            if (review.Title.Length > 50)
+            {
+                errors.Add("The Title field can't be more than 50 characters.");
+                count++;
+            }
+            if (review.ReviewsDescription == null || review.ReviewsDescription.Trim() == "")
+            {
+                errors.Add("The ReviewsDescription field can't be empty or whitspace.");
+                count++;
+            }
+            if (review.ReviewsDescription.Length > 200)
+            {
+                errors.Add("The ReviewsDescription field can't be more than 200 characters.");
+                count++;
+            }
+            if (review.Email == null || review.Email.Trim() == "")
+            {
+                errors.Add("The Email field can't be empty or whitspace.");
+                count++;
+            }
+ 
+            return errors;
+        }
     }
 }
+/*
+{
+    "id": 63,
+    "rating": 3,
+    "title": "seen better",
+    "reviewsDescription": "i am tired of mundane products",
+    "email": "dyannuzzi@catalyte.io",
+    "productId": 659,
+    "userId": 0,
+    "dateCreated": "2022-02-20T17:39:31.353938"
+}
+*/
