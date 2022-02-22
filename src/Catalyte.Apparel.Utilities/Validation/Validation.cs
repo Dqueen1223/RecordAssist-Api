@@ -181,9 +181,9 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The ReviewsDescription field can't be empty or whitspace.");
                 count++;
             }
-            if (review.ReviewsDescription.Length > 200)
+            if (review.ReviewsDescription.Length > 500)
             {
-                errors.Add("The ReviewsDescription field can't be more than 200 characters.");
+                errors.Add("The ReviewsDescription field can't be more than 500 characters.");
                 count++;
             }
             if (review.Email == null || review.Email.Trim() == "")
