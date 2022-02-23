@@ -29,7 +29,7 @@ namespace Catalyte.Apparel.DTOs
 
         public string State { get; set; }
 
-        public int? Zip { get; set; }
+        public string Zip { get; set; }
 
         public string Phone { get; set; }
     }
