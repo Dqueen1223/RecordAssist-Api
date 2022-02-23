@@ -25,6 +25,11 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Reviews.FindAsync(reviewId);
         }
+        public async Task<Review> NoTrackingGetReviewByIdAsync(int reviewId)
+        {
+            return await _ctx.Reviews.Where(p => p.Id == reviewId).AsNoTracking().Take(1).FirstOrDefaultAsync();
+        }
+
         public async Task<Review> UpdateReviewAsync(Review review)
         {
             review.DateModified = DateTime.Now;
@@ -35,7 +40,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<IEnumerable<Review>> GetAllReviewsAsync()
         {
-            return await _ctx.Reviews.ToListAsync();
+            return await _ctx.Reviews.OrderBy((i)=>i.DateCreated).ToListAsync();
         }
 
         public async Task DeleteReviewByIdAsync(int reviewId)

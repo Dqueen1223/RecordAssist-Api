@@ -3,6 +3,7 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
+using Catalyte.Apparel.Utilities.Validation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -80,11 +81,10 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<Review> UpdateReviewAsync(int reviewId, Review updatedReview)
         {
             Review review;
-
+            
             try
             {
-                //review = await _ReviewsRepository.GetReviewByIdAsync(reviewId);
-                review = await _ReviewsRepository.UpdateReviewAsync(updatedReview);
+                review = await _ReviewsRepository.NoTrackingGetReviewByIdAsync(reviewId);
             }
             catch (Exception ex)
             {
@@ -97,8 +97,20 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
                 throw new NotFoundException($"Review {reviewId} could not be found.");
             }
-            return review;
+            List<string> errors = Validation.ReviewValidation(updatedReview);
+            if (errors.Count > 0)
+                throw new BadRequestException(string.Join(' ', errors));
 
+            try
+            {
+                review = await _ReviewsRepository.UpdateReviewAsync(updatedReview);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return review;
         }
 
         /// <summary>
