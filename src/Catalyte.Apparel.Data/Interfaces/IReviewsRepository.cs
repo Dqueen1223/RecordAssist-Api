@@ -21,5 +21,7 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task DeleteReviewByIdAsync(int reviewId);
 
+        Task<Review> CreateReviewAsync(Review model);
+
     }
 }

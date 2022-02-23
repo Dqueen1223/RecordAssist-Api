@@ -50,6 +50,13 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.SaveChangesAsync();
         }
 
+        public async Task<Review> CreateReviewAsync(Review model)
+        {
+            await _ctx.Reviews.AddAsync(model);
+            await _ctx.SaveChangesAsync();
+            return model;
+        }
+
     }
 
 }

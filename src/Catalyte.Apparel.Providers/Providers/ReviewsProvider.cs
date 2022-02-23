@@ -137,6 +137,27 @@ namespace Catalyte.Apparel.Providers.Providers
             }
         }
 
+        /// <summary>
+        /// Asynchronously deletes the review with the provided id from the database.
+        /// </summary>
+        /// <param name="newReview">The review being created.</param>
+        /// <returns>The review.</returns>
+        public async Task<Review> CreateReviewAsync(Review newReview)
+        {
+            Review savedReview;
+           
+            try
+            {
+                savedReview = await _ReviewsRepository.CreateReviewAsync(newReview);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return savedReview;
+        }
+
     }
 
 
