@@ -13,7 +13,7 @@
 
         public string BillingState { get; set; }
 
-        public int BillingZip { get; set; }
+        public string BillingZip { get; set; }
 
         public string Email { get; set; }
 
