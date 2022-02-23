@@ -196,15 +196,3 @@ namespace Catalyte.Apparel.Utilities.Validation
         }
     }
 }
-/*
-{
-    "id": 63,
-    "rating": 3,
-    "title": "seen better",
-    "reviewsDescription": "i am tired of mundane products",
-    "email": "dyannuzzi@catalyte.io",
-    "productId": 659,
-    "userId": 0,
-    "dateCreated": "2022-02-20T17:39:31.353938"
-}
-*/
