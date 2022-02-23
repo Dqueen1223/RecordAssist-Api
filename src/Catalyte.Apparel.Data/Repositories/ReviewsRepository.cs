@@ -25,6 +25,11 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Reviews.FindAsync(reviewId);
         }
+        public async Task<Review> NoTrackingGetReviewByIdAsync(int reviewId)
+        {
+            return await _ctx.Reviews.Where(p => p.Id == reviewId).AsNoTracking().Take(1).FirstOrDefaultAsync();
+        }
+
         public async Task<Review> UpdateReviewAsync(Review review)
         {
             review.DateModified = DateTime.Now;

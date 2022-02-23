@@ -537,6 +537,7 @@ namespace Catalyte.Apparel.Data.Context
             };
             modelBuilder.Entity<ShippingRate>().HasData(shippingRate);
 
+            
         }
     }
 }
