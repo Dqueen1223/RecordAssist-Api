@@ -1,12 +1,8 @@
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Utilities.Validation;
+using System;
 using System.Collections.Generic;
 using Xunit;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System;
 
 
 
@@ -62,7 +58,7 @@ namespace Catalyte.Apparel.UnitTesting
             };
             Assert.Equal(Expected, Actual);
         }
-            
+
         [Fact]
         public void CreditCardExpirationAboveYear72ReturnsError()
         {
@@ -71,10 +67,6 @@ namespace Catalyte.Apparel.UnitTesting
             creditCard.CVV = "123";
             creditCard.CardNumber = "4132402120390213";
             creditCard.Expiration = "02/73";
-            creditCard.CardHolder = null;
-            creditCard.CVV = null;
-            creditCard.CardNumber = null;
-            creditCard.Expiration = null;
             var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
@@ -97,7 +89,7 @@ namespace Catalyte.Apparel.UnitTesting
             Assert.Equal(Expected, Actual);
         }
         [Fact]
-        public void NullCVVReturnserror ()
+        public void NullCVVReturnserror()
         {
             Purchase creditCard = new();
             creditCard.CardHolder = "Json";
@@ -161,7 +153,7 @@ namespace Catalyte.Apparel.UnitTesting
         public void ThisMonthAndThisYearReturnsTrue()
         {
             var CurrentMonth = DateTime.Now.Month;
-            
+
             var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
             Purchase creditCard = new();
             creditCard.CardHolder = "Json";
@@ -174,7 +166,7 @@ namespace Catalyte.Apparel.UnitTesting
             else
                 creditCard.Expiration = $"{CurrentMonth}/{CurrentYear}";
 
-              var Actual = Validation.CreditCardValidation(creditCard);
+            var Actual = Validation.CreditCardValidation(creditCard);
             List<string> Expected = new()
             {
             };
@@ -183,7 +175,7 @@ namespace Catalyte.Apparel.UnitTesting
         [Fact]
         public void ThisYearLastMonthReturnError()
         {
-            var CurrentMonth = DateTime.Now.Month -1;
+            var CurrentMonth = DateTime.Now.Month - 1;
 
             var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
             Purchase creditCard = new();

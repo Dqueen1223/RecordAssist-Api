@@ -15,9 +15,13 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<LineItem> LineItems { get; set; }
 
+        public DbSet<ShippingRate> ShippingRates { get; set; }
+
         public DbSet<Purchase> Purchases { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Promo> Promos { get; set; }
 

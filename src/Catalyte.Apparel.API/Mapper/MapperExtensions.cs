@@ -6,6 +6,9 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
+using Catalyte.Apparel.DTOs.Products;
+using Catalyte.Apparel.DTOs.Reviews;
+using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 
 namespace Catalyte.Apparel.API.DTOMappings
@@ -43,7 +46,6 @@ namespace Catalyte.Apparel.API.DTOMappings
             promo = mapper.Map(promoDTO, promo);
             return promo;
         }
-
         /// <summary>
         /// Helper method to build model for a purchase DTO.
         /// </summary>
@@ -63,6 +65,32 @@ namespace Catalyte.Apparel.API.DTOMappings
             };
         }
 
+        public static ProductDTO MapProductToProductDto(this IMapper mapper, Product product)
+        {
+            return new ProductDTO()
+            {
+                Id = product.Id,
+                Category = product.Category,
+                Type = product.Type,
+                Sku = product.Sku,
+                Demographic = product.Demographic,
+                GlobalProductCode = product.GlobalProductCode,
+                StyleNumber = product.StyleNumber,
+                ReleaseDate = product.ReleaseDate,
+                DateCreated = product.DateCreated,
+                DateModified = product.DateModified,
+                Active = product.Active,
+                Description = product.Description,
+                Name = product.Name,
+                PrimaryColorCode = product.PrimaryColorCode,
+                SecondaryColorCode = product.SecondaryColorCode,
+                Brand = product.Brand,
+                Material = product.Material,
+                Price = product.Price,
+                Quantity = product.Quantity,
+                ImageSrc = product.ImageSrc
+            };
+        }
         public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
         {
             var purchase = new Purchase
@@ -80,6 +108,19 @@ namespace Catalyte.Apparel.API.DTOMappings
             purchase.LineItems = mapper.Map(purchaseDTO.LineItems, purchase.LineItems);
 
             return purchase;
+        }
+
+        public static Product MapCreateProductDtoToProduct(this IMapper mapper, ProductDTO productDTO)
+        {
+            var product = new Product
+            {
+                DateCreated = DateTime.Now,
+                DateModified = productDTO.DateCreated,
+            };
+            product = mapper.Map(productDTO, product);
+            
+
+            return product;
         }
     }
 }

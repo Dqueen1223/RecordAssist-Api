@@ -16,6 +16,8 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<ShippingRate> ShippingRates { get; set; }
+
         public DbSet<LineItem> LineItems { get; set; }
 
         public DbSet<Purchase> Purchases { get; set; }
@@ -23,6 +25,8 @@ namespace Catalyte.Apparel.Data.Context
         public DbSet<User> Users { get; set; }
 
         public DbSet<Promo> Promos { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
