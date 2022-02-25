@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs;
 using Catalyte.Apparel.Providers.Interfaces;
@@ -47,10 +48,8 @@ namespace Catalyte.Apparel.API.Controllers
         public async Task<ActionResult<UserDTO>> CreateUserAsync([FromBody] User userToCreate)
         {
             _logger.LogInformation("Request received for CreateUserAsync");
-
             var user = await _userProvider.CreateUserAsync(userToCreate);
-            var userDTO = _mapper.Map<UserDTO>(user);
-
+            var userDTO = _mapper.Map<UserDTO>(userToCreate);
             return Created("/users", userDTO);
         }
 

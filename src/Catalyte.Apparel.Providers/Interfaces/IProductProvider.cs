@@ -11,13 +11,13 @@ namespace Catalyte.Apparel.Providers.Interfaces
     /// </summary>
     public interface IProductProvider
     {
+        Task<Product> NoTrackingGetProductByIdAsync(int productId);
         Task<Product> GetProductByIdAsync(int productId);
-
         Task<IEnumerable<Product>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range);
 
-
+        Task<Product> UpdateProductAsync(Product updatedProduct);
         Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
                                                                  List<string> color, List<string> demographic, List<string> material,
                                                                  decimal minPrice, decimal maxPrice, List<string> type, int? range);

@@ -20,7 +20,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string DeliveryState { get; set; }
 
-        public int DeliveryZip { get; set; }
+        public string DeliveryZip { get; set; }
 
         private sealed class DeliveryAddressEqualityComparer : IEqualityComparer<DeliveryAddress>
         {

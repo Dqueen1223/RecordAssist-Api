@@ -29,6 +29,11 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
         /// <summary>
+        /// Asynchronously retrieves nontracked product with the provided id from the database.
+        /// </summary>
+        /// <param name="productId">The id of the product to retrieve.</param>
+        /// <returns>The product.</returns>
+        ///  /// <summary>
         /// Asynchronously retrieves the product with the provided id from the database.
         /// </summary>
         /// <param name="productId">The id of the product to retrieve.</param>
@@ -40,6 +45,28 @@ namespace Catalyte.Apparel.Providers.Providers
             try
             {
                 product = await _productRepository.GetProductByIdAsync(productId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (product == null || product == default)
+            {
+                _logger.LogInformation($"Product with id: {productId} could not be found.");
+                throw new NotFoundException($"Product with id: {productId} could not be found.");
+            }
+
+            return product;
+        }
+        public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
+        {
+            Product product;
+
+            try
+            {
+                product = await _productRepository.NoTrackingGetProductByIdAsync(productId);
             }
             catch (Exception ex)
             {
@@ -211,7 +238,36 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+        public async Task<Product> UpdateProductAsync (Product updatedProduct)
+        {
+            Product newProduct;
 
+            Product existingProduct;
+            try
+            {
+                existingProduct =  await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+                if (existingProduct == null)
+                {
+                    _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
+                    throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
+                }
+            try
+            {
+                newProduct = await _productRepository.UpdateProductAsync(updatedProduct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return newProduct;
+        }
         /// <summary>
         /// Persists a purchase to the database.
         /// </summary>

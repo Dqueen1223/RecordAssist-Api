@@ -22,10 +22,9 @@ namespace Catalyte.Apparel.Data.Model
         [MaxLength(50)]
         public string BillingCity { get; set; }
 
-        [MaxLength(2)]
         public string BillingState { get; set; }
 
-        [MaxLength(10)]
+        [MaxLength(11)]
         public string BillingZip { get; set; }
 
         [MaxLength(100)]
@@ -49,11 +48,10 @@ namespace Catalyte.Apparel.Data.Model
         [MaxLength(50)]
         public string DeliveryCity { get; set; }
 
-        [MaxLength(2)]
         public string DeliveryState { get; set; }
 
-        [MaxLength(10)]
-        public int DeliveryZip { get; set; }
+        [MaxLength(11)]
+        public string DeliveryZip { get; set; }
 
         [MaxLength(19)]
         public string CardNumber { get; set; }

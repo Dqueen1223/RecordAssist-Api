@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalyte.Apparel.API.DTOMappings;
+using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs.Products;
 using Catalyte.Apparel.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -78,6 +79,21 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok(productDTO);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<ProductDTO>> UpdateProductAsync(
+                        [FromBody] ProductDTO Product)
+        {
+            _logger.LogInformation("Request received for update user");
+
+            var productToUpdate = _mapper.Map<Product>(Product);
+            {
+                _logger.LogInformation("Request recived for update product");
+            }
+            var updatedProduct = await _productProvider.UpdateProductAsync(productToUpdate);
+            var productDTO = _mapper.Map<ProductDTO>(updatedProduct);
+
+            return Ok(productDTO);
+        }
         [HttpGet("/products/categories")]
         public async Task<ActionResult<IEnumerable<string>>> GetAllUniqueProductCategoriesAsync()
         {
