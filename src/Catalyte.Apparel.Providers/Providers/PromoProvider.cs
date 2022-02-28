@@ -44,6 +44,27 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             return savedPromo;
         }
+        public async Task<Promo> GetPromoByCodeAsync(string Code)
+        {
+            Promo SavedPromo;
 
+            try
+            {
+                SavedPromo = await _promoRepository.GetPromoByCodeAsync(Code);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (SavedPromo == null || SavedPromo == default)
+            {
+                _logger.LogInformation($"Review with id: {Code} could not be found.");
+                throw new NotFoundException($"Review {Code} could not be found.");
+            }
+            return SavedPromo;
+
+        }
     }
 }
