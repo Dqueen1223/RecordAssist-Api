@@ -10,6 +10,8 @@ namespace Catalyte.Apparel.DTOs.Purchases
     {
         public DateTime OrderDate { get; set; }
 
+        public decimal TotalCost { get; set; }
+
         public DeliveryAddressDTO DeliveryAddress { get; set; }
 
         public BillingAddressDTO BillingAddress { get; set; }

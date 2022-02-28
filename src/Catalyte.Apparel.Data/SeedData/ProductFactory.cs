@@ -11,6 +11,7 @@ namespace Catalyte.Apparel.Data.SeedData
     public class ProductFactory
     {
         Random _rand = new();
+        //ReviewFactory _reviewFactory;
 
         private List<string> _colors = new()
         {
@@ -316,6 +317,7 @@ namespace Catalyte.Apparel.Data.SeedData
             var adj = _adjectives[_rand.Next(0, _adjectives.Count)];
             var demo = GetDemographic();
             var type = _types[_rand.Next(0, _types.Count)];
+            //var review = _reviewFactory(2, _reviewFactory.Count)
 
 
             return new Product
@@ -340,6 +342,7 @@ namespace Catalyte.Apparel.Data.SeedData
                 Price = GetPrice(),
                 Quantity = GetQuantity(),
                 ImageSrc = GetImageSrc(type)
+                //Review = 
             };
         }
 
