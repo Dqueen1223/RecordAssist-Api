@@ -3,8 +3,10 @@ using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
+using Catalyte.Apparel.Utilities.Validation;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -236,6 +238,13 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
+        /// <summary>
+        /// Asynchronously updates product with new product information
+        /// </summary>
+        /// <param name="updatedProduct"></param>
+        /// <returns> The updated product</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<Product> UpdateProductAsync (Product updatedProduct)
         {
             Product newProduct;
@@ -264,6 +273,11 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
+            List<string> errors = Validation.ProductValidation(updatedProduct);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
             return newProduct;
         }
         /// <summary>
@@ -275,8 +289,16 @@ namespace Catalyte.Apparel.Providers.Providers
         {
             Product savedProduct;
 
+
+            List<string> errors = Validation.ProductValidation(newProduct);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
             try
             {
+                var newDate = DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Day.ToString();
+                newProduct.ReleaseDate = DateTime.Parse(newDate);
                 savedProduct = await _productRepository.CreateProductAsync(newProduct);
             }
             catch (Exception ex)
