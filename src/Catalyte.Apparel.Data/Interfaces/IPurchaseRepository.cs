@@ -14,3 +14,4 @@ namespace Catalyte.Apparel.Data.Interfaces
         Task<Purchase> CreatePurchaseAsync(Purchase purchase);
     }
 }
+

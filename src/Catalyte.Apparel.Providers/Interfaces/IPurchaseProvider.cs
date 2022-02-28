@@ -16,3 +16,4 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<string> CheckForInactiveProductsAsync(Purchase purchase);
     }
 }
+

@@ -90,3 +90,4 @@ namespace Catalyte.Apparel.Data.Model
     }
 
 }
+
