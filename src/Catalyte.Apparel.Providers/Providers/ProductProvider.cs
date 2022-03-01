@@ -299,7 +299,7 @@ namespace Catalyte.Apparel.Providers.Providers
         {
             Product existingProduct;
             Product deletedProduct;
-            Product purchasedProduct;
+            bool purchasedProduct;
             try
             {
                  existingProduct = await _productRepository.GetProductByIdAsync(id);
@@ -309,10 +309,10 @@ namespace Catalyte.Apparel.Providers.Providers
                     _logger.LogInformation($"Product with id: {id} does not exist.");
                     throw new NotFoundException($"Product with id:{id} not found.");
                 }
-                else if (purchasedProduct != null)
+                else if (purchasedProduct)
                 {
                     _logger.LogInformation($"Product with id: {id} has purchases associated with it.");
-                    throw new BadRequestException($"Product with id: {id} has purchases associated with it. In ProductProvider");
+                    throw new BadRequestException($"Product with id: {id} has purchases associated with it.");
                 }
                 else
                 {
@@ -324,7 +324,7 @@ namespace Catalyte.Apparel.Providers.Providers
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;// new ServiceUnavailableException("There was a problem connecting to the database.");
+                throw;
             }
 
            
@@ -338,30 +338,22 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <param name="product">The product object that will be deleted.</param>
         /// <returns>A product with purchases or null if there are no purchases.</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
-        public async Task<Product> CheckForPurchasesByProductIdAsync(int productId, Product product)
+        public async Task<bool> CheckForPurchasesByProductIdAsync(int productId, Product product)
         {
-            Product purchasedItems = null;
+            Boolean purchaseLineItems = false;
             try
             {
-                var purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
+                purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
 
-
-                if (purchaseLineItems.Count > 0)
-                {
-                    purchasedItems = product;
-                    return purchasedItems;
-                }
-                else
-                {
-                    return purchasedItems;
-                }
+  
+                
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-
+    }
+                    return purchaseLineItems; 
         }
     }
 }

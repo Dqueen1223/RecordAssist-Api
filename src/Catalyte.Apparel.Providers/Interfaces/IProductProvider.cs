@@ -30,6 +30,6 @@ namespace Catalyte.Apparel.Providers.Interfaces
 
         Task<Product> DeleteProductByIdAsync(int id);
 
-        Task<Product> CheckForPurchasesByProductIdAsync(int productId, Product product);
+        Task<bool> CheckForPurchasesByProductIdAsync(int productId, Product product);
     }
 }

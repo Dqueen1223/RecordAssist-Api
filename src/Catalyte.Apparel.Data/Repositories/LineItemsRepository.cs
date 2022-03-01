@@ -20,11 +20,11 @@ namespace Catalyte.Apparel.Data.Repositories
             _ctx = ctx;
         }
 
-        public async Task<List<LineItem>> GetLineItemsByProductIdAsync(int productId)
+        public async Task<bool> GetLineItemsByProductIdAsync(int productId)
         {
             var purchasedProduct = await _ctx.LineItems
                 .Where(l => l.ProductId == productId)
-                .ToListAsync();
+                .AnyAsync();
 
             return purchasedProduct;
         }

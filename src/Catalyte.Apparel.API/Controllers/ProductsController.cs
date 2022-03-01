@@ -133,5 +133,15 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok("Product successfully deleted.");
         }
 
+        [HttpGet("/products/purchased/{productId}")]
+        public async Task<ActionResult<bool>> CheckForPurchasesByProductIdAsync(int productId)
+        {
+            _logger.LogInformation("Request received for CheckForPurchasesByProductIdAsync.");
+            var product = await _productProvider.GetProductByIdAsync(productId);
+            var purchasedProduct = await _productProvider.CheckForPurchasesByProductIdAsync(productId, product);
+
+            return Ok(purchasedProduct);
+
+        }
     }
 }
