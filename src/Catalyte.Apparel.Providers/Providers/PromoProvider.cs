@@ -57,14 +57,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-
-            if (SavedPromo == null || SavedPromo == default)
-            {
-                _logger.LogInformation($"Review with id: {Code} could not be found.");
-                throw new NotFoundException($"Review {Code} could not be found.");
-            }
             return SavedPromo;
-
         }
     }
 }
