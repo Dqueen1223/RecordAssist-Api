@@ -42,6 +42,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
+
             return savedPromo;
         }
         public async Task<Promo> GetPromoByCodeAsync(string Code)
@@ -56,6 +57,10 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (SavedPromo == null)
+            {
+                return new Promo();
             }
             return SavedPromo;
         }
