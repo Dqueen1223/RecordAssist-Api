@@ -296,9 +296,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 throw new BadRequestException(string.Join(' ', errors));
             }
             try
-            {
-                var newDate = DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Day.ToString();
-                newProduct.ReleaseDate = DateTime.Parse(newDate);
+            { 
                 savedProduct = await _productRepository.CreateProductAsync(newProduct);
             }
             catch (Exception ex)
