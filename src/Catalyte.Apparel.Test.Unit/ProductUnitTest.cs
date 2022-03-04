@@ -13,6 +13,7 @@ namespace Test.Unit
 {
     public class ProductUnitTest
     {
+        private readonly Mock<ILineItemsRepository> _lineItemsRepoMock = new();
         private readonly Mock<IProductRepository> _repositoryMock = new();
         private readonly Mock<IProductProvider> _productProviderMock = new();
         private readonly Mock<ILogger<ProductProvider>> _loggerMock = new();
@@ -25,7 +26,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
                 .ReturnsAsync(test);
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
             //Act
             var actual = await provider.GetAllUniqueProductCategoriesAsync();
@@ -41,7 +42,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetAllUniqueProductCategoriesAsync())
                     .ThrowsAsync(new ServiceUnavailableException("error"));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
 
             //act
@@ -58,7 +59,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetAllUniqueProductTypesAsync())
                     .ThrowsAsync(new ServiceUnavailableException("error"));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
 
             //act
@@ -75,7 +76,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetAllUniqueProductTypesAsync())
                     .ThrowsAsync(new ServiceUnavailableException("error"));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
 
             //act
@@ -91,14 +92,11 @@ namespace Test.Unit
             //arrange 
             List<string> emptyStringList = new List<string>();
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, emptyStringList, emptyStringList, emptyStringList,
-<<<<<<< HEAD
-                emptyStringList, emptyStringList, 0, 100, emptyStringList, null, 100000))
-=======
+
                 emptyStringList, emptyStringList, 0, 100, emptyStringList, 0, 100000))
->>>>>>> e714bf42316e5767c876d0b94a74b7bc7cd846a9
                 .ThrowsAsync(new ServiceUnavailableException("There was a problem connecting to the database."));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
             //act
             Task actual() => provider.GetProductsAsync(true, emptyStringList, emptyStringList, emptyStringList,
@@ -116,7 +114,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, -25, 0, stringEmptyList, null, 100000))
            .ThrowsAsync(new BadRequestException("Prices cannot be negative."));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
             //Act
             Task actual() => provider.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, -25, 0, stringEmptyList, null);
 
@@ -132,7 +130,7 @@ namespace Test.Unit
             _repositoryMock.Setup(repo => repo.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, 250, 100, stringEmptyList, null, 100000))
            .ThrowsAsync(new BadRequestException("The minimum price cannot be greater than the maximum price."));
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
             //Act
             Task actual() => provider.GetProductsAsync(true, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, stringEmptyList, 250, 100, stringEmptyList, null);
 
@@ -149,7 +147,7 @@ namespace Test.Unit
                 emptyStringList, emptyStringList, 0, 100, emptyStringList, null, 1000))
                 .ReturnsAsync(0);
 
-            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object);
+            var provider = new ProductProvider(_repositoryMock.Object, _loggerMock.Object, _lineItemsRepoMock.Object);
 
             //act
             var actual = await provider.GetProductsCountAsync(true, emptyStringList, emptyStringList, emptyStringList,
