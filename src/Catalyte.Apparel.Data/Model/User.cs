@@ -30,6 +30,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Phone { get; set; }
 
+        public List<int> WishList { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
