@@ -72,33 +72,6 @@ namespace Catalyte.Apparel.Providers.Providers
             }
 
             // UPDATES USER
-            User existingUser;
-
-            try
-            {
-                existingUser = await _userRepository.GetUserByIdAsync(id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-
-            if (existingUser == default)
-            {
-                _logger.LogInformation($"User with id: {id} does not exist.");
-                throw new NotFoundException($"User with id:{id} not found.");
-            }
-
-            // TEMPORARY LOGIC TO PREVENT USER FROM UPDATING THEIR ROLE
-            updatedUser.Role = existingUser.Role;
-
-            // GIVE THE USER ID IF NOT SPECIFIED IN BODY TO AVOID DUPLICATE USERS
-            if (updatedUser.Id == default)
-            {
-                updatedUser.Id = id;
-            }
-
             try
             {
                 await _userRepository.UpdateUserAsync(updatedUser);
