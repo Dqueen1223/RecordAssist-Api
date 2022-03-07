@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Catalyte.Apparel.Data.Model;
@@ -88,14 +87,14 @@ namespace Catalyte.Apparel.API.Controllers
             return Created($"/reviews/", reviewDTO);
         }
 
-        [HttpGet("/reviews/product")] 
-        public async Task<ActionResult<List<int>>>GetReviewByProductIdAsync()
+        [HttpGet("/reviews/product")]
+        public async Task<ActionResult<List<int>>> GetReviewByProductIdAsync()
         {
             _logger.LogInformation($"Request received for GetReviewByProductIdAsync");
             var isDeletable = await _reviewsProvider.GetReviewByProductIdAsync();
 
 
             return Ok(isDeletable);
+        }
     }
-    }
-    }
+}

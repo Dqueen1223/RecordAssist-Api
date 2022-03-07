@@ -238,25 +238,25 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-        public async Task<Product> UpdateProductAsync (Product updatedProduct)
+        public async Task<Product> UpdateProductAsync(Product updatedProduct)
         {
             Product newProduct;
 
             Product existingProduct;
             try
             {
-                existingProduct =  await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
+                existingProduct = await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-                if (existingProduct == null)
-                {
-                    _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
-                    throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
-                }
+            if (existingProduct == null)
+            {
+                _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
+                throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
+            }
             try
             {
                 newProduct = await _productRepository.UpdateProductAsync(updatedProduct);
@@ -302,8 +302,8 @@ namespace Catalyte.Apparel.Providers.Providers
             bool purchasedProduct;
             try
             {
-                 existingProduct = await _productRepository.GetProductByIdAsync(id);
-                 purchasedProduct = await CheckForPurchasesByProductIdAsync(id, existingProduct);
+                existingProduct = await _productRepository.GetProductByIdAsync(id);
+                purchasedProduct = await CheckForPurchasesByProductIdAsync(id, existingProduct);
                 if (existingProduct == null)
                 {
                     _logger.LogInformation($"Product with id: {id} does not exist.");
@@ -321,13 +321,13 @@ namespace Catalyte.Apparel.Providers.Providers
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw;
             }
 
-           
+
 
         }
 
@@ -340,20 +340,20 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <exception cref="ServiceUnavailableException"></exception>
         public async Task<bool> CheckForPurchasesByProductIdAsync(int productId, Product product)
         {
-            Boolean purchaseLineItems = false;
+            bool purchaseLineItems;
             try
             {
                 purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
 
-  
-                
+
+
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
-    }
-                    return purchaseLineItems; 
+            }
+            return purchaseLineItems;
         }
     }
 }

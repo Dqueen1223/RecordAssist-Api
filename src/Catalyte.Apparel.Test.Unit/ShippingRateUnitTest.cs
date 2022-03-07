@@ -1,11 +1,8 @@
 ﻿using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Providers.Providers;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,7 +14,7 @@ namespace Test.Unit
         private readonly Mock<IShippingRateProvider> _shippingRateProviderMock = new();
         private readonly Mock<ILogger<ShippingRateProvider>> _loggerMock = new();
 
-        
+
         [Fact]
         public async Task GetShippingRate_ReturnsCurrectly()
         {

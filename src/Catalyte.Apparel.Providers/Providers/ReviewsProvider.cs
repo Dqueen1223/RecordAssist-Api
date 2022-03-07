@@ -2,8 +2,8 @@
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Providers.Interfaces;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using Microsoft.Extensions.Logging;
 using Catalyte.Apparel.Utilities.Validation;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -46,7 +46,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            
+
             if (review == null || review == default)
             {
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
@@ -83,7 +83,7 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<Review> UpdateReviewAsync(int reviewId, Review updatedReview)
         {
             Review review;
-            
+
             try
             {
                 review = await _ReviewsRepository.NoTrackingGetReviewByIdAsync(reviewId);
@@ -147,7 +147,7 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<Review> CreateReviewAsync(Review newReview)
         {
             Review savedReview;
-           
+
             try
             {
                 savedReview = await _ReviewsRepository.CreateReviewAsync(newReview);
@@ -168,9 +168,9 @@ namespace Catalyte.Apparel.Providers.Providers
 
             try
             {
-               allProducts= await _productRepository.GetAllProductsAsync();
+                allProducts = await _productRepository.GetAllProductsAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
@@ -179,7 +179,7 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 foreach (Product product in allProducts)
                 {
-                review = await _ReviewsRepository.GetReviewByProductIdAsync(product.Id);
+                    review = await _ReviewsRepository.GetReviewByProductIdAsync(product.Id);
                     if (review.Count > 0)
                     {
                         productIds.Add(product.Id);
