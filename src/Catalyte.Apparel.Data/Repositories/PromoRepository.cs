@@ -28,7 +28,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<Promo> GetPromoByCodeAsync(string Code)
         {
-            return await _ctx.Promos.AsQueryable().WherePromoCodeEquals(Code).SingleOrDefaultAsync();
+            return await _ctx.Promos.AsQueryable().WherePromoCodeEquals(Code).FirstOrDefaultAsync();
         }
     }
 }
