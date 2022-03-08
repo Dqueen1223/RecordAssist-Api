@@ -37,7 +37,7 @@ namespace Catalyte.Apparel.API.Controllers
             _logger.LogInformation("Request received for CreatePromo");
 
             var newPromo = _mapper.MapCreatePromoDtoToPromo(model);
-            var savedPromo = await _PromoProvider.CreatePromoAsync(newPromo);
+            var savedPromo = await _PromoProvider.CreatePromoAsync (newPromo);
             var promoDTO = _mapper.MapPromoToPromoDto(savedPromo);
             return Created($"/promo/", promoDTO);
         }
