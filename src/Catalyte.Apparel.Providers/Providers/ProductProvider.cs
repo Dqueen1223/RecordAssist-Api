@@ -240,7 +240,6 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-<<<<<<< HEAD
         /// <summary>
         /// Asynchronously updates product with new product information
         /// </summary>
@@ -249,9 +248,6 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <exception cref="ServiceUnavailableException"></exception>
         /// <exception cref="NotFoundException"></exception>
         public async Task<Product> UpdateProductAsync (Product updatedProduct)
-=======
-        public async Task<Product> UpdateProductAsync(Product updatedProduct)
->>>>>>> 9699060a1501738035f211424c34bcbc601369d1
         {
             Product newProduct;
 
@@ -368,9 +364,6 @@ namespace Catalyte.Apparel.Providers.Providers
             try
             {
                 purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
-
-
-
             }
             catch (Exception ex)
             {
