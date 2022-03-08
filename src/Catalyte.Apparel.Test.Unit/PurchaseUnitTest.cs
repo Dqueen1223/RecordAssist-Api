@@ -12,6 +12,7 @@ namespace Catalyte.Apparel.Test.Unit
 {
     public class PurchaseUnitTest
     {
+        private readonly Mock<ILineItemsRepository> _lineItemsRepositoryMock = new();
         private readonly Mock<IPurchaseRepository> _purchaseRepositoryMock = new();
         private readonly Mock<ILogger<PurchaseProvider>> _purchaseLoggerMock = new();
         private readonly Mock<IProductProvider> _productProvider = new();
@@ -30,7 +31,7 @@ namespace Catalyte.Apparel.Test.Unit
             _purchaseRepositoryMock.Setup(repo => repo.GetAllPurchasesByEmailAsync("Customer@home.com"))
             .ReturnsAsync(purchases);
 
-            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null);
+            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null, _lineItemsRepositoryMock.Object);
             //Act
             var actual = await purchaseProvider.GetAllPurchasesByEmailAsync("Customer@home.com");
             //Assert
@@ -45,7 +46,7 @@ namespace Catalyte.Apparel.Test.Unit
             _purchaseRepositoryMock.Setup(repo => repo.GetAllPurchasesByEmailAsync("Customer@home.com"))
             .ReturnsAsync(purchases);
 
-            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null);
+            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null, _lineItemsRepositoryMock.Object);
             //Act
             var actual = await purchaseProvider.GetAllPurchasesByEmailAsync("Customer@home.com");
             //Assert
@@ -58,7 +59,7 @@ namespace Catalyte.Apparel.Test.Unit
             _purchaseRepositoryMock.Setup(repo => repo.GetAllPurchasesByEmailAsync(null))
            .ThrowsAsync(new NotFoundException("No email specified for request."));
 
-            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null);
+            var purchaseProvider = new PurchaseProvider(_purchaseRepositoryMock.Object, _purchaseLoggerMock.Object, _productProvider.Object, null, _lineItemsRepositoryMock.Object);
             //Act
             Task actual() => purchaseProvider.GetAllPurchasesByEmailAsync(null);
             //Arrange

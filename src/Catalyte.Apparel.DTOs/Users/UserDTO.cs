@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Catalyte.Apparel.DTOs
 {
@@ -8,6 +9,8 @@ namespace Catalyte.Apparel.DTOs
     public class UserDTO
     {
         public int Id { get; set; }
+
+        public DateTime LastActive { get; set; }
 
         public DateTime DateCreated { get; set; }
 
@@ -32,5 +35,7 @@ namespace Catalyte.Apparel.DTOs
         public string Zip { get; set; }
 
         public string Phone { get; set; }
+
+        public List<int> Wishlist { get; set; }
     }
 }

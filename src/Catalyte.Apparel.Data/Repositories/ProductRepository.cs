@@ -26,7 +26,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<Product> NoTrackingGetProductByIdAsync(int productId)
         {
-           return  await _ctx.Products.Where(p => p.Id == productId).AsNoTracking().Take(1).FirstOrDefaultAsync();
+            return await _ctx.Products.Where(p => p.Id == productId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
 
         public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
@@ -67,7 +67,7 @@ namespace Catalyte.Apparel.Data.Repositories
             (demographic.Contains(p.Demographic.ToLower()) || demographic.Count() == 0) &&
             (material.Contains(p.Material.ToLower()) || material.Count() == 0) &&
             ((p.Price >= minPrice || minPrice.Equals(0)) && (p.Price <= maxPrice || maxPrice.Equals(0))) &&
-            (type.Contains(p.Type.ToLower()) || type.Count() == 0)).Skip(count: (int)range).Take(returnProducts).OrderBy((i)=>i.Id).ToListAsync();
+            (type.Contains(p.Type.ToLower()) || type.Count() == 0)).Skip(count: (int)range).Take(returnProducts).OrderBy((i) => i.Id).ToListAsync();
         }
         public async Task<Product> CreateProductAsync(Product product)
         {
@@ -83,6 +83,25 @@ namespace Catalyte.Apparel.Data.Repositories
 
             return product;
         }
-    }
+        public async Task<Product> DeleteProductByIdAsync(Product product)
+        {
 
+            _ctx.Products.Attach(product);
+            _ctx.Products.Remove(product);
+            await _ctx.SaveChangesAsync();
+
+            return product;
+
+        }
+
+
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _ctx.Products.OrderBy((i) => i.Id).ToListAsync();
+        }
+    }
 }
+
+
+

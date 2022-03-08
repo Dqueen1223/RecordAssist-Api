@@ -1,8 +1,5 @@
 ﻿using Catalyte.Apparel.Data.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Providers.Interfaces
@@ -20,5 +17,6 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task DeleteReviewByIdAsnc(int reviewId);
 
         Task<Review> CreateReviewAsync(Review model);
+        Task<List<int>> GetReviewByProductIdAsync();
     }
 }

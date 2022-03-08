@@ -27,5 +27,9 @@ namespace Catalyte.Apparel.Providers.Interfaces
         Task<List<string>> GetAllUniqueProductTypesAsync();
 
         Task<Product> CreateProductAsync(Product model);
+
+        Task<Product> DeleteProductByIdAsync(int id);
+
+        Task<bool> CheckForPurchasesByProductIdAsync(int productId, Product product);
     }
 }

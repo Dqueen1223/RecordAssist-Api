@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Xunit;
 
-namespace Test.Unit
+namespace Catalyte.Apparel.Test.Unit
 {
     public class PromoUnitTest
     {
