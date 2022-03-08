@@ -119,6 +119,7 @@ namespace Catalyte.Apparel.Providers.Providers
 
             // SET DEFAULT ROLE TO CUSTOMER AND TIMESTAMP
             newUser.Role = Constants.CUSTOMER;
+            newUser.LastActive = DateTime.UtcNow;
             newUser.DateCreated = DateTime.UtcNow;
             newUser.DateModified = DateTime.UtcNow;
 
