@@ -235,10 +235,6 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The Email field can't be empty or whitspace.");
                 count++;
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9699060a1501738035f211424c34bcbc601369d1
             return errors;
         }
     }
