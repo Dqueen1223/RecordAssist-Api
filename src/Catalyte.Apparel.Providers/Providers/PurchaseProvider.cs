@@ -20,13 +20,15 @@ namespace Catalyte.Apparel.Providers.Providers
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IProductProvider _productProvider;
         private readonly IMapper _mapper;
+        private readonly ILineItemsRepository _lineItemsRepository;
 
-        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger, IProductProvider productProvider, IMapper mapper)
+        public PurchaseProvider(IPurchaseRepository purchaseRepository, ILogger<PurchaseProvider> logger, IProductProvider productProvider, IMapper mapper, ILineItemsRepository lineItemsRepository)
         {
             _logger = logger;
             _purchaseRepository = purchaseRepository;
             _productProvider = productProvider;
             _mapper = mapper;
+            _lineItemsRepository = lineItemsRepository;
         }
 
         /// <summary>

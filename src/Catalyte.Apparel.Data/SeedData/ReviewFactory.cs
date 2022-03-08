@@ -1,9 +1,6 @@
 ﻿using Catalyte.Apparel.Data.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.SeedData
 {
@@ -83,16 +80,16 @@ namespace Catalyte.Apparel.Data.SeedData
 
 
             return new Review
-            {   
+            {
                 Id = id,
                 Rating = rating,
                 Title = title,
-                ReviewsDescription= reviewsDescription,
+                ReviewsDescription = reviewsDescription,
                 Email = "customer@customer.home",
                 ProductId = productId,
                 DateCreated = RandomDay(),
                 DateModified = DateTime.Now
-                
+
             };
         }
 

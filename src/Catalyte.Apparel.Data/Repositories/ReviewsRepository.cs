@@ -2,10 +2,10 @@
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
 
 namespace Catalyte.Apparel.Data.Repositories
 /// <summary>
@@ -40,7 +40,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<IEnumerable<Review>> GetAllReviewsAsync()
         {
-            return await _ctx.Reviews.OrderBy((i)=>i.DateCreated).ToListAsync();
+            return await _ctx.Reviews.OrderBy((i) => i.DateCreated).ToListAsync();
         }
 
         public async Task DeleteReviewByIdAsync(int reviewId)
@@ -55,6 +55,15 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.Reviews.AddAsync(model);
             await _ctx.SaveChangesAsync();
             return model;
+        }
+
+        public async Task<List<Review>> GetReviewByProductIdAsync(int productId)
+        {
+            var reviewedProduct = await _ctx.Reviews
+                .Where(l => l.ProductId == productId)
+                .ToListAsync();
+
+            return reviewedProduct;
         }
 
     }

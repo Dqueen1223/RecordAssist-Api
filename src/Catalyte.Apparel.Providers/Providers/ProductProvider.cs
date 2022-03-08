@@ -19,11 +19,13 @@ namespace Catalyte.Apparel.Providers.Providers
     {
         private readonly ILogger<ProductProvider> _logger;
         private readonly IProductRepository _productRepository;
+        private readonly ILineItemsRepository _lineItemsRepository;
 
-        public ProductProvider(IProductRepository productRepository, ILogger<ProductProvider> logger)
+        public ProductProvider(IProductRepository productRepository, ILogger<ProductProvider> logger, ILineItemsRepository lineItemsRepository)
         {
             _logger = logger;
             _productRepository = productRepository;
+            _lineItemsRepository = lineItemsRepository;
         }
 
         /// <summary>
@@ -236,25 +238,25 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return products;
         }
-        public async Task<Product> UpdateProductAsync (Product updatedProduct)
+        public async Task<Product> UpdateProductAsync(Product updatedProduct)
         {
             Product newProduct;
 
             Product existingProduct;
             try
             {
-                existingProduct =  await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
+                existingProduct = await _productRepository.NoTrackingGetProductByIdAsync(updatedProduct.Id);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-                if (existingProduct == null)
-                {
-                    _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
-                    throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
-                }
+            if (existingProduct == null)
+            {
+                _logger.LogInformation($"Product with id: {updatedProduct.Id} does not exist.");
+                throw new NotFoundException($"Product with id:{updatedProduct.Id} not found.");
+            }
             try
             {
                 newProduct = await _productRepository.UpdateProductAsync(updatedProduct);
@@ -284,9 +286,74 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            
+
             return savedProduct;
         }
 
+        /// <summary>
+        /// Deletes a product by the product id.
+        /// </summary>
+        /// <param name="id">The id of the product to be deleted</param>
+        /// <returns>the deleted product object</returns>
+        public async Task<Product> DeleteProductByIdAsync(int id)
+        {
+            Product existingProduct;
+            Product deletedProduct;
+            bool purchasedProduct;
+            try
+            {
+                existingProduct = await _productRepository.GetProductByIdAsync(id);
+                purchasedProduct = await CheckForPurchasesByProductIdAsync(id, existingProduct);
+                if (existingProduct == null)
+                {
+                    _logger.LogInformation($"Product with id: {id} does not exist.");
+                    throw new NotFoundException($"Product with id:{id} not found.");
+                }
+                else if (purchasedProduct)
+                {
+                    _logger.LogInformation($"Product with id: {id} has purchases associated with it.");
+                    throw new BadRequestException($"Product with id: {id} has purchases associated with it.");
+                }
+                else
+                {
+                    deletedProduct = await _productRepository.DeleteProductByIdAsync(existingProduct);
+                    return deletedProduct;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
+
+
+        }
+
+        /// <summary>
+        /// Helper function for DeleteProductByIdAsync to check for purchases associated with the product before deleting.
+        /// </summary>
+        /// <param name="productId">Id of the product to be deleted.</param>
+        /// <param name="product">The product object that will be deleted.</param>
+        /// <returns>A product with purchases or null if there are no purchases.</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        public async Task<bool> CheckForPurchasesByProductIdAsync(int productId, Product product)
+        {
+            bool purchaseLineItems;
+            try
+            {
+                purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return purchaseLineItems;
+        }
     }
 }
