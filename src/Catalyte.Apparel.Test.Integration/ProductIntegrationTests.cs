@@ -196,6 +196,23 @@ namespace Catalyte.Apparel.Test.Integration
             var result = await response.Content.ReadAsAsync<int>();
             Assert.True(result == 20);
         }
+        [Fact]
+        public async Task DeleteProductsByIdAsync_Returns200()
+        {
+            var response = await _client.DeleteAsync("/products/100");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+        [Fact]
+        public async Task DeleteProductsByIdAsync_Returns400IfPurchased()
+        {
+            var response = await _client.DeleteAsync("/products/1");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+        [Fact]
+        public async Task DeleteProductsByIdAsync_Returns404IfNoProductFound()
+        {
+            var response = await _client.DeleteAsync("/products/9999");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
     }
 }
-//gi

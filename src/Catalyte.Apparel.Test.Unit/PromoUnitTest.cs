@@ -9,7 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Test.Unit
+namespace Catalyte.Apparel.Test.Unit
 {
     public class PromoUnitTest
     {

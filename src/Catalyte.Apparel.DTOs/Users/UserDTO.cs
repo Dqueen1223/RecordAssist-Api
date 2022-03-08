@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Catalyte.Apparel.DTOs
 {
@@ -32,5 +33,7 @@ namespace Catalyte.Apparel.DTOs
         public string Zip { get; set; }
 
         public string Phone { get; set; }
+
+        public List<int> Wishlist { get; set; }
     }
 }
