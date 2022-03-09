@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using System;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
 using Xunit;
 
 namespace Catalyte.Apparel.Test.Unit
@@ -49,6 +50,21 @@ namespace Catalyte.Apparel.Test.Unit
             {
                 Assert.True(true);
             }
+        }
+        [Fact]
+        public async Task GetPromoAsync_Success()
+        {
+            Promo promo = new();
+            promo.Code = "getstuff";
+            _repositoryMock.Setup(repo => repo.GetPromoByCodeAsync(promo.Code)).ReturnsAsync(promo);
+            var promoProvider = new PromoProvider(_repositoryMock.Object, _loggerMock.Object);
+            var actual = await promoProvider.GetPromoByCodeAsync(promo.Code);
+            if (actual != null)
+            {
+                Assert.True(true);
+            }
+            Assert.True(false);
+            
         }
     }
 }
