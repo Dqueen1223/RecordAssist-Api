@@ -10,7 +10,6 @@ namespace Catalyte.Apparel.Data.Model
     /// </summary>
     public class Product : BaseEntity
     {
-
         public string Name { get; set; }
 
         public string Sku { get; set; }

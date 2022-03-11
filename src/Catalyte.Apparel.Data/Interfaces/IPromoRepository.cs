@@ -10,6 +10,6 @@ namespace Catalyte.Apparel.Data.Interfaces
     {
         Task<Promo> CreatePromoAsync(Promo model);
 
-        //Task<Promo> GetAllPromosByName(string name);
+        Task<Promo> GetPromoByCodeAsync(string Code);
     }
 }

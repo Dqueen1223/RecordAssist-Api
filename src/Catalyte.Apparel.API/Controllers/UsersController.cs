@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
 using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.DTOs;
 using Catalyte.Apparel.Providers.Interfaces;

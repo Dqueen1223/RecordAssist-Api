@@ -158,6 +158,50 @@ namespace Catalyte.Apparel.Utilities.Validation
             return errors;
         }
         /// <summary>
+        /// This function validates that products are valid based on multiple criteria.
+        /// if invalid, it returns a list of strings. otherwise it returns an empty list.
+        /// </summary>
+        public static List<string> ProductValidation(Product product)
+        {
+            List<string> errors = new();
+            if (product.Name == null)
+                errors.Add("Name is required.");
+            if (product.Sku == null)
+                errors.Add("Sku is required.");
+            if (product.Description == null)
+                errors.Add("Description is required.");
+            if (product.Demographic == null)
+                errors.Add("Demographic is required.");
+            if (product.Category == null)
+                errors.Add("Category is required.");
+            if (product.Type == null)
+                errors.Add("Product Type is required.");
+            if (product.PrimaryColorCode == null)
+                errors.Add("Primary color code is required.");
+            if (product.SecondaryColorCode == null)
+                errors.Add("Secondary color code is required.");
+            if (product.StyleNumber == null)
+                errors.Add("Style number is required.");
+            if (product.GlobalProductCode == null)
+                errors.Add("GlobalProductCode is required.");
+            if (product.Active.ToString() == null)
+                errors.Add("Activity is required.");
+            if (product.Brand == null)
+                errors.Add("Brand is required.");
+            if (product.ImageSrc == null)
+                errors.Add("Image is required.");
+            if (product.Material == null)
+                errors.Add("Material is required.");
+            if (product.Price.ToString() == null)
+                errors.Add("Price is required.");
+            if (!product.Price.ToString().Contains('.'))
+                errors.Add("Price must be a decimal.");
+            if (product.Quantity.ToString() == null)
+                errors.Add("Quantity is required.");
+            if (product.Quantity.ToString().Contains('.'))
+                errors.Add("Quantity must be an integer.");
+            return errors;
+        }
         /// This function validates that reviews are valid
         /// if invalid, it returns a list of strings. otherwise it returns an empty list.
         /// </summary>
@@ -191,7 +235,6 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("The Email field can't be empty or whitspace.");
                 count++;
             }
- 
             return errors;
         }
     }
