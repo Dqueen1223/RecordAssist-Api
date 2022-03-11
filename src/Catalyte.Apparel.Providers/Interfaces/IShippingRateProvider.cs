@@ -1,7 +1,4 @@
-﻿using Catalyte.Apparel.Data.Model;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 
 namespace Catalyte.Apparel.Providers.Interfaces

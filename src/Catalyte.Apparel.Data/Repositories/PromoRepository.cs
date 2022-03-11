@@ -1,6 +1,9 @@
 ﻿using Catalyte.Apparel.Data.Context;
+using Catalyte.Apparel.Data.Filters;
 using Catalyte.Apparel.Data.Interfaces;
 using Catalyte.Apparel.Data.Model;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Catalyte.Apparel.Data.Repositories
@@ -22,6 +25,10 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.Promos.AddAsync(model);
             await _ctx.SaveChangesAsync();
             return model;
+        }
+        public async Task<Promo> GetPromoByCodeAsync(string Code)
+        {
+            return await _ctx.Promos.AsQueryable().WherePromoCodeEquals(Code).FirstOrDefaultAsync();
         }
     }
 }
