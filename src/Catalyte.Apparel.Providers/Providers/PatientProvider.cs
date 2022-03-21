@@ -20,13 +20,13 @@ namespace Catalyte.Apparel.Providers.Providers
     public class PatientProvider : IPatientProvider
     {
         private readonly ILogger<PatientProvider> _logger;
-        private readonly IPatientReposity _patientReposity;
+        private readonly IPatientRepository _patientReposity;
         private readonly ILineItemsRepository _lineItemsRepository;
 
-        public PatientProvider(IProductRepository productRepository, ILogger<PatientProvider> logger, ILineItemsRepository lineItemsRepository)
+        public PatientProvider(IPatientRepository patientRepository, ILogger<PatientProvider> logger, ILineItemsRepository lineItemsRepository)
         {
             _logger = logger;
-            _patientReposity = productRepository;
+            _patientReposity = patientRepository;
             _lineItemsRepository = lineItemsRepository;
         }
 
@@ -63,13 +63,13 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <param name="patientId">The id of the product to retrieve.</param>
         /// <returns>The product.</returns>
         ///  /// <summary>
-        public async Task<Patient> NoTrackingGetProductByIdAsync(int patientId)
+        public async Task<Patient> NoTrackingGetPaitentByIdAsync(int patientId)
         {
             Patient product;
 
             try
             {
-                product = await _patientReposity.NoTrackingGetProductByIdAsync(patientId);
+                product = await _patientReposity.NoTrackingGetPaitentByIdAsync(patientId);
             }
             catch (Exception ex)
             {
@@ -186,61 +186,68 @@ namespace Catalyte.Apparel.Providers.Providers
         /// Asynchronously retrieves all products from the database.
         /// </summary>
         /// <returns>All products in the database.</returns>
-        public async Task<IEnumerable<Patient>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
-                                                                 List<string> color, List<string> demographic, List<string> material,
-                                                                 decimal minPrice, decimal maxPrice, List<string> type, int? range)
+        public async Task<IEnumerable<Patient>> GetPatientsAsync()
         {
-            IEnumerable<Patient> products;
-
-            int returnProducts = 20;
-            if (range == null)
-            {
-                returnProducts = 100000;
-                range = 0;
-            }
-            // Convert input color code to hex format to match database column label
-            List<string> hexColor = new List<string>();
-            if (color.Count() > 0)
-            {
-                foreach (var colorItem in color)
-                {
-                    hexColor.Add("#" + colorItem.ToLower());
-                }
-            }
-
-            // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-            if (minPrice < 0 || maxPrice < 0)
-            {
-                _logger.LogInformation("Prices cannot be negative.");
-                throw new BadRequestException("Prices cannot be negative.");
-            }
-            if (minPrice > maxPrice && !maxPrice.Equals(0))
-            {
-                _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
-                throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
-            }
-
-            // Convert all strings to lowercase for simplified query parameter matching
-            List<string> brandLower = brand.ConvertAll(x => x.ToLower());
-            List<string> categoryLower = category.ConvertAll(x => x.ToLower());
-            List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
-            List<string> materialLower = material.ConvertAll(x => x.ToLower());
-            List<string> typeLower = type.ConvertAll(x => x.ToLower());
-
             try
             {
-                products = await _patientReposity.GetProductsAsync(active, brandLower, categoryLower, hexColor,
-                                                                 demographicLower, materialLower,
-                                                                 minPrice, maxPrice, typeLower, range, returnProducts);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-
-            return products;
+                Patients = await _pateintRepository.GetPatientsAsync()
+            };
         }
+        //public async Task<IEnumerable<Patient>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+        //                                                         List<string> color, List<string> demographic, List<string> material,
+        //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
+        //{
+        //    IEnumerable<Patient> products;
+
+        //    int returnProducts = 20;
+        //    if (range == null)
+        //    {
+        //        returnProducts = 100000;
+        //        range = 0;
+        //    }
+        //    // Convert input color code to hex format to match database column label
+        //    List<string> hexColor = new List<string>();
+        //    if (color.Count() > 0)
+        //    {
+        //        foreach (var colorItem in color)
+        //        {
+        //            hexColor.Add("#" + colorItem.ToLower());
+        //        }
+        //    }
+
+        //    // Check that minPrice is not greater than maxPrice and minPrice is non-negative
+        //    if (minPrice < 0 || maxPrice < 0)
+        //    {
+        //        _logger.LogInformation("Prices cannot be negative.");
+        //        throw new BadRequestException("Prices cannot be negative.");
+        //    }
+        //    if (minPrice > maxPrice && !maxPrice.Equals(0))
+        //    {
+        //        _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
+        //        throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
+        //    }
+
+        //    // Convert all strings to lowercase for simplified query parameter matching
+        //    List<string> brandLower = brand.ConvertAll(x => x.ToLower());
+        //    List<string> categoryLower = category.ConvertAll(x => x.ToLower());
+        //    List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
+        //    List<string> materialLower = material.ConvertAll(x => x.ToLower());
+        //    List<string> typeLower = type.ConvertAll(x => x.ToLower());
+
+        //    try
+        //    {
+        //        products = await _patientReposity.GetProductsAsync(active, brandLower, categoryLower, hexColor,
+        //                                                         demographicLower, materialLower,
+        //                                                         minPrice, maxPrice, typeLower, range, returnProducts);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.Message);
+        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
+        //    }
+
+        //    return products;
+        //}
         /// <summary>
         /// Asynchronously updates product with new product information
         /// </summary>
@@ -316,29 +323,29 @@ namespace Catalyte.Apparel.Providers.Providers
         /// </summary>
         /// <param name="id">The id of the product to be deleted</param>
         /// <returns>the deleted product object</returns>
-        public async Task<Product> DeleteProductByIdAsync(int id)
+        public async Task<Patient> DeletePatientByIdAsync(int id)
         {
-            Product existingProduct;
-            Product deletedProduct;
-            bool purchasedProduct;
+            Patient existingPatient;
+            Patient deletedPatient;
+            bool purchasedPatient;
             try
             {
-                existingProduct = await _productRepository.GetProductByIdAsync(id);
-                purchasedProduct = await CheckForPurchasesByProductIdAsync(id, existingProduct);
-                if (existingProduct == null)
+                existingPatient = await _patientReposity.GetPatientByIdAsync(id);
+                //purchasedPatient = await CheckForPurchasesByPatientIdAsync(id, existingPatient);
+                if (existingPatient == null)
                 {
-                    _logger.LogInformation($"Product with id: {id} does not exist.");
-                    throw new NotFoundException($"Product with id:{id} not found.");
+                    _logger.LogInformation($"Patient with id: {id} does not exist.");
+                    throw new NotFoundException($"Patient with id:{id} not found.");
                 }
-                else if (purchasedProduct)
-                {
-                    _logger.LogInformation($"Product with id: {id} has purchases associated with it.");
-                    throw new BadRequestException($"Product with id: {id} has purchases associated with it.");
-                }
+                //else if (purchasedPatient)
+                //{
+                //    _logger.LogInformation($"Patient with id: {id} has purchases associated with it.");
+                //    throw new BadRequestException($"Patient with id: {id} has purchases associated with it.");
+                //}
                 else
                 {
-                    deletedProduct = await _productRepository.DeleteProductByIdAsync(existingProduct);
-                    return deletedProduct;
+                    deletedPatient = await _patientReposity.DeletePatientByIdAsync(existingPatient);
+                    return deletedPatient;
                 }
 
             }

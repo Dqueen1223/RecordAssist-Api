@@ -13,11 +13,13 @@ namespace Catalyte.Apparel.Providers.Interfaces
     {
         //Task<Patient> NoTrackingGetProductByIdAsync(int productId);
         Task<Patient> GetPatientByIdAsync(int patientId);
-        Task<IEnumerable<Patient>> GetPatientAsync(List<string> Firstname, List<string> LastName, List<string> Ssn,
-                                                                 List<string> Email, List<string> Street, List<string> City
-                                                       /*          decimal minPrice, decimal maxPrice, List<string> type, int? range*/);
+        ////Task<IEnumerable<Patient>> GetPatientAsync(List<string> Firstname, List<string> LastName, List<string> Ssn,
+        ////                                                         List<string> Email, List<string> Street, List<string> City
+        //                                               /*          decimal minPrice, decimal maxPrice, List<string> type, int? range*/);
 
-        Task<Patient> UpdatePatienttAsync(Patient updatedPatient);
+        Task<IEnumerable<Patient>> GetPatientAsync();
+
+        Task<Patient> UpdatePatientAsync(Patient updatedPatient);
         //Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range);
@@ -26,6 +28,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
 
         //Task<List<string>> GetAllUniquePatientTypesAsync();
 
+        Task<Patient> GetPatientsAsync();
         Task<Patient> CreatePatientAsync(Patient model);
 
         Task<Patient> DeletePatientByIdAsync(int id);

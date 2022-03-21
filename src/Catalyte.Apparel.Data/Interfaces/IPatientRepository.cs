@@ -8,7 +8,7 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// <summary>
     /// This interface provides an abstraction layer for Patient repository methods.
     /// </summary>
-    public interface IpatientRepository
+    public interface IPatientRepository
     {
         Task<Patient> NoTrackingGetPatientByIdAsync(int patientId);
         Task<Patient> GetPatientByIdAsync(int patientId);
@@ -21,7 +21,8 @@ namespace Catalyte.Apparel.Data.Interfaces
         //                                                         List<string> State, List<string> zIPcODE, List<string> Age, List<string> Height, int returnProducts);
 
         Task<IEnumerable<Patient>> GetPatientsAsync();
-        Task<Patient> UpdatePatientAsync(Patient atient);
+
+        Task<Patient> UpdatePatientAsync(Patient patient);
 
         Task<List<string>> GetAllUniquePatientCategoriesAsync();
         Task<List<string>> GetAllUniquePatientTypesAsync();

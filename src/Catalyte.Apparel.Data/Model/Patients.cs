@@ -41,9 +41,9 @@ namespace Catalyte.Apparel.Data.Model
         {
             return JsonConvert.SerializeObject(this);
         }
-        public static IEqualityComparer<Patient> ProductComparer { get; } = new ProductEqualityComparer();
+        public static IEqualityComparer<Patient> PatientComparer { get; } = new PatientEqualityComparer();
 
-        private sealed class ProductEqualityComparer : IEqualityComparer<Patient>
+        private sealed class PatientEqualityComparer : IEqualityComparer<Patient>
         {
             public bool Equals(Patient x, Patient y)
             {
