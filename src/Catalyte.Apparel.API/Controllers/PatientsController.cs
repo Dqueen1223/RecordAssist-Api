@@ -69,20 +69,20 @@ namespace Catalyte.Apparel.API.Controllers
 
         //    return Ok(patientsCount);
         //}
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<PatientDTO>> GetPatientByIdAsync(int id)
-        //{
-        //    _logger.LogInformation($"Request received for GetPatientByIdAsync for id: {id}");
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PatientDTO>> GetPatientByIdAsync(int id)
+        {
+            _logger.LogInformation($"Request received for GetPatientByIdAsync for id: {id}");
 
-        //    var patient = await _patientProvider.GetPatientByIdAsync(id);
-        //    var patientDTO = _mapper.Map<PatientDTO>(patient);
+            var patient = await _patientProvider.GetPatientByIdAsync(id);
+            var patientDTO = _mapper.Map<PatientDTO>(patient);
 
-        //    return Ok(patientDTO);
-        //}
+            return Ok(patientDTO);
+        }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult<PatientDTO>> UpdatePatientAsync(
-                        [FromBody] PatientDTO Patient)
+                        int id, [FromBody] PatientDTO Patient)
         {
             _logger.LogInformation("Request received for update user");
 
@@ -90,9 +90,9 @@ namespace Catalyte.Apparel.API.Controllers
             {
                 _logger.LogInformation("Request recived for update patient");
             }
-            var updatedPatient = await _patientProvider.UpdatePatientAsync(patientToUpdate);
+            var updatedPatient = await _patientProvider.UpdatePatientAsync(id, patientToUpdate);
             var patientDTO = _mapper.Map<PatientDTO>(updatedPatient);
-
+      
             return Ok(patientDTO);
         }
         //[HttpGet("/patients/categories")]
@@ -120,7 +120,7 @@ namespace Catalyte.Apparel.API.Controllers
             var newPatient = _mapper.MapCreatePatientDtoToPatient(model);
             var savedPatient = await _patientProvider.CreatePatientAsync(newPatient);
             var patientDTO = _mapper.MapPatientToPatientDto(savedPatient);
-            return Created($"/maintenance", patientDTO);
+            return Created($"/patient", patientDTO);
         }
 
         [HttpDelete("{id}")]
@@ -131,7 +131,7 @@ namespace Catalyte.Apparel.API.Controllers
             await _patientProvider.DeletePatientByIdAsync(id);
 
 
-            return Ok("Patient successfully deleted.");
+            return NoContent();
         }
 
         //[HttpGet("/patients/purchased/{patientId}")]

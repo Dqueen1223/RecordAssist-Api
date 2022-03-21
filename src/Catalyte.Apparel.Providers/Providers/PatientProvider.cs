@@ -83,6 +83,25 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return patient;
         }
+
+        public async Task<Patient> NoTrackingCheckConflictingEmail(string patientEmail)
+        {
+            Patient CheckExistingEmail;
+            try
+            {
+                CheckExistingEmail = await _patientRepository.NoTrackingCheckConflictingEmail(patientEmail);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (CheckExistingEmail != null)
+            {
+                throw new ConflictException("This email is already taken");
+            }
+            return null;
+        }
         /// <summary>
         /// Asynchronously retrieves all unique patient categories in the database 
         /// </summary>
@@ -261,14 +280,16 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <returns> The updated patient</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
         /// <exception cref="NotFoundException"></exception>
-        public async Task<Patient> UpdatePatientAsync (Patient updatedPatient)
+        public async Task<Patient> UpdatePatientAsync (int id, Patient updatedPatient)
         {
             Patient newPatient;
+
+            Patient checkValidEmail;
 
             Patient existingPatient;
             try
             {
-                existingPatient = await _patientRepository.NoTrackingGetPatientByIdAsync(updatedPatient.Id);
+                existingPatient = await _patientRepository.NoTrackingGetPatientByIdAsync(id);
             }
             catch (Exception ex)
             {
@@ -277,8 +298,25 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (existingPatient == null)
             {
-                _logger.LogInformation($"Patient with id: {updatedPatient.Id} does not exist.");
-                throw new NotFoundException($"Patient with id:{updatedPatient.Id} not found.");
+                _logger.LogInformation($"Patient with id: {id} does not exist.");
+                throw new NotFoundException($"Patient with id:{id} not found.");
+            }
+            if(updatedPatient.Id == 0)
+            { 
+                updatedPatient.Id = existingPatient.Id;
+            }
+            try
+            {
+                checkValidEmail = await _patientRepository.NoTrackingCheckConflictingEmail(updatedPatient.Email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (checkValidEmail.Id != updatedPatient.Id && checkValidEmail != null && checkValidEmail.Email == updatedPatient.Email)
+            {
+                throw new ConflictException("This email has already been used");
             }
             try
             {
@@ -289,11 +327,12 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            //List<string> errors = Validation.PatientValidation(updatedPatient);
-            //if (errors.Count > 0)
-            //{
-            //    throw new BadRequestException(string.Join(' ', errors));
-            //}
+            List<string> errors = Validation.PatientValidation(updatedPatient);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
+
             return newPatient;
         }
         /// <summary>
@@ -305,12 +344,26 @@ namespace Catalyte.Apparel.Providers.Providers
         {
             Patient savedPatient;
 
+            Patient checkValidEmail;
 
-            //List<string> errors = Validation.PatientValidation(newPatient);
-            //if (errors.Count > 0)
-            //{
-            //    throw new BadRequestException(string.Join(' ', errors));
-            //}
+            List<string> errors = Validation.PatientValidation(newPatient);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
+            try
+            {
+                checkValidEmail = await _patientRepository.NoTrackingCheckConflictingEmail(newPatient.Email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (checkValidEmail != null && checkValidEmail.Email == newPatient.Email)
+            {
+                throw new ConflictException("This email has already been used");
+            }
             try
             {
                 savedPatient = await _patientRepository.CreatePatientAsync(newPatient);
@@ -320,7 +373,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-
+            
             return savedPatient;
         }
 
@@ -336,17 +389,11 @@ namespace Catalyte.Apparel.Providers.Providers
             try
             {
                 existingPatient = await _patientRepository.GetPatientByIdAsync(id);
-                //purchasedPatient = await CheckForPurchasesByPatientIdAsync(id, existingPatient);
                 if (existingPatient == null)
                 {
                     _logger.LogInformation($"Patient with id: {id} does not exist.");
                     throw new NotFoundException($"Patient with id:{id} not found.");
                 }
-                //else if (purchasedPatient)
-                //{
-                //    _logger.LogInformation($"Patient with id: {id} has purchases associated with it.");
-                //    throw new BadRequestException($"Patient with id: {id} has purchases associated with it.");
-                //}
                 else
                 {
                     deletedPatient = await _patientRepository.DeletePatientByIdAsync(existingPatient);

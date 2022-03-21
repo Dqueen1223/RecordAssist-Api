@@ -31,6 +31,10 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Patients.Where(p => p.Id == PatientId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
 
+        public async Task<Patient> NoTrackingCheckConflictingEmail(string patientEmail)
+        {
+            return await _ctx.Patients.Where(p => p.Email == patientEmail).AsNoTracking().Take(1).FirstOrDefaultAsync();
+        }
         //public async Task<List<string>> GetAllUniquePatientCategoriesAsync()
         //{
         //    return await _ctx.Patients.Select(l => l.Category).Distinct().ToListAsync();

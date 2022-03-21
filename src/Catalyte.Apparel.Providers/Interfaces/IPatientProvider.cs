@@ -17,9 +17,9 @@ namespace Catalyte.Apparel.Providers.Interfaces
         ////                                                         List<string> Email, List<string> Street, List<string> City
         //                                               /*          decimal minPrice, decimal maxPrice, List<string> type, int? range*/);
 
-        Task<IEnumerable<Patient>> GetPatientAsync();
+        Task<IEnumerable<Patient>> GetPatientsAsync();
 
-        Task<Patient> UpdatePatientAsync(Patient updatedPatient);
+        Task<Patient> UpdatePatientAsync(int id, Patient updatedPatient);
         //Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range);
@@ -28,11 +28,11 @@ namespace Catalyte.Apparel.Providers.Interfaces
 
         //Task<List<string>> GetAllUniquePatientTypesAsync();
 
-        Task<Patient> GetPatientsAsync();
+        //Task<Patient> GetPatientsAsync();
         Task<Patient> CreatePatientAsync(Patient model);
 
         Task<Patient> DeletePatientByIdAsync(int id);
 
-        Task<bool> CheckForPurchasesByPatientIdAsync(int patientId, Patient patient);
+        //Task<bool> CheckForPurchasesByPatientIdAsync(int patientId, Patient patient);
     }
 }

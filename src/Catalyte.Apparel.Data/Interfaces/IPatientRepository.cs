@@ -11,6 +11,8 @@ namespace Catalyte.Apparel.Data.Interfaces
     public interface IPatientRepository
     {
         Task<Patient> NoTrackingGetPatientByIdAsync(int patientId);
+
+        Task<Patient> NoTrackingCheckConflictingEmail(string patientEmail);
         Task<Patient> GetPatientByIdAsync(int patientId);
         //Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
