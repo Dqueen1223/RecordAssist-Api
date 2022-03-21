@@ -24,8 +24,8 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<Patient> UpdatePatientAsync(Patient patient);
 
-        Task<List<string>> GetAllUniquePatientCategoriesAsync();
-        Task<List<string>> GetAllUniquePatientTypesAsync();
+        //Task<List<string>> GetAllUniquePatientCategoriesAsync();
+        //Task<List<string>> GetAllUniquePatientTypesAsync();
 
         Task<Patient> CreatePatientAsync(Patient newPatient);
 

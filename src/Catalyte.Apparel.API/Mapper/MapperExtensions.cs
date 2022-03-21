@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Products;
+using Catalyte.Apparel.DTOs.Patients;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
@@ -62,30 +62,25 @@ namespace Catalyte.Apparel.API.DTOMappings
             };
         }
 
-        public static ProductDTO MapProductToProductDto(this IMapper mapper, Product product)
+        public static PatientDTO MapPatientToPatientDto(this IMapper mapper, Patient patient)
         {
-            return new ProductDTO()
+            return new PatientDTO()
             {
-                Id = product.Id,
-                Category = product.Category,
-                Type = product.Type,
-                Sku = product.Sku,
-                Demographic = product.Demographic,
-                GlobalProductCode = product.GlobalProductCode,
-                StyleNumber = product.StyleNumber,
-                ReleaseDate = product.ReleaseDate,
-                DateCreated = product.DateCreated,
-                DateModified = product.DateModified,
-                Active = product.Active,
-                Description = product.Description,
-                Name = product.Name,
-                PrimaryColorCode = product.PrimaryColorCode,
-                SecondaryColorCode = product.SecondaryColorCode,
-                Brand = product.Brand,
-                Material = product.Material,
-                Price = product.Price,
-                Quantity = product.Quantity,
-                ImageSrc = product.ImageSrc
+                Id = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Ssn = patient.Ssn,
+                Email = patient.Email,
+                Street = patient.Street,
+                City = patient.City,
+                State = patient.State,
+                ZipCode = patient.ZipCode,
+                Age = patient.Age,
+                Height = patient.Height,
+                Weight = patient.Weight,
+                Insurance = patient.Insurance,
+                Gender = patient.Gender,
+                Postal = patient.Postal
             };
         }
         public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
@@ -107,17 +102,17 @@ namespace Catalyte.Apparel.API.DTOMappings
             return purchase;
         }
 
-        public static Product MapCreateProductDtoToProduct(this IMapper mapper, ProductDTO productDTO)
+        public static Patient MapCreatePatientDtoToPatient(this IMapper mapper, PatientDTO patientDTO)
         {
-            var product = new Product
+            var patient = new Patient
             {
                 DateCreated = DateTime.Now,
-                DateModified = productDTO.DateCreated,
+                //DateModified = patientDTO.DateCreated
             };
-            product = mapper.Map(productDTO, product);
+            patient = mapper.Map(patientDTO, patient);
 
 
-            return product;
+            return patient;
         }
     }
 }

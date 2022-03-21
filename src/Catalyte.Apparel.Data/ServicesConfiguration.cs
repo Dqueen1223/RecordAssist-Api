@@ -19,13 +19,11 @@ namespace Catalyte.Apparel.Data
                 options.UseNpgsql(config.GetConnectionString("CatalyteApparel")));
 
             services.AddScoped<IApparelCtx>(provider => provider.GetService<ApparelCtx>());
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IReviewsRepository, ReviewsRepository>();
             services.AddScoped<IPromoRepository, PromoRepository>();
             services.AddScoped<IShippingRateRepository, ShippingRateRepository>();
-            services.AddScoped<ILineItemsRepository, LineItemsRepository>();
 
             return services;
 

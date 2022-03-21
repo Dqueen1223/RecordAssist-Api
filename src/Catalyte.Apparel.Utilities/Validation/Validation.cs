@@ -13,79 +13,79 @@ namespace Catalyte.Apparel.Utilities.Validation
         /// This function validates that credit cards are valid based on multiple criteria.
         /// if invalid, it returns a list of strings. otherwise it returns an empty list.
         /// </summary>
-        public static List<string> CreditCardValidation(Purchase Purchase)
-        {
+        //public static List<string> CreditCardValidation(Purchase Purchase)
+        //{
 
-            List<string> errors = new();
-            //Card number validation
-            try
-            {
-                if (Purchase.CardNumber.Trim() == "" || Purchase.CardNumber == null)
-                    errors.Add("The card number field must not be empty or whitespace. ");
+        //    List<string> errors = new();
+        //    //Card number validation
+        //    try
+        //    {
+        //        if (Purchase.CardNumber.Trim() == "" || Purchase.CardNumber == null)
+        //            errors.Add("The card number field must not be empty or whitespace. ");
 
-                if (Purchase.CardNumber.Trim() != "" && Purchase.CardNumber.Trim().Length < 16 || Purchase.CardNumber.Trim().Length > 19)
-                    errors.Add("Card number length must be between 16 and 19 characters. ");
+        //        if (Purchase.CardNumber.Trim() != "" && Purchase.CardNumber.Trim().Length < 16 || Purchase.CardNumber.Trim().Length > 19)
+        //            errors.Add("Card number length must be between 16 and 19 characters. ");
 
-                if (Purchase.CardNumber.Trim() != "" && !Purchase.CardNumber.Trim().All(char.IsDigit))
-                    errors.Add("Card number must be only numbers. ");
+        //        if (Purchase.CardNumber.Trim() != "" && !Purchase.CardNumber.Trim().All(char.IsDigit))
+        //            errors.Add("Card number must be only numbers. ");
 
-                if (Purchase.CardNumber.Trim() != "" && Purchase.CardNumber.Trim().First() != '4' && Purchase.CardNumber.Trim().First() != '5')
-                    errors.Add("This credit card provider is not supported. ");
-            }
-            catch (Exception)
-            {
-                errors.Add("The card number field must not be empty or whitespace. ");
-            }
-            //Expiration Validation
-            try
-            {
-                if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
-                    errors.Add("The expiration field must not be empty or whitespace. ");
-                if (Purchase.Expiration.Trim().Length == 5 && Purchase.Expiration.Trim().Substring(2, 1) == "/")
-                {
-                    var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
-                    var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
-                    var CurrentMonth = DateTime.Now.Month;
-                    var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
-                    if (int.Parse(CardYear) > int.Parse(CurrentYear) + 50)
-                        CardYear = $"/19{CardYear}";
-                    else
-                        CardYear = $"/20{CardYear}";
+        //        if (Purchase.CardNumber.Trim() != "" && Purchase.CardNumber.Trim().First() != '4' && Purchase.CardNumber.Trim().First() != '5')
+        //            errors.Add("This credit card provider is not supported. ");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        errors.Add("The card number field must not be empty or whitespace. ");
+        //    }
+        //    //Expiration Validation
+        //    try
+        //    {
+        //        if (Purchase.Expiration.Trim() == "" || Purchase.Expiration == null)
+        //            errors.Add("The expiration field must not be empty or whitespace. ");
+        //        if (Purchase.Expiration.Trim().Length == 5 && Purchase.Expiration.Trim().Substring(2, 1) == "/")
+        //        {
+        //            var CardYear = Purchase.Expiration.Trim().Substring(3, 2);
+        //            var CardMonth = Purchase.Expiration.Trim().Substring(0, 2);
+        //            var CurrentMonth = DateTime.Now.Month;
+        //            var CurrentYear = DateTime.Now.Year.ToString().Substring(2, 2);
+        //            if (int.Parse(CardYear) > int.Parse(CurrentYear) + 50)
+        //                CardYear = $"/19{CardYear}";
+        //            else
+        //                CardYear = $"/20{CardYear}";
 
-                    if (Purchase.Expiration.Trim() != "" && DateTime.Parse($"{CurrentMonth}/20{CurrentYear}") > DateTime.Parse($"{CardMonth}{CardYear}"))
-                        errors.Add("This credit card is expired. ");
-                }
-                else
-                    errors.Add("Correct format for date is MM/YY ");
-            }
-            catch (Exception)
-            {
-                errors.Add("This card must be a valid date in MM/YY format. ");
-            }
+        //            if (Purchase.Expiration.Trim() != "" && DateTime.Parse($"{CurrentMonth}/20{CurrentYear}") > DateTime.Parse($"{CardMonth}{CardYear}"))
+        //                errors.Add("This credit card is expired. ");
+        //        }
+        //        else
+        //            errors.Add("Correct format for date is MM/YY ");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        errors.Add("This card must be a valid date in MM/YY format. ");
+        //    }
 
-            if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")
-                errors.Add("The card holder field must not be empty or whitespace. ");
+        //    if (Purchase.CardHolder == null || Purchase.CardHolder.Trim() == "")
+        //        errors.Add("The card holder field must not be empty or whitespace. ");
 
-            try
-            {
-                if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
-                    errors.Add("The CVV field must not be empty or white space. ");
+        //    try
+        //    {
+        //        if (Purchase.CVV.Length == 0 || Purchase.CVV == null)
+        //            errors.Add("The CVV field must not be empty or white space. ");
 
-                if (Purchase.CVV.Length != 0 && Purchase.CVV.Trim().Length != 3)
-                    errors.Add("CVV must be 3 digits long. ");
+        //        if (Purchase.CVV.Length != 0 && Purchase.CVV.Trim().Length != 3)
+        //            errors.Add("CVV must be 3 digits long. ");
 
-                if (Purchase.CVV.Trim() != "" && !Purchase.CVV.Trim().All(char.IsDigit))
-                    errors.Add("CVV must be only numbers. ");
-            }
-            catch (Exception)
-            {
-                errors.Add("The CVV field must not be empty or white space. ");
-            }
-            if (Purchase.CVV == null && Purchase.CardNumber == null && Purchase.Expiration == null && Purchase.CardHolder == null)
-                throw new BadRequestException("No credit card provided. ");
+        //        if (Purchase.CVV.Trim() != "" && !Purchase.CVV.Trim().All(char.IsDigit))
+        //            errors.Add("CVV must be only numbers. ");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        errors.Add("The CVV field must not be empty or white space. ");
+        //    }
+        //    if (Purchase.CVV == null && Purchase.CardNumber == null && Purchase.Expiration == null && Purchase.CardHolder == null)
+        //        throw new BadRequestException("No credit card provided. ");
 
-            return errors;
-        }
+        //    return errors;
+        //}
         /// <summary>
         /// This function validates that promos are valid based on multiple criteria.
         /// if invalid, it returns a list of strings. otherwise it returns an empty list.
@@ -158,48 +158,48 @@ namespace Catalyte.Apparel.Utilities.Validation
             return errors;
         }
         /// <summary>
-        /// This function validates that products are valid based on multiple criteria.
+        /// This function validates that Patients are valid based on multiple criteria.
         /// if invalid, it returns a list of strings. otherwise it returns an empty list.
         /// </summary>
-        public static List<string> ProductValidation(Product product)
+        public static List<string> PatientValidation(Patient patient)
         {
             List<string> errors = new();
-            if (product.Name == null)
-                errors.Add("Name is required.");
-            if (product.Sku == null)
-                errors.Add("Sku is required.");
-            if (product.Description == null)
-                errors.Add("Description is required.");
-            if (product.Demographic == null)
-                errors.Add("Demographic is required.");
-            if (product.Category == null)
-                errors.Add("Category is required.");
-            if (product.Type == null)
-                errors.Add("Product Type is required.");
-            if (product.PrimaryColorCode == null)
-                errors.Add("Primary color code is required.");
-            if (product.SecondaryColorCode == null)
-                errors.Add("Secondary color code is required.");
-            if (product.StyleNumber == null)
-                errors.Add("Style number is required.");
-            if (product.GlobalProductCode == null)
-                errors.Add("GlobalProductCode is required.");
-            if (product.Active.ToString() == null)
-                errors.Add("Activity is required.");
-            if (product.Brand == null)
-                errors.Add("Brand is required.");
-            if (product.ImageSrc == null)
-                errors.Add("Image is required.");
-            if (product.Material == null)
-                errors.Add("Material is required.");
-            if (product.Price.ToString() == null)
-                errors.Add("Price is required.");
-            if (!product.Price.ToString().Contains('.'))
-                errors.Add("Price must be a decimal.");
-            if (product.Quantity.ToString() == null)
-                errors.Add("Quantity is required.");
-            if (product.Quantity.ToString().Contains('.'))
-                errors.Add("Quantity must be an integer.");
+            if (patient.FirstName == null)
+                errors.Add("FirstName is required.");
+            if (patient.LastName == null)
+                errors.Add("LastName is required.");
+            if (patient.Ssn == null)
+                errors.Add("Ssn is required.");
+            if (patient.Email == null)
+                errors.Add("Email is required.");
+            if (patient.Street == null)
+                errors.Add("Street is required.");
+            if (patient.City == null)
+                errors.Add("City is required.");
+            if (patient.State == null)
+                errors.Add("State is required.");
+            if (patient.Postal == null)
+                errors.Add("Postal code is required.");
+            if (patient.Age.ToString() == null)
+                errors.Add("Age number is required.");
+            if (patient.Height.ToString() == null)
+                errors.Add("Height is required.");
+            if (patient.Weight.ToString() == null)
+                errors.Add("Weight is required.");
+            if (patient.Insurance == null)
+                errors.Add("Insurance is required.");
+            if (patient.Gender == null)
+                errors.Add("Gender is required.");
+            //if (patient.Material == null)
+            //    errors.Add("Material is required.");
+            //if (patient.Price.ToString() == null)
+            //    errors.Add("Price is required.");
+            //if (!patient.Price.ToString().Contains('.'))
+            //    errors.Add("Price must be a decimal.");
+            //if (patient.Quantity.ToString() == null)
+            //    errors.Add("Quantity is required.");
+            //if (patient.Quantity.ToString().Contains('.'))
+            //    errors.Add("Quantity must be an integer.");
             return errors;
         }
         /// This function validates that reviews are valid

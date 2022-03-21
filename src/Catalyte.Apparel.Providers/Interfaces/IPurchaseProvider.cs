@@ -1,19 +1,19 @@
-﻿using Catalyte.Apparel.Data.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿//using Catalyte.Apparel.Data.Model;
+//using System.Collections.Generic;
+//using System.Threading.Tasks;
 
-namespace Catalyte.Apparel.Providers.Interfaces
-{
-    /// <summary>
-    /// This interface provides an abstraction layer for purchase related service methods.
-    /// </summary>
-    public interface IPurchaseProvider
-    {
-        Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email);
+//namespace Catalyte.Apparel.Providers.Interfaces
+//{
+//    /// <summary>
+//    /// This interface provides an abstraction layer for purchase related service methods.
+//    /// </summary>
+//    public interface IPurchaseProvider
+//    {
+//        Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email);
 
-        Task<Purchase> CreatePurchasesAsync(Purchase model);
+//        Task<Purchase> CreatePurchasesAsync(Purchase model);
 
-        Task<string> CheckForInactiveProductsAsync(Purchase purchase);
-    }
-}
+//        Task<string> CheckForInactiveProductsAsync(Purchase purchase);
+//    }
+//}
 

@@ -24,15 +24,17 @@
 
         public string ZipCode { get; set; }
 
-        public string Age { get; set; }
+        public int Age { get; set; }
 
-        public string Height { get; set; }
+        public int Height { get; set; }
 
-        public bool Weight { get; set; }
+        public int Weight { get; set; }
 
         public string Insurance { get; set; }
 
         public string Gender { get; set; }
+
+        public string Postal { get; set; }
 
     }
 }

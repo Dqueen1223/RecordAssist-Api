@@ -20,56 +20,26 @@ namespace Catalyte.Apparel.Providers.Providers
     public class PatientProvider : IPatientProvider
     {
         private readonly ILogger<PatientProvider> _logger;
-        private readonly IPatientRepository _patientReposity;
-        private readonly ILineItemsRepository _lineItemsRepository;
+        private readonly IPatientRepository _patientRepository;
 
-        public PatientProvider(IPatientRepository patientRepository, ILogger<PatientProvider> logger, ILineItemsRepository lineItemsRepository)
+        public PatientProvider(IPatientRepository patientRepository, ILogger<PatientProvider> logger)
         {
             _logger = logger;
-            _patientReposity = patientRepository;
-            _lineItemsRepository = lineItemsRepository;
+            _patientRepository = patientRepository;
         }
 
 
-        /// Asynchronously retrieves the product with the provided id from the database.
+        /// Asynchronously retrieves the patient with the provided id from the database.
         /// </summary>
-        /// <param name="productId">The id of the product to retrieve.</param>
-        /// <returns>The product.</returns>
-        //public async Task<Patient> GetPatientsByIdAsync(int patientId)
-        //{
-        //    Patient product;
-
-        //    try
-        //    {
-        //        product = await _patientReposity.GetProductByIdAsync(productId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-
-        //    if (product == null || product == default)
-        //    {
-        //        _logger.LogInformation($"Product with id: {productId} could not be found.");
-        //        throw new NotFoundException($"Product with id: {productId} could not be found.");
-        //    }
-
-        //    return product;
-        //}
-        /// <summary>
-        /// Asynchronously retrieves nontracked Patient with the provided id from the database.
-        /// </summary>
-        /// <param name="patientId">The id of the product to retrieve.</param>
-        /// <returns>The product.</returns>
-        ///  /// <summary>
-        public async Task<Patient> NoTrackingGetPaitentByIdAsync(int patientId)
+        /// <param name="patientId">The id of the patient to retrieve.</param>
+        /// <returns>The patient.</returns>
+        public async Task<Patient> GetPatientByIdAsync(int patientId)
         {
-            Patient product;
+            Patient patient;
 
             try
             {
-                product = await _patientReposity.NoTrackingGetPaitentByIdAsync(patientId);
+                patient = await _patientRepository.GetPatientByIdAsync(patientId);
             }
             catch (Exception ex)
             {
@@ -77,26 +47,54 @@ namespace Catalyte.Apparel.Providers.Providers
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
 
-            if (product == null || product == default)
+            if (patient == null || patient == default)
             {
-                _logger.LogInformation($"Product with id: {patientId} could not be found.");
-                throw new NotFoundException($"Product with id: {patientId} could not be found.");
+                _logger.LogInformation($"Patient with id: {patientId} could not be found.");
+                throw new NotFoundException($"Patient with id: {patientId} could not be found.");
             }
 
-            return product;
+            return patient;
         }
         /// <summary>
-        /// Asynchronously retrieves all unique product categories in the database 
+        /// Asynchronously retrieves nontracked Patient with the provided id from the database.
+        /// </summary>
+        /// <param name="patientId">The id of the patient to retrieve.</param>
+        /// <returns>The patient.</returns>
+        ///  /// <summary>
+        public async Task<Patient> NoTrackingGetPatientByIdAsync(int patientId)
+        {
+            Patient patient;
+
+            try
+            {
+                patient = await _patientRepository.NoTrackingGetPatientByIdAsync(patientId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (patient == null || patient == default)
+            {
+                _logger.LogInformation($"Patient with id: {patientId} could not be found.");
+                throw new NotFoundException($"Patient with id: {patientId} could not be found.");
+            }
+
+            return patient;
+        }
+        /// <summary>
+        /// Asynchronously retrieves all unique patient categories in the database 
         /// </summary>
         /// <returns>list of strings of categories</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
-        //public async Task<List<string>> GetAllUniqueProductCategoriesAsync()
+        //public async Task<List<string>> GetAllUniquePatientCategoriesAsync()
         //{
         //    List<string> categories;
 
         //    try
         //    {
-        //        categories = await _productRepository.GetAllUniqueProductCategoriesAsync();
+        //        categories = await _patientRepository.GetAllUniquePatientCategoriesAsync();
         //    }
         //    catch (Exception ex)
         //    {
@@ -106,17 +104,17 @@ namespace Catalyte.Apparel.Providers.Providers
         //    return categories;
         //}
         ///// <summary>
-        ///// Asynchronously retrieves all unique product types in the database 
+        ///// Asynchronously retrieves all unique patient types in the database 
         ///// </summary>
         ///// <returns>list of strings of categories</returns>
         ///// <exception cref="ServiceUnavailableException"></exception>
-        //public async Task<List<string>> GetAllUniqueProductTypesAsync()
+        //public async Task<List<string>> GetAllUniquePatientTypesAsync()
         //{
         //    List<string> categories;
 
         //    try
         //    {
-        //        categories = await _productRepository.GetAllUniqueProductTypesAsync();
+        //        categories = await _patientRepository.GetAllUniquePatientTypesAsync();
         //    }
         //    catch (Exception ex)
         //    {
@@ -126,17 +124,17 @@ namespace Catalyte.Apparel.Providers.Providers
         //    return categories;
         //}
 
-        //public async Task<int> GetProductsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
+        //public async Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
         //{
         //    {
-        //        int productsCount;
+        //        int patientsCount;
 
-        //        int returnProducts = 20;
+        //        int returnPatients = 20;
         //        if (range == null)
         //        {
-        //            returnProducts = 100000;
+        //            returnPatients = 100000;
         //            range = 0;
         //        }
         //        // Convert input color code to hex format to match database column label
@@ -169,9 +167,9 @@ namespace Catalyte.Apparel.Providers.Providers
 
         //        try
         //        {
-        //            productsCount = await _productRepository.GetProductsCountAsync(active, brandLower, categoryLower, hexColor,
+        //            patientsCount = await _patientRepository.GetPatientsCountAsync(active, brandLower, categoryLower, hexColor,
         //                                                         demographicLower, materialLower,
-        //                                                         minPrice, maxPrice, typeLower, range, returnProducts);
+        //                                                         minPrice, maxPrice, typeLower, range, returnPatients);
         //        }
         //        catch (Exception ex)
         //        {
@@ -179,30 +177,38 @@ namespace Catalyte.Apparel.Providers.Providers
         //            throw new ServiceUnavailableException("There was a problem connecting to the database.");
         //        }
 
-        //        return productsCount;
+        //        return patientsCount;
         //    }
         //}
         /// <summary>
-        /// Asynchronously retrieves all products from the database.
+        /// Asynchronously retrieves all patients from the database.
         /// </summary>
-        /// <returns>All products in the database.</returns>
+        /// <returns>All patients in the database.</returns>
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
         {
+            IEnumerable<Patient> patients;
             try
             {
-                Patients = await _pateintRepository.GetPatientsAsync()
-            };
+                patients = await _patientRepository.GetPatientsAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return patients;
         }
-        //public async Task<IEnumerable<Patient>> GetProductsAsync(Nullable<bool> active, List<string> brand, List<string> category,
+        //public async Task<IEnumerable<Patient>> GetPatientsAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
         //{
-        //    IEnumerable<Patient> products;
+        //    IEnumerable<Patient> patients;
 
-        //    int returnProducts = 20;
+        //    int returnPatients = 20;
         //    if (range == null)
         //    {
-        //        returnProducts = 100000;
+        //        returnPatients = 100000;
         //        range = 0;
         //    }
         //    // Convert input color code to hex format to match database column label
@@ -236,9 +242,9 @@ namespace Catalyte.Apparel.Providers.Providers
 
         //    try
         //    {
-        //        products = await _patientReposity.GetProductsAsync(active, brandLower, categoryLower, hexColor,
+        //        patients = await _patientRepository.GetPatientsAsync(active, brandLower, categoryLower, hexColor,
         //                                                         demographicLower, materialLower,
-        //                                                         minPrice, maxPrice, typeLower, range, returnProducts);
+        //                                                         minPrice, maxPrice, typeLower, range, returnPatients);
         //    }
         //    catch (Exception ex)
         //    {
@@ -246,49 +252,49 @@ namespace Catalyte.Apparel.Providers.Providers
         //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
         //    }
 
-        //    return products;
+        //    return patients;
         //}
         /// <summary>
-        /// Asynchronously updates product with new product information
+        /// Asynchronously updates patient with new patient information
         /// </summary>
         /// <param name="updatedPatient"></param>
-        /// <returns> The updated product</returns>
+        /// <returns> The updated patient</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
         /// <exception cref="NotFoundException"></exception>
-        public async Task<Patient> UpdateProductAsync (Patient updatedPatient)
+        public async Task<Patient> UpdatePatientAsync (Patient updatedPatient)
         {
-            Patient newProduct;
+            Patient newPatient;
 
-            Patient existingProduct;
+            Patient existingPatient;
             try
             {
-                existingProduct = await _patientReposity.NoTrackingGetProductByIdAsync(updatedPatient.Id);
+                existingPatient = await _patientRepository.NoTrackingGetPatientByIdAsync(updatedPatient.Id);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            if (existingProduct == null)
+            if (existingPatient == null)
             {
-                _logger.LogInformation($"Product with id: {updatedPatient.Id} does not exist.");
-                throw new NotFoundException($"Product with id:{updatedPatient.Id} not found.");
+                _logger.LogInformation($"Patient with id: {updatedPatient.Id} does not exist.");
+                throw new NotFoundException($"Patient with id:{updatedPatient.Id} not found.");
             }
             try
             {
-                newProduct = await _patientReposity.UpdateProductAsync(updatedPatient);
+                newPatient = await _patientRepository.UpdatePatientAsync(updatedPatient);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            //List<string> errors = Validation.ProductValidation(updatedPatient);
+            //List<string> errors = Validation.PatientValidation(updatedPatient);
             //if (errors.Count > 0)
             //{
             //    throw new BadRequestException(string.Join(' ', errors));
             //}
-            return newProduct;
+            return newPatient;
         }
         /// <summary>
         /// Persists a purchase to the database.
@@ -300,14 +306,14 @@ namespace Catalyte.Apparel.Providers.Providers
             Patient savedPatient;
 
 
-            //List<string> errors = Validation.ProductValidation(newPatient);
+            //List<string> errors = Validation.PatientValidation(newPatient);
             //if (errors.Count > 0)
             //{
             //    throw new BadRequestException(string.Join(' ', errors));
             //}
             try
             {
-                savedPatient = await _patientReposity.CreatePatientAsync(newPatient);
+                savedPatient = await _patientRepository.CreatePatientAsync(newPatient);
             }
             catch (Exception ex)
             {
@@ -319,18 +325,17 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
         /// <summary>
-        /// Deletes a product by the product id.
+        /// Deletes a patient by the patient id.
         /// </summary>
-        /// <param name="id">The id of the product to be deleted</param>
-        /// <returns>the deleted product object</returns>
+        /// <param name="id">The id of the patient to be deleted</param>
+        /// <returns>the deleted patient object</returns>
         public async Task<Patient> DeletePatientByIdAsync(int id)
         {
             Patient existingPatient;
             Patient deletedPatient;
-            bool purchasedPatient;
             try
             {
-                existingPatient = await _patientReposity.GetPatientByIdAsync(id);
+                existingPatient = await _patientRepository.GetPatientByIdAsync(id);
                 //purchasedPatient = await CheckForPurchasesByPatientIdAsync(id, existingPatient);
                 if (existingPatient == null)
                 {
@@ -344,7 +349,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 //}
                 else
                 {
-                    deletedPatient = await _patientReposity.DeletePatientByIdAsync(existingPatient);
+                    deletedPatient = await _patientRepository.DeletePatientByIdAsync(existingPatient);
                     return deletedPatient;
                 }
 
@@ -358,25 +363,25 @@ namespace Catalyte.Apparel.Providers.Providers
         }
 
         /// <summary>
-        /// Helper function for DeleteProductByIdAsync to check for purchases associated with the product before deleting.
+        /// Helper function for DeletePatientByIdAsync to check for purchases associated with the patient before deleting.
         /// </summary>
-        /// <param name="patientId">Id of the product to be deleted.</param>
-        /// <param name="product">The product object that will be deleted.</param>
-        /// <returns>A product with purchases or null if there are no purchases.</returns>
+        /// <param name="patientId">Id of the patient to be deleted.</param>
+        /// <param name="patient">The patient object that will be deleted.</param>
+        /// <returns>A patient with purchases or null if there are no purchases.</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
-        public async Task<bool> CheckForPurchasesByProductIdAsync(int productId, Patient paitent)
-        {
-            bool purchaseLineItems;
-            try
-            {
-                purchaseLineItems = await _lineItemsRepository.GetLineItemsByProductIdAsync(productId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-            return purchaseLineItems;
-        }
+        //public async Task<bool> CheckForPurchasesByPatientIdAsync(int patientId, Patient paitent)
+        //{
+        //    bool purchaseLineItems;
+        //    try
+        //    {
+        //        purchaseLineItems = await _lineItemsRepository.GetLineItemsByPatientIdAsync(patientId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.Message);
+        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
+        //    }
+        //    return purchaseLineItems;
+        //}
     }
 }

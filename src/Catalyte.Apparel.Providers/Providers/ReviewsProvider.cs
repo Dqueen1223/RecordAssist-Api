@@ -13,26 +13,26 @@ using System.Threading.Tasks;
 namespace Catalyte.Apparel.Providers.Providers
 {
     /// <summary>
-    /// This class provides the implementation of the IProductProvider interface, providing service methods for products.
+    /// This class provides the implementation of the IProductProvider interface, providing service methods for patients.
     /// </summary>
     public class ReviewsProvider : IReviewProvider
     {
         private readonly ILogger<ReviewsProvider> _logger;
         private readonly IReviewsRepository _ReviewsRepository;
-        private readonly IProductRepository _productRepository;
+        private readonly IPatientRepository _patientRepository;
 
-        public ReviewsProvider(IReviewsRepository reviewsRepository, ILogger<ReviewsProvider> logger, IProductRepository productRepository)
+        public ReviewsProvider(IReviewsRepository reviewsRepository, ILogger<ReviewsProvider> logger, IPatientRepository patientRepository)
         {
             _logger = logger;
             _ReviewsRepository = reviewsRepository;
-            _productRepository = productRepository;
+            _patientRepository = patientRepository;
         }
 
         /// <summary>
         /// Asynchronously retrieves the review with the provided id from the database.
         /// </summary>
-        /// <param name="reviewId">The id of the product to retrieve.</param>
-        /// <returns>The product.</returns>
+        /// <param name="reviewId">The id of the patient to retrieve.</param>
+        /// <returns>The patient.</returns>
         public async Task<Review> GetReviewByIdAsync(int reviewId)
         {
             Review review;
@@ -118,7 +118,7 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <summary>
         /// Asynchronously deletes the review with the provided id from the database.
         /// </summary>
-        /// <param name="reviewId">The id of the product to retrieve.</param>
+        /// <param name="reviewId">The id of the patient to retrieve.</param>
         /// <returns>The review.</returns>
         public async Task DeleteReviewByIdAsnc(int reviewId)
         {
@@ -163,12 +163,12 @@ namespace Catalyte.Apparel.Providers.Providers
         public async Task<List<int>> GetReviewByProductIdAsync()
         {
             List<Review> review;
-            IEnumerable<Product> allProducts;
-            var productIds = new List<int>();
+            IEnumerable<Patient> allPatients;
+            var patientIds = new List<int>();
 
             try
             {
-                allProducts = await _productRepository.GetAllProductsAsync();
+                allPatients = await _patientRepository.GetAllPatientsAsync();
             }
             catch (Exception ex)
             {
@@ -177,12 +177,12 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             try
             {
-                foreach (Product product in allProducts)
+                foreach (Patient patient in allPatients)
                 {
-                    review = await _ReviewsRepository.GetReviewByProductIdAsync(product.Id);
+                    review = await _ReviewsRepository.GetReviewByProductIdAsync(patient.Id);
                     if (review.Count > 0)
                     {
-                        productIds.Add(product.Id);
+                        patientIds.Add(patient.Id);
                     }
                 }
 
@@ -193,7 +193,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
 
-            return productIds;
+            return patientIds;
 
         }
 

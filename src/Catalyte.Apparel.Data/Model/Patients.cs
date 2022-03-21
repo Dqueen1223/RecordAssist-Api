@@ -20,23 +20,26 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Email { get; set; }
 
+        public string ZipCode { get; set; }
+
+        public int Age { get; set; }
+
+        public int Height { get; set; }
+
+        public int Weight { get; set; }
+
+        public string Insurance { get; set; }
+
+        public string Gender { get; set; }
+
         public string Street { get; set; }
 
         public string City { get; set; }
 
         public string State { get; set; }
 
-        public string ZipCode { get; set; }
+        public string Postal { get; set; }
 
-        public string Age { get; set; }
-
-        public string Height { get; set; }
-
-        public bool Weight { get; set; }
-
-        public string Insurance { get; set; }
-
-        public string Gender { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);

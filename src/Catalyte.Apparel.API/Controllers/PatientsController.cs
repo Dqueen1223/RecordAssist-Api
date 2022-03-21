@@ -95,23 +95,23 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(patientDTO);
         }
-        [HttpGet("/patients/categories")]
-        public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientCategoriesAsync()
-        {
-            _logger.LogInformation($"Request received for GetAllUniquePatientCategoriesAsync");
-            var patientCategories = await _patientProvider.GetAllUniquePatientCategoriesAsync();
-            return Ok(patientCategories);
+        //[HttpGet("/patients/categories")]
+        //public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientCategoriesAsync()
+        //{
+        //    _logger.LogInformation($"Request received for GetAllUniquePatientCategoriesAsync");
+        //    var patientCategories = await _patientProvider.GetAllUniquePatientCategoriesAsync();
+        //    return Ok(patientCategories);
 
-        }
+        //}
 
-        [HttpGet("/patients/types")]
-        public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientTypesAsync()
-        {
-            _logger.LogInformation($"Request received for GetAllUniquePatientTypesAsync");
-            var patientTypes = await _patientProvider.GetAllUniquePatientTypesAsync();
-            return Ok(patientTypes);
+        //[HttpGet("/patients/types")]
+        //public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientTypesAsync()
+        //{
+        //    _logger.LogInformation($"Request received for GetAllUniquePatientTypesAsync");
+        //    var patientTypes = await _patientProvider.GetAllUniquePatientTypesAsync();
+        //    return Ok(patientTypes);
 
-        }
+        //}
 
         [HttpPost]
         public async Task<ActionResult<List<PatientDTO>>> CreatePatientAsync([FromBody] PatientDTO model)
@@ -134,15 +134,15 @@ namespace Catalyte.Apparel.API.Controllers
             return Ok("Patient successfully deleted.");
         }
 
-        [HttpGet("/patients/purchased/{patientId}")]
-        public async Task<ActionResult<bool>> CheckForPurchasesByPatientIdAsync(int patientId)
-        {
-            _logger.LogInformation("Request received for CheckForPurchasesByPatientIdAsync.");
-            var patient = await _patientProvider.GetPatientByIdAsync(patientId);
-            var purchasedPatient = await _patientProvider.CheckForPurchasesByPatientIdAsync(patientId, patient);
+        //[HttpGet("/patients/purchased/{patientId}")]
+        //public async Task<ActionResult<bool>> CheckForPurchasesByPatientIdAsync(int patientId)
+        //{
+        //    _logger.LogInformation("Request received for CheckForPurchasesByPatientIdAsync.");
+        //    var patient = await _patientProvider.GetPatientByIdAsync(patientId);
+        //    var purchasedPatient = await _patientProvider.CheckForPurchasesByPatientIdAsync(patientId, patient);
 
-            return Ok(purchasedPatient);
+        //    return Ok(purchasedPatient);
 
-        }
+        //}
     }
 }
