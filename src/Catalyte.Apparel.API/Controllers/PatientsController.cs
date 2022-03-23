@@ -109,16 +109,5 @@ namespace Catalyte.Apparel.API.Controllers
 
             return NoContent();
         }
-
-        //[HttpGet("/patients/purchased/{patientId}")]
-        //public async Task<ActionResult<bool>> CheckForPurchasesByPatientIdAsync(int patientId)
-        //{
-        //    _logger.LogInformation("Request received for CheckForPurchasesByPatientIdAsync.");
-        //    var patient = await _patientProvider.GetPatientByIdAsync(patientId);
-        //    var purchasedPatient = await _patientProvider.CheckForPurchasesByPatientIdAsync(patientId, patient);
-
-        //    return Ok(purchasedPatient);
-
-        //}
     }
 }

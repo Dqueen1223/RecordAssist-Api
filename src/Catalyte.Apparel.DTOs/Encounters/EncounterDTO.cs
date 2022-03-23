@@ -24,11 +24,11 @@ namespace Catalyte.Apparel.DTOs.Encounters
 
         public string ChiefComplaint { get; set; }
 
-        public int Pulse { get; set; }
+        public Nullable<int> Pulse { get; set; }
 
-        public int Systolic { get; set; }
+        public Nullable<int> Systolic { get; set; }
 
-        public int Diastolic { get; set; }
+        public Nullable<int> Diastolic { get; set; }
 
         public DateTime Date { get; set; }
     }

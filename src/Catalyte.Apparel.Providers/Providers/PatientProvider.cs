@@ -441,10 +441,10 @@ namespace Catalyte.Apparel.Providers.Providers
                     throw new NotFoundException($"Patient with id:{id} not found.");
                 }
                 encounter = await _patientRepository.GetEncountersByIdAsync(id);
-                    if (encounter != null)
+                    if (encounter.Count() == 0)
                 {
-                    _logger.LogInformation($"Patient with id {id} has encounters and cannot be deleted");
-                    throw new NotFoundException($"Patient with id {id} has encounters and cannot be deleted");
+                    _logger.LogInformation($"Patient with id: {id} has encounters and cannot be deleted");
+                    throw new ConflictException($"Patient with id: {id} has encounters and cannot be deleted");
                 }
                 else
                 {

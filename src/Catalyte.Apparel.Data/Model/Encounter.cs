@@ -31,34 +31,14 @@ namespace Catalyte.Apparel.Data.Model
 
         public string ChiefComplaint { get; set; }
 
-        public int Pulse { get; set; }
+        public Nullable<int> Pulse { get; set; }
 
-        public int Systolic { get; set; }
+        public Nullable<int> Systolic { get; set; }
 
-        public int Diastolic { get; set; }
+        public Nullable<int> Diastolic { get; set; }
 
         public DateTime Date { get; set; }
 
-        //public Patient Patient { get; set; }
-
-        //    private sealed class EncounterIdPatientIdEqualityComparer : IEqualityComparer<Encounter>
-        //    {
-        //        public bool Equals(Encounter x, Encounter y)
-        //        {
-        //            if (ReferenceEquals(x, y)) return true;
-        //            if (ReferenceEquals(x, null)) return false;
-        //            if (ReferenceEquals(y, null)) return false;
-        //            if (x.GetType() != y.GetType()) return false;
-        //            return x.Id == y.Id && x.PatientId == y.PatientId;
-        //        }
-
-        //        public int GetHashCode(Encounter obj)
-        //        {
-        //            return HashCode.Combine(obj.Id, obj.PatientId);
-        //        }
-        //    }
-        //    public static IEqualityComparer<Encounter> EncounterIdPatientIdComparer { get; } = new EncounterIdPatientIdEqualityComparer();
-        //}
         private sealed class EncounterEqualityComparer : IEqualityComparer<Encounter>
         {
             public bool Equals(Encounter x, Encounter y)
