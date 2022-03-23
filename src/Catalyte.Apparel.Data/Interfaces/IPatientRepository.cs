@@ -14,6 +14,7 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<Patient> NoTrackingCheckConflictingEmail(string patientEmail);
         Task<Patient> GetPatientByIdAsync(int patientId);
+        Task<Encounter> GetEncounterByIdAsync(int patientId);
         //Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range, int returnProducts);

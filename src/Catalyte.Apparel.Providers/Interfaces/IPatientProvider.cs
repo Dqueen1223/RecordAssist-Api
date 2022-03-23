@@ -13,6 +13,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
     {
         //Task<Patient> NoTrackingGetProductByIdAsync(int productId);
         Task<Patient> GetPatientByIdAsync(int patientId);
+        Task<Encounter> GetEncounterByIdAsync(int patientId);
         ////Task<IEnumerable<Patient>> GetPatientAsync(List<string> Firstname, List<string> LastName, List<string> Ssn,
         ////                                                         List<string> Email, List<string> Street, List<string> City
         //                                               /*          decimal minPrice, decimal maxPrice, List<string> type, int? range*/);

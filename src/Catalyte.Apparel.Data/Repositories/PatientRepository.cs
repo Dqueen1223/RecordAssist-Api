@@ -30,6 +30,10 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Patients.Where(p => p.Id == PatientId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
+        public async Task<Encounter> GetEncounterByIdAsync(int patient)
+        {
+            return await _ctx.Encounters.Where(e => e.PatientId == patient).ToListAsync();
+        }
 
         public async Task<Encounter> CreateEncounterAsync(Encounter encounter)
         {
@@ -74,15 +78,6 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Patients.ToListAsync();
         }
-        //return await _ctx.Patients.Where(p =>
-        //(p.Active == active || active == null) &&
-        //(brand.Contains(p.Brand.ToLower()) || brand.Count() == 0) &&
-        //(category.Contains(p.Category.ToLower()) || category.Count() == 0) &&
-        //(color.Contains(p.PrimaryColorCode.ToLower()) || color.Contains(p.SecondaryColorCode.ToLower()) || color.Count() == 0) &&
-        //(demographic.Contains(p.Demographic.ToLower()) || demographic.Count() == 0) &&
-        //(material.Contains(p.Material.ToLower()) || material.Count() == 0) &&
-        //((p.Price >= minPrice || minPrice.Equals(0)) && (p.Price <= maxPrice || maxPrice.Equals(0))) &&
-        //(type.Contains(p.Type.ToLower()) || type.Count() == 0)).Skip(count: (int)range).Take(returnPatients).OrderBy((i) => i.Id).ToListAsync();
         public async Task<Patient> CreatePatientAsync(Patient product)
         {
             await _ctx.Patients.AddAsync(product);

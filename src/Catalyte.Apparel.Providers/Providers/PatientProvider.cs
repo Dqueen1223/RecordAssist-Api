@@ -55,6 +55,31 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return patient;
         }
+
+                /// Asynchronously retrieves the patient with the provided id from the database.
+        /// </summary>
+        /// <param name="patientId">The id of the patient to retrieve.</param>
+        /// <returns>The patient.</returns>
+        public async Task<Encounter> GetEncounterByIdAsync(int patientId)
+        {
+            Encounter encounter;
+            try
+            {
+                encounter = await _patientRepository.GetEncounterByIdAsync(patientId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (encounter == null || encounter == default)
+            {
+                _logger.LogInformation($"Encounter with id: {patientId} could not be found.");
+                throw new NotFoundException($"Encounter with id: {patientId} could not be found.");
+            }
+
+            return encounter;
+        }
         /// <summary>
         /// Asynchronously retrieves nontracked Patient with the provided id from the database.
         /// </summary>
