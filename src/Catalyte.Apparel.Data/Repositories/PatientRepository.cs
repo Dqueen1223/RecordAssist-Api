@@ -30,7 +30,7 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Patients.Where(p => p.Id == PatientId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
-        public async Task<Encounter> GetEncounterByIdAsync(int patient)
+        public async Task<IEnumerable<Encounter>> GetEncountersByIdAsync(int patient)
         {
             return await _ctx.Encounters.Where(e => e.PatientId == patient).ToListAsync();
         }
@@ -77,6 +77,10 @@ namespace Catalyte.Apparel.Data.Repositories
         public async Task<IEnumerable<Patient>> GetPatientsAsync()
         {
             return await _ctx.Patients.ToListAsync();
+        }
+        public async Task<IEnumerable<Encounter>> GetAllEncountersAsync()
+        {
+            return await _ctx.Encounters.ToListAsync();
         }
         public async Task<Patient> CreatePatientAsync(Patient product)
         {

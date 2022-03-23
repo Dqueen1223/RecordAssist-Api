@@ -60,12 +60,13 @@ namespace Catalyte.Apparel.Providers.Providers
         /// </summary>
         /// <param name="patientId">The id of the patient to retrieve.</param>
         /// <returns>The patient.</returns>
-        public async Task<Encounter> GetEncounterByIdAsync(int patientId)
+        public async Task<IEnumerable<Encounter>> GetEncountersByIdAsync(int patientId)
         {
-            Encounter encounter;
+            IEnumerable<Encounter> encounter;
+
             try
             {
-                encounter = await _patientRepository.GetEncounterByIdAsync(patientId);
+                encounter = await _patientRepository.GetEncountersByIdAsync(patientId);
             }
             catch (Exception ex)
             {
@@ -243,6 +244,21 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return patients;
         }
+        public async Task<IEnumerable<Encounter>> GetAllEncountersAsync()
+        {
+            IEnumerable<Encounter> encounters;
+            try
+            {
+                encounters = await _patientRepository.GetAllEncountersAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            return encounters;
+        }
         //public async Task<IEnumerable<Patient>> GetPatientsAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
@@ -415,6 +431,7 @@ namespace Catalyte.Apparel.Providers.Providers
         {
             Patient existingPatient;
             Patient deletedPatient;
+            IEnumerable<Encounter> encounter;
             try
             {
                 existingPatient = await _patientRepository.GetPatientByIdAsync(id);
@@ -422,6 +439,12 @@ namespace Catalyte.Apparel.Providers.Providers
                 {
                     _logger.LogInformation($"Patient with id: {id} does not exist.");
                     throw new NotFoundException($"Patient with id:{id} not found.");
+                }
+                encounter = await _patientRepository.GetEncountersByIdAsync(id);
+                    if (encounter != null)
+                {
+                    _logger.LogInformation($"Patient with id {id} has encounters and cannot be deleted");
+                    throw new NotFoundException($"Patient with id {id} has encounters and cannot be deleted");
                 }
                 else
                 {
@@ -460,19 +483,5 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <param name="patient">The patient object that will be deleted.</param>
         /// <returns>A patient with purchases or null if there are no purchases.</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
-        //public async Task<bool> CheckForPurchasesByPatientIdAsync(int patientId, Patient paitent)
-        //{
-        //    bool purchaseLineItems;
-        //    try
-        //    {
-        //        purchaseLineItems = await _lineItemsRepository.GetLineItemsByPatientIdAsync(patientId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-        //    return purchaseLineItems;
-        //}
     }
 }

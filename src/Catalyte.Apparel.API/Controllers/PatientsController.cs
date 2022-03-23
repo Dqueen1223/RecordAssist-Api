@@ -26,7 +26,6 @@ namespace Catalyte.Apparel.API.Controllers
             ILogger<PatientsController> logger,
             IPatientProvider patientProvider,
             IMapper mapper)
-            // IEncounterProvider encountersProvider)
         {
             _logger = logger;
             _mapper = mapper;
@@ -44,23 +43,7 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(patientDTOs);
         }
-        //[HttpGet("/patients/count")]
-        //public async Task<ActionResult<int>> GetPatientsCountAsync(Nullable<bool> active, [FromQuery] List<string> brand,
-        //                                                                          [FromQuery] List<string> category,
-        //                                                                          [FromQuery] List<string> color,
-        //                                                                          [FromQuery] List<string> demographic,
-        //                                                                          [FromQuery] List<string> material,
-        //                                                                          decimal minPrice, decimal maxPrice,
-        //                                                                          [FromQuery] List<string> type, int? range)
-        //{
-        //    _logger.LogInformation("Request received for GetPatientsAsync");
 
-        //    var patientsCount = await _patientProvider.GetPatientsCountAsync(active, brand, category, color,
-        //                                                           demographic, material,
-        //                                                           minPrice, maxPrice, type, range);
-
-        //    return Ok(patientsCount);
-        //}
         [HttpGet("{id}")]
         public async Task<ActionResult<PatientDTO>> GetPatientByIdAsync(int id)
         {
@@ -87,23 +70,6 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(patientDTO);
         }
-        //[HttpGet("/patients/categories")]
-        //public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientCategoriesAsync()
-        //{
-        //    _logger.LogInformation($"Request received for GetAllUniquePatientCategoriesAsync");
-        //    var patientCategories = await _patientProvider.GetAllUniquePatientCategoriesAsync();
-        //    return Ok(patientCategories);
-
-        //}
-
-        //[HttpGet("/patients/types")]
-        //public async Task<ActionResult<IEnumerable<string>>> GetAllUniquePatientTypesAsync()
-        //{
-        //    _logger.LogInformation($"Request received for GetAllUniquePatientTypesAsync");
-        //    var patientTypes = await _patientProvider.GetAllUniquePatientTypesAsync();
-        //    return Ok(patientTypes);
-
-        //}
         [HttpPost("{id}/encounters")]
         public async Task<ActionResult<EncounterDTO>> CreateEncounterAsync([FromBody] EncounterDTO Encounter)
         {
@@ -114,22 +80,14 @@ namespace Catalyte.Apparel.API.Controllers
             return Created($"/encounters", encounterDTO);
         }
         [HttpGet("{id}/encounters")]
-        public async Task<ActionResult<EncounterDTO>> GetEncounterByPatientIdAsync(int id)
+        public async Task<ActionResult<EncounterDTO>> GetEncountersByIdAsync(int id)
         {
             _logger.LogInformation($"Request received for GetEncountersByPatientIdAsync for id: {id}");
-            var savedEncounter = await _patientProvider.GetEncounterByIdAsync(id);
-            var encounterDTO = _mapper.Map < IEnumerable<EncounterDTO>>(savedEncounter);
-            return Created($"/encounters", encounterDTO);
+            var savedEncounter = await _patientProvider.GetEncountersByIdAsync(id);
+            var encounterDTOs = _mapper.Map <IEnumerable<EncounterDTO>>(savedEncounter);
+            return Ok(encounterDTOs);
         }
-        //[HttpPut("{id}/encounters/{id}")]
-        //public async Task<ActionResult<EncounterDTO>> UpdateEncounterAsync([FromBody] EncounterDTO Encounter)
-        //{
-        //    _logger.LogInformation("Request recieve for CreateEncounter");
-        //    var newEncounter = _mapper.MapEncounterDtotoEncounter(Encounter);
-        //    var savedEncounter = await _patientProvider.UpdateEncounterAsync(newEncounter);
-        //    var encounterDTO = _mapper.Map<EncounterDTO>(savedEncounter);
-        //    return Created($"/encounters", encounterDTO);
-        //}
+        
 
         [HttpPost]
         public async Task<ActionResult<PatientDTO>> CreatePatientAsync([FromBody] PatientDTO patient)
