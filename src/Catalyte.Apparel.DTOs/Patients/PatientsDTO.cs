@@ -38,7 +38,6 @@ namespace Catalyte.Apparel.DTOs.Patients
 
         public string Postal { get; set; }
 
-        public EncounterDTO Encounters { get; set; }
 
     }
 }

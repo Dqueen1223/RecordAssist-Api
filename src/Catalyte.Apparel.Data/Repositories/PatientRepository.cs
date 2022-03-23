@@ -31,6 +31,13 @@ namespace Catalyte.Apparel.Data.Repositories
             return await _ctx.Patients.Where(p => p.Id == PatientId).AsNoTracking().Take(1).FirstOrDefaultAsync();
         }
 
+        public async Task<Encounter> CreateEncounterAsync(Encounter encounter)
+        {
+            await _ctx.Encounters.AddAsync(encounter);
+            await _ctx.SaveChangesAsync();
+
+            return encounter;
+        }
         public async Task<Patient> NoTrackingCheckConflictingEmail(string patientEmail)
         {
             return await _ctx.Patients.Where(p => p.Email == patientEmail).AsNoTracking().Take(1).FirstOrDefaultAsync();

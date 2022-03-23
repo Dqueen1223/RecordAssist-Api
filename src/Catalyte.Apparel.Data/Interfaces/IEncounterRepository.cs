@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Catalyte.Apparel.Data.Model;
 
 namespace Catalyte.Apparel.Data.Interfaces
 {
@@ -7,6 +8,7 @@ namespace Catalyte.Apparel.Data.Interfaces
     /// </summary>
     public interface IEncounterRepository
     {
+        Task<Encounter> CreateEncounterAsync(Encounter newEncounter);
         Task<bool> GetEncounterByPatientIdAsync(int patientId);
     }
 }

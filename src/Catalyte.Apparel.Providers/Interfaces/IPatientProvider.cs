@@ -29,8 +29,9 @@ namespace Catalyte.Apparel.Providers.Interfaces
         //Task<List<string>> GetAllUniquePatientTypesAsync();
 
         //Task<Patient> GetPatientsAsync();
-        Task<Patient> CreatePatientAsync(Patient model);
+        Task<Patient> CreatePatientAsync(Patient patient);
 
+        Task<Encounter> CreateEncounterAsync(Encounter encounter);
         Task<Patient> DeletePatientByIdAsync(int id);
 
         //Task<bool> CheckForPurchasesByPatientIdAsync(int patientId, Patient patient);

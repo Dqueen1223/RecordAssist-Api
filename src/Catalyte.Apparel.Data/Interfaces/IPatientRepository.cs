@@ -24,6 +24,7 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<IEnumerable<Patient>> GetPatientsAsync();
 
+        Task<Encounter> CreateEncounterAsync(Encounter newEncounter);
         Task<Patient> UpdatePatientAsync(Patient patient);
 
         //Task<List<string>> GetAllUniquePatientCategoriesAsync();

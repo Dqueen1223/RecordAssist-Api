@@ -94,7 +94,6 @@ namespace Catalyte.Apparel.API.DTOMappings
                 Insurance = patient.Insurance,
                 Gender = patient.Gender,
                 Postal = patient.Postal,
-                Encounters = mapper.Map<EncounterDTO>(patient)
             };
         }
         //public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
@@ -123,7 +122,6 @@ namespace Catalyte.Apparel.API.DTOMappings
                 DateCreated = DateTime.Now,
             };
             patient = mapper.Map(patientDTO, patient);
-            patient = mapper.Map(patientDTO.Encounters, patient);
 
             return patient;
         }

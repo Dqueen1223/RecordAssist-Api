@@ -413,6 +413,21 @@ namespace Catalyte.Apparel.Providers.Providers
 
         }
 
+        public async Task<Encounter> CreateEncounterAsync(Encounter newEncounter)
+        {
+            Encounter savedEncounter;
+
+            try
+            {
+                savedEncounter = await _patientRepository.CreateEncounterAsync(newEncounter);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            return savedEncounter;
+        }
         /// <summary>
         /// Helper function for DeletePatientByIdAsync to check for purchases associated with the patient before deleting.
         /// </summary>

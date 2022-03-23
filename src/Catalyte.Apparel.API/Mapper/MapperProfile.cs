@@ -15,13 +15,13 @@ namespace Catalyte.Apparel.API
         public MapperProfile()
         {
             CreateMap<Patient, PatientDTO>().ReverseMap();
-            CreateMap<Encounter, EncounterDTO>();
+            CreateMap<Encounter, EncounterDTO>().ReverseMap();
 
             //CreateMap<Purchase, PurchaseDTO>();
             //CreateMap<Purchase, DeliveryAddressDTO>().ReverseMap();
             //CreateMap<Purchase, CreditCardDTO>().ReverseMap();
             //CreateMap<Purchase, BillingAddressDTO>()
-            //    .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.BillingEmail))
+            //    .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.BillingEmail)) qq 
             //    .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.BillingPhone))
             //    .ReverseMap();
             //CreateMap<LineItem, LineItemDTO>().ReverseMap();

@@ -36,34 +36,6 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Postal { get; set; }
 
-        /// <summary>
-        /// Encounters
-        /// </summary>
-        public int PatientId { get; set; }
-
-        public string Notes { get; set; }
-
-        public string VisitCode { get; set; }
-
-        public string Provider { get; set; }
-
-        public string BillingCode { get; set; }
-
-        public string Icd10 { get; set; }
-
-        public decimal TotalCost { get; set; }
-
-        public int Copay { get; set; }
-
-        public string ChiefComplaint { get; set; }
-
-        public int Pulse { get; set; }
-
-        public int Systolic { get; set; }
-
-        public int Diastolic { get; set; }
-
-        public DateTime Date { get; set; }
         //public override string ToString()
         //{
         //    return JsonConvert.SerializeObject(this);

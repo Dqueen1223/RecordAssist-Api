@@ -76,7 +76,7 @@ namespace Catalyte.Apparel.API.DTOMappings
             };
         }
 
-        public static PatientDTO MapPatientToPatientDto(this IMapper mapper, Patient patient)
+        public static PatientDTO MapPatientToPatientDTO(this IMapper mapper, Patient patient)
         {
             return new PatientDTO()
             {
@@ -94,7 +94,6 @@ namespace Catalyte.Apparel.API.DTOMappings
                 Insurance = patient.Insurance,
                 Gender = patient.Gender,
                 Postal = patient.Postal,
-                Encounters = mapper.Map<EncounterDTO>(patient)
             };
         }
         //public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
@@ -116,16 +115,25 @@ namespace Catalyte.Apparel.API.DTOMappings
         //    return purchase;
         //}
 
-        public static Patient MapCreatePatientDtoToPatient(this IMapper mapper, PatientDTO patientDTO)
+        public static Patient MapPatientDtoToPatient(this IMapper mapper, PatientDTO patientDTO)
         {
             var patient = new Patient
             {
-                DateCreated = DateTime.Now,
+                DateCreated = DateTime.Now
             };
             patient = mapper.Map(patientDTO, patient);
-            patient = mapper.Map(patientDTO.Encounters, patient);
 
             return patient;
+        }
+        public static Encounter MapEncounterDtotoEncounter(this IMapper mapper, EncounterDTO encounterDTO)
+        {
+            var encounter = new Encounter
+            {
+                DateCreated = DateTime.Now
+            };
+            encounter = mapper.Map(encounterDTO, encounter);
+
+            return encounter;
         }
     }
 }
