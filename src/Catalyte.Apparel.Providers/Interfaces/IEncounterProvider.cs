@@ -7,13 +7,13 @@
 //    /// <summary>
 //    /// This interface provides an abstraction layer for purchase related service methods.
 //    /// </summary>
-//    public interface IPurchaseProvider
+//    public interface IEncounterProvider
 //    {
-//        Task<IEnumerable<Purchase>> GetAllPurchasesByEmailAsync(string email);
+//        Task<IEnumerable<Encounter>> GetAllEncountersByEmailAsync(string email);
 
-//        Task<Purchase> CreatePurchasesAsync(Purchase model);
+//        Task<Encounter> CreateEncountersAsync(Encounter model);
 
-//        Task<string> CheckForInactiveProductsAsync(Purchase purchase);
+//        Task<string> CheckForInactiveProductsAsync(Encounter purchase);
 //    }
 //}
 

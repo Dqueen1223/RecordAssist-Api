@@ -10,8 +10,6 @@ namespace Catalyte.Apparel.Data.Model
     /// </summary>
     public class Patient : BaseEntity
     {
-        public int PatientId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -19,8 +17,6 @@ namespace Catalyte.Apparel.Data.Model
         public string Ssn { get; set; }
 
         public string Email { get; set; }
-
-        public string ZipCode { get; set; }
 
         public int Age { get; set; }
 
@@ -40,6 +36,7 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Postal { get; set; }
 
+        public Encounter Encounters { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
@@ -54,7 +51,7 @@ namespace Catalyte.Apparel.Data.Model
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.FirstName == y.FirstName && x.LastName == y.LastName && x.Ssn == y.Ssn && x.Email == y.Email && x.Street == y.Street && x.City == y.City && x.State == y.State && x.ZipCode == y.ZipCode && x.Age == y.Age && x.Height == y.Height && x.Weight == y.Weight && x.Insurance == y.Insurance && x.Gender == y.Gender;
+                return x.FirstName == y.FirstName && x.LastName == y.LastName && x.Ssn == y.Ssn && x.Email == y.Email && x.Street == y.Street && x.City == y.City && x.State == y.State && x.Postal == y.Postal && x.Age == y.Age && x.Height == y.Height && x.Weight == y.Weight && x.Insurance == y.Insurance && x.Gender == y.Gender;
             }
 
             public int GetHashCode(Patient obj)
@@ -67,12 +64,13 @@ namespace Catalyte.Apparel.Data.Model
                 hashCode.Add(obj.Street);
                 hashCode.Add(obj.City);
                 hashCode.Add(obj.State);
-                hashCode.Add(obj.ZipCode);
+                hashCode.Add(obj.Postal);
                 hashCode.Add(obj.Age);
                 hashCode.Add(obj.Height);
                 hashCode.Add(obj.Weight);
                 hashCode.Add(obj.Insurance);
                 hashCode.Add(obj.Gender);
+                //hashCode.Add(obj.)
 
                 return hashCode.ToHashCode();
             }

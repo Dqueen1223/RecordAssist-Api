@@ -1,4 +1,7 @@
-﻿namespace Catalyte.Apparel.DTOs.Patients
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace Catalyte.Apparel.DTOs.Patients
 {
     /// <summary>
     /// Describes a data transfer object for patients.
@@ -6,7 +9,6 @@
     public class PatientDTO
     {
         public int Id { get; set; }
-
 
         public string FirstName { get; set; }
 
@@ -22,8 +24,6 @@
 
         public string State { get; set; }
 
-        public string ZipCode { get; set; }
-
         public int Age { get; set; }
 
         public int Height { get; set; }
@@ -35,6 +35,8 @@
         public string Gender { get; set; }
 
         public string Postal { get; set; }
+
+        public Encounters.EncounterDTO Encounters { get; set; }
 
     }
 }

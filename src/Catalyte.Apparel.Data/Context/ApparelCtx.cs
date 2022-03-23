@@ -16,11 +16,9 @@ namespace Catalyte.Apparel.Data.Context
 
         public DbSet<Patient> Patients { get; set; }
 
+        public DbSet<Encounter> Encounters { get; set; }
+
         public DbSet<ShippingRate> ShippingRates { get; set; }
-
-        //public DbSet<LineItem> LineItems { get; set; }
-
-        //public DbSet<Purchase> Purchases { get; set; }
 
         public DbSet<User> Users { get; set; }
 

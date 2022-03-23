@@ -32,12 +32,12 @@
 //                .ToListAsync();
 //        }
 
-//        public async Task<Purchase> CreatePurchaseAsync(Purchase purchase)
-//        {
-//            await _ctx.Purchases.AddAsync(purchase);
-//            await _ctx.SaveChangesAsync();
+//public async Task<Purchase> CreatePurchaseAsync(Purchase purchase)
+//{
+//    await _ctx.Purchases.AddAsync(purchase);
+//    await _ctx.SaveChangesAsync();
 
-//            return purchase;
-//        }
-//    }
+//    return purchase;
 //}
+////    }
+////}

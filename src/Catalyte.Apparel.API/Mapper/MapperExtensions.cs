@@ -7,6 +7,7 @@ using Catalyte.Apparel.DTOs.Patients;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.Utilities.HttpResponseExceptions;
+using Catalyte.Apparel.DTOs.Encounters;
 
 namespace Catalyte.Apparel.API.DTOMappings
 {
@@ -48,19 +49,32 @@ namespace Catalyte.Apparel.API.DTOMappings
         /// </summary>
         /// <param name="purchase">The purchase to be persisted.</param>
         /// <returns>A purchase DTO.</returns>
-        //public static PurchaseDTO MapPurchaseToPurchaseDto(this IMapper mapper, Purchase purchase)
-        //{
-        //    return new PurchaseDTO()
-        //    {
-        //        Id = purchase.Id,
-        //        TotalCost = purchase.TotalCost,
-        //        OrderDate = purchase.OrderDate,
-        //        LineItems = mapper.Map<List<LineItemDTO>>(purchase.LineItems),
-        //        DeliveryAddress = mapper.Map<DeliveryAddressDTO>(purchase),
-        //        BillingAddress = mapper.Map<BillingAddressDTO>(purchase),
-        //        CreditCard = mapper.Map<CreditCardDTO>(purchase)
-        //    };
-        //}
+        public static EncounterDTO MapEncounterToEncounterDto(this IMapper mapper, Encounter encounter)
+        {
+            return new EncounterDTO()
+            {
+                PatientId = encounter.PatientId,
+                //Id = encounter.Id,
+                Notes = encounter.Notes,
+                VisitCode = encounter.VisitCode,
+                Provider = encounter.Provider,
+                BillingCode = encounter.BillingCode,
+                Icd10 = encounter.Icd10,
+                TotalCost = encounter.TotalCost,
+                Copay = encounter.Copay,
+                ChiefComplaint = encounter.ChiefComplaint,
+                Pulse = encounter.Pulse,
+                Systolic = encounter.Systolic,
+                Diastolic = encounter.Diastolic,
+                Date = encounter.Date
+
+                //LineItems = mapper.Map<List<EncounterDTO>>(encounter.LineItems),
+                //DeliveryAddress = mapper.Map<DeliveryAddressDTO>(encounter),
+                //BillingAddress = mapper.Map<BillingAddressDTO>(encounter),
+                //CreditCard = mapper.Map<CreditCardDTO>(encounter)
+
+            };
+        }
 
         public static PatientDTO MapPatientToPatientDto(this IMapper mapper, Patient patient)
         {
@@ -74,13 +88,13 @@ namespace Catalyte.Apparel.API.DTOMappings
                 Street = patient.Street,
                 City = patient.City,
                 State = patient.State,
-                ZipCode = patient.ZipCode,
                 Age = patient.Age,
                 Height = patient.Height,
                 Weight = patient.Weight,
                 Insurance = patient.Insurance,
                 Gender = patient.Gender,
-                Postal = patient.Postal
+                Postal = patient.Postal,
+                Encounters = mapper.Map<EncounterDTO>(patient)
             };
         }
         //public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
@@ -107,10 +121,9 @@ namespace Catalyte.Apparel.API.DTOMappings
             var patient = new Patient
             {
                 DateCreated = DateTime.Now,
-                //DateModified = patientDTO.DateCreated
             };
             patient = mapper.Map(patientDTO, patient);
-
+            patient = mapper.Map(patientDTO.Encounters, patient);
 
             return patient;
         }

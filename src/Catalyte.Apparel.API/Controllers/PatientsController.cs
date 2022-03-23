@@ -114,10 +114,10 @@ namespace Catalyte.Apparel.API.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<List<PatientDTO>>> CreatePatientAsync([FromBody] PatientDTO model)
+        public async Task<ActionResult<List<PatientDTO>>> CreatePatientAsync([FromBody] PatientDTO patient)
         {
             _logger.LogInformation("Request received for CreatePatient");
-            var newPatient = _mapper.MapCreatePatientDtoToPatient(model);
+            var newPatient = _mapper.MapCreatePatientDtoToPatient(patient);
             var savedPatient = await _patientProvider.CreatePatientAsync(newPatient);
             var patientDTO = _mapper.MapPatientToPatientDto(savedPatient);
             return Created($"/patient", patientDTO);

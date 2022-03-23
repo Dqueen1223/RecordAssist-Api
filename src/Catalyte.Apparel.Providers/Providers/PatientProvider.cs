@@ -287,6 +287,11 @@ namespace Catalyte.Apparel.Providers.Providers
             Patient checkValidEmail;
 
             Patient existingPatient;
+            List<string> errors = Validation.PatientValidation(updatedPatient);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
             try
             {
                 existingPatient = await _patientRepository.NoTrackingGetPatientByIdAsync(id);
@@ -301,9 +306,13 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogInformation($"Patient with id: {id} does not exist.");
                 throw new NotFoundException($"Patient with id:{id} not found.");
             }
-            if(updatedPatient.Id == 0)
-            { 
-                updatedPatient.Id = existingPatient.Id;
+            if (updatedPatient.Id == 0)
+            {
+                throw new BadRequestException("Patient body must have an Id associated");
+            }
+            if(updatedPatient.Id != existingPatient.Id)
+            {
+                throw new BadRequestException("Body Id and path Id must be identical");
             }
             try
             {
@@ -326,11 +335,6 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
-            }
-            List<string> errors = Validation.PatientValidation(updatedPatient);
-            if (errors.Count > 0)
-            {
-                throw new BadRequestException(string.Join(' ', errors));
             }
 
             return newPatient;

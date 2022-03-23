@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 namespace Catalyte.Apparel.Data.Context
 {
     /// <summary>
-    /// This interface provides an abstraction layer for the apparel database context.
+    /// This interface provides an abstraction layer for Super Health Inc. database context.
     /// </summary>
     public interface IApparelCtx
     {
 
         public DbSet<Patient> Patients { get; set; }
 
+        public DbSet<Encounter> Encounters { get; set; }
         public DbSet<ShippingRate> ShippingRates { get; set; }
 
         public DbSet<User> Users { get; set; }

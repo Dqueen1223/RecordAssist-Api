@@ -5,6 +5,7 @@ using Catalyte.Apparel.DTOs.Patients;
 using Catalyte.Apparel.DTOs.Promos;
 using Catalyte.Apparel.DTOs.Purchases;
 using Catalyte.Apparel.DTOs.Reviews;
+using Catalyte.Apparel.DTOs.Encounters;
 using Catalyte.Apparel.DTOs.ShippingRate;
 
 namespace Catalyte.Apparel.API
@@ -14,7 +15,7 @@ namespace Catalyte.Apparel.API
         public MapperProfile()
         {
             CreateMap<Patient, PatientDTO>().ReverseMap();
-            //CreateMap<CreatePurchaseDTO, Purchase>();
+            CreateMap<Encounter, EncounterDTO>();
 
             //CreateMap<Purchase, PurchaseDTO>();
             //CreateMap<Purchase, DeliveryAddressDTO>().ReverseMap();

@@ -1,12 +1,12 @@
 ﻿//using System;
 //using System.Collections.Generic;
 
-//namespace Catalyte.Apparel.DTOs.Purchases
+//namespace Catalyte.Apparel.DTOs.Encounters
 //{
 //    /// <summary>
 //    /// Describes a data transfer object for creating a purchase transaction.
 //    /// </summary>
-//    public class CreatePurchaseDTO
+//    public class CreateEncounterDTO
 //    {
 //        public DateTime OrderDate { get; set; }
 
