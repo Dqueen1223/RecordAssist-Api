@@ -36,45 +36,72 @@ namespace Catalyte.Apparel.Data.Model
 
         public string Postal { get; set; }
 
-        public Encounter Encounters { get; set; }
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
-        public static IEqualityComparer<Patient> PatientComparer { get; } = new PatientEqualityComparer();
+        /// <summary>
+        /// Encounters
+        /// </summary>
+        public int PatientId { get; set; }
 
-        private sealed class PatientEqualityComparer : IEqualityComparer<Patient>
-        {
-            public bool Equals(Patient x, Patient y)
-            {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                if (x.GetType() != y.GetType()) return false;
-                return x.FirstName == y.FirstName && x.LastName == y.LastName && x.Ssn == y.Ssn && x.Email == y.Email && x.Street == y.Street && x.City == y.City && x.State == y.State && x.Postal == y.Postal && x.Age == y.Age && x.Height == y.Height && x.Weight == y.Weight && x.Insurance == y.Insurance && x.Gender == y.Gender;
-            }
+        public string Notes { get; set; }
 
-            public int GetHashCode(Patient obj)
-            {
-                var hashCode = new HashCode();
-                hashCode.Add(obj.FirstName);
-                hashCode.Add(obj.LastName);
-                hashCode.Add(obj.Ssn);
-                hashCode.Add(obj.Email);
-                hashCode.Add(obj.Street);
-                hashCode.Add(obj.City);
-                hashCode.Add(obj.State);
-                hashCode.Add(obj.Postal);
-                hashCode.Add(obj.Age);
-                hashCode.Add(obj.Height);
-                hashCode.Add(obj.Weight);
-                hashCode.Add(obj.Insurance);
-                hashCode.Add(obj.Gender);
-                //hashCode.Add(obj.)
+        public string VisitCode { get; set; }
 
-                return hashCode.ToHashCode();
-            }
-        }
+        public string Provider { get; set; }
+
+        public string BillingCode { get; set; }
+
+        public string Icd10 { get; set; }
+
+        public decimal TotalCost { get; set; }
+
+        public int Copay { get; set; }
+
+        public string ChiefComplaint { get; set; }
+
+        public int Pulse { get; set; }
+
+        public int Systolic { get; set; }
+
+        public int Diastolic { get; set; }
+
+        public DateTime Date { get; set; }
+        //public override string ToString()
+        //{
+        //    return JsonConvert.SerializeObject(this);
+        //}
+        //public static IEqualityComparer<Patient> PatientComparer { get; } = new PatientEqualityComparer();
+
+        //private sealed class PatientEqualityComparer : IEqualityComparer<Patient>
+        //{
+        //    public bool Equals(Patient x, Patient y)
+        //    {
+        //        if (ReferenceEquals(x, y)) return true;
+        //        if (ReferenceEquals(x, null)) return false;
+        //        if (ReferenceEquals(y, null)) return false;
+        //        if (x.GetType() != y.GetType()) return false;
+        //        return x.FirstName == y.FirstName && x.LastName == y.LastName && x.Ssn == y.Ssn && x.Email == y.Email && x.Street == y.Street && x.City == y.City && x.State == y.State && x.Postal == y.Postal && x.Age == y.Age && x.Height == y.Height && x.Weight == y.Weight && x.Insurance == y.Insurance && x.Gender == y.Gender;
+        //    }
+
+        //    public int GetHashCode(Patient obj)
+        //    {
+        //        var hashCode = new HashCode();
+        //        hashCode.Add(obj.FirstName);
+        //        hashCode.Add(obj.LastName);
+        //        hashCode.Add(obj.Ssn);
+        //        hashCode.Add(obj.Email);
+        //        hashCode.Add(obj.Street);
+        //        hashCode.Add(obj.City);
+        //        hashCode.Add(obj.State);
+        //        hashCode.Add(obj.Postal);
+        //        hashCode.Add(obj.Age);
+        //        hashCode.Add(obj.Height);
+        //        hashCode.Add(obj.Weight);
+        //        hashCode.Add(obj.Insurance);
+        //        hashCode.Add(obj.Gender);
+        //        //hashCode.Add(obj.)
+
+        //        return hashCode.ToHashCode();
+        //    }
+        //}
 
     }
 

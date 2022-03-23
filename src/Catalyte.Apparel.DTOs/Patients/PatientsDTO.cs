@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Catalyte.Apparel.DTOs.Encounters;
+
 namespace Catalyte.Apparel.DTOs.Patients
 {
     /// <summary>
@@ -36,7 +38,7 @@ namespace Catalyte.Apparel.DTOs.Patients
 
         public string Postal { get; set; }
 
-        public Encounters.EncounterDTO Encounters { get; set; }
+        public EncounterDTO Encounters { get; set; }
 
     }
 }

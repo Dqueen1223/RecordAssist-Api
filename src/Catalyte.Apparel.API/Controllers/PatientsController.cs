@@ -114,7 +114,7 @@ namespace Catalyte.Apparel.API.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<List<PatientDTO>>> CreatePatientAsync([FromBody] PatientDTO patient)
+        public async Task<ActionResult<PatientDTO>> CreatePatientAsync([FromBody] PatientDTO patient)
         {
             _logger.LogInformation("Request received for CreatePatient");
             var newPatient = _mapper.MapCreatePatientDtoToPatient(patient);

@@ -20,12 +20,12 @@ namespace Catalyte.Apparel.API.DTOMappings
         //        .Select(x => mapper.MapPurchaseToPurchaseDto(x))
         //        .ToList();
         //}
-        //public static IEnumerable<PromoDTO> MapPromosToPromoDtos(this IMapper mapper, IEnumerable<Promo> promos)
-        //{
-        //    return promos
-        //        .Select(x => mapper.MapPromoToPromoDto(x))
-        //        .ToList();
-        //}
+        public static IEnumerable<PromoDTO> MapPromosToPromoDtos(this IMapper mapper, IEnumerable<Promo> promos)
+        {
+            return promos
+                .Select(x => mapper.MapPromoToPromoDto(x))
+                .ToList();
+        }
         public static PromoDTO MapPromoToPromoDto(this IMapper mapper, Promo promo)
         {
             return new PromoDTO()

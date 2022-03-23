@@ -31,16 +31,16 @@ namespace Catalyte.Apparel.API.Controllers
             _PromoProvider = PromoProvider;
             _mapper = mapper;
         }
-        [HttpPost]
-        public async Task<ActionResult<List<PromoDTO>>> CreatePromoAsync([FromBody] CreatePromoDTO model)
-        {
-            _logger.LogInformation("Request received for CreatePromo");
+        //[HttpPost]
+        //public async Task<ActionResult<List<PromoDTO>>> CreatePromoAsync([FromBody] CreatePromoDTO model)
+        //{
+        //    _logger.LogInformation("Request received for CreatePromo");
 
-            var newPromo = _mapper.MapCreatePromoDtoToPromo(model);
-            var savedPromo = await _PromoProvider.CreatePromoAsync (newPromo);
-            var promoDTO = _mapper.MapPromoToPromoDto(savedPromo);
-            return Created($"/promo/", promoDTO);
-        }
+        //    var newPromo = _mapper.MapCreatePromoDtoToPromo(model);
+        //    var savedPromo = await _PromoProvider.CreatePromoAsync (newPromo);
+        //    var promoDTO = _mapper.MapPromoToPromoDto(savedPromo);
+        //    return Created($"/promo/", promoDTO);
+        //}
         [HttpGet("{Code}")]
         public async Task<ActionResult<PromoDTO>> GetPromoByCodeAsync(string Code)
         {
