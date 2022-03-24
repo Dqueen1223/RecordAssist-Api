@@ -170,18 +170,34 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("LastName is required.");
             if (patient.Ssn == null)
                 errors.Add("Ssn is required.");
+            else if (!Regex.IsMatch(patient.Ssn, @"\d{3}-\d{2}-\d{4}$"))
+            {
+                errors.Add("Must be a valid ssn (ex. 123-45-6798)");
+            }
             if (patient.Email == null)
                 errors.Add("Email is required.");
+            else if (!Regex.IsMatch(patient.Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                errors.Add("Must be a valid email (ex.test@test.com)");
+            }
             if (patient.Street == null)
-                errors.Add("Street is required.");
+                    errors.Add("Street is required.");
             if (patient.City == null)
                 errors.Add("City is required.");
             if (patient.State == null)
                 errors.Add("State is required.");
+            else if (patient.State.Length != 2)
+            {
+                errors.Add("State must have a valid two letter state code (ex. MD)");
+            }
             if (patient.Postal == null)
                 errors.Add("Postal code is required.");
+            else if (!Regex.IsMatch(patient.Postal, @"\d{5}$") && !Regex.IsMatch(patient.Postal, @"\d{5}-\d{4}$"))
+            {
+                errors.Add("Must be a valid zip (ex. 12345 or 12345-6789)");
+            }
             if (patient.Age.ToString() == null)
-                errors.Add("Age number is required.");
+                errors.Add("Age is required.");
             if (patient.Height.ToString() == null)
                 errors.Add("Height is required.");
             if (patient.Weight.ToString() == null)
@@ -190,16 +206,10 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("Insurance is required.");
             if (patient.Gender == null)
                 errors.Add("Gender is required.");
-            //if (patient.Material == null)
-            //    errors.Add("Material is required.");
-            //if (patient.Price.ToString() == null)
-            //    errors.Add("Price is required.");
-            //if (!patient.Price.ToString().Contains('.'))
-            //    errors.Add("Price must be a decimal.");
-            //if (patient.Quantity.ToString() == null)
-            //    errors.Add("Quantity is required.");
-            //if (patient.Quantity.ToString().Contains('.'))
-            //    errors.Add("Quantity must be an integer.");
+            else if(patient.Gender != "Male" && patient.Gender != "Female" && patient.Gender != "Other")
+            {
+                errors.Add("Gender must be 'Male', 'Female' or 'Other'");
+            }
             return errors;
         }
         /// This function validates that reviews are valid
