@@ -259,61 +259,6 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return encounters;
         }
-        //public async Task<IEnumerable<Patient>> GetPatientsAsync(Nullable<bool> active, List<string> brand, List<string> category,
-        //                                                         List<string> color, List<string> demographic, List<string> material,
-        //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
-        //{
-        //    IEnumerable<Patient> patients;
-
-        //    int returnPatients = 20;
-        //    if (range == null)
-        //    {
-        //        returnPatients = 100000;
-        //        range = 0;
-        //    }
-        //    // Convert input color code to hex format to match database column label
-        //    List<string> hexColor = new List<string>();
-        //    if (color.Count() > 0)
-        //    {
-        //        foreach (var colorItem in color)
-        //        {
-        //            hexColor.Add("#" + colorItem.ToLower());
-        //        }
-        //    }
-
-        //    // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-        //    if (minPrice < 0 || maxPrice < 0)
-        //    {
-        //        _logger.LogInformation("Prices cannot be negative.");
-        //        throw new BadRequestException("Prices cannot be negative.");
-        //    }
-        //    if (minPrice > maxPrice && !maxPrice.Equals(0))
-        //    {
-        //        _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
-        //        throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
-        //    }
-
-        //    // Convert all strings to lowercase for simplified query parameter matching
-        //    List<string> brandLower = brand.ConvertAll(x => x.ToLower());
-        //    List<string> categoryLower = category.ConvertAll(x => x.ToLower());
-        //    List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
-        //    List<string> materialLower = material.ConvertAll(x => x.ToLower());
-        //    List<string> typeLower = type.ConvertAll(x => x.ToLower());
-
-        //    try
-        //    {
-        //        patients = await _patientRepository.GetPatientsAsync(active, brandLower, categoryLower, hexColor,
-        //                                                         demographicLower, materialLower,
-        //                                                         minPrice, maxPrice, typeLower, range, returnPatients);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-
-        //    return patients;
-        //}
         /// <summary>
         /// Asynchronously updates patient with new patient information
         /// </summary>
@@ -381,10 +326,10 @@ namespace Catalyte.Apparel.Providers.Providers
             return newPatient;
         }
         /// <summary>
-        /// Persists a purchase to the database.
+        /// Persists a patient to the database.
         /// </summary>
-        /// <param name="model">PurchaseDTO used to build the purchase.</param>
-        /// <returns>The persisted purchase with IDs.</returns>
+        /// <param name="newPatient">PatientDTO used to build the patient.</param>
+        /// <returns>The persisted patient with IDs.</returns>
         public async Task<Patient> CreatePatientAsync(Patient newPatient)
         {
             Patient savedPatient;
@@ -465,6 +410,11 @@ namespace Catalyte.Apparel.Providers.Providers
         {
             Encounter savedEncounter;
 
+            List<string> errors = Validation.EncounterValidation(newEncounter);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
             try
             {
                 savedEncounter = await _patientRepository.CreateEncounterAsync(newEncounter);

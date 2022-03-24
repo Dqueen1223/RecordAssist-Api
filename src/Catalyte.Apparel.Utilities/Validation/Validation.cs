@@ -158,9 +158,42 @@ namespace Catalyte.Apparel.Utilities.Validation
             return errors;
         }
         /// <summary>
-        /// This function validates that Patients are valid based on multiple criteria.
+        /// This function validates that Encounters are valid based on multiple criteria.
         /// if invalid, it returns a list of strings. otherwise it returns an empty list.
         /// </summary>
+        public static List<string> EncounterValidation(Encounter encounter)
+        {
+            List<string> errors = new();
+            if (encounter.VisitCode == null)
+                errors.Add("VisitCode is required.");
+            else if(!Regex.IsMatch(encounter.VisitCode, @"[a-zA-Z]{1}\d{1}[a-zA-Z]{1}\s\d{1}[a-zA-Z]{1}\d{1}"))
+                {
+                errors.Add("Visit Code Format must match LDL DLD (ex. A1S 2D3)");
+            }
+            if (encounter.Provider == null)
+                errors.Add("provider is required.");
+            if (encounter.BillingCode == null)
+                errors.Add("BillingCode is required.");
+            else if (!Regex.IsMatch(encounter.BillingCode, @"\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            {
+                errors.Add("BillingCode must match format of xxx.xxx.xxx-xx (ex. 123.456.789-12)");
+            }
+            if (encounter.Icd10 == null)
+                errors.Add("icd10 is required.");
+            else if (!Regex.IsMatch(encounter.Icd10, @"[a-zA-Z]{1}\d{2}$"))
+            {
+                errors.Add("idc10 must match format of LDD (ex. A12)");
+            }
+            if (encounter.TotalCost.ToString() == null)
+                    errors.Add("Total cost is required.");
+            if (encounter.Copay.ToString() == null)
+                errors.Add("Copay is required.");
+            if (encounter.ChiefComplaint == null)
+                errors.Add("Chief Complaint is required.");
+            if (encounter.Date == default)
+                errors.Add("Date is required.");
+            return errors;
+        }
         public static List<string> PatientValidation(Patient patient)
         {
             List<string> errors = new();
@@ -181,7 +214,7 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("Must be a valid email (ex.test@test.com)");
             }
             if (patient.Street == null)
-                    errors.Add("Street is required.");
+                errors.Add("Street is required.");
             if (patient.City == null)
                 errors.Add("City is required.");
             if (patient.State == null)
@@ -206,44 +239,9 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("Insurance is required.");
             if (patient.Gender == null)
                 errors.Add("Gender is required.");
-            else if(patient.Gender != "Male" && patient.Gender != "Female" && patient.Gender != "Other")
+            else if (patient.Gender != "Male" && patient.Gender != "Female" && patient.Gender != "Other")
             {
                 errors.Add("Gender must be 'Male', 'Female' or 'Other'");
-            }
-            return errors;
-        }
-        /// This function validates that reviews are valid
-        /// if invalid, it returns a list of strings. otherwise it returns an empty list.
-        /// </summary>
-        public static List<string> ReviewValidation(Review review)
-        {
-            List<string> errors = new();
-            var count = 0;
-            //check for null or default values
-            if (review.Title == null || review.Title.Trim() == "")
-            {
-                errors.Add("The Title field can't be empty or whitspace.");
-                count++;
-            }
-            if (review.Title.Length > 50)
-            {
-                errors.Add("The Title field can't be more than 50 characters.");
-                count++;
-            }
-            if (review.ReviewsDescription == null || review.ReviewsDescription.Trim() == "")
-            {
-                errors.Add("The ReviewsDescription field can't be empty or whitspace.");
-                count++;
-            }
-            if (review.ReviewsDescription.Length > 500)
-            {
-                errors.Add("The ReviewsDescription field can't be more than 500 characters.");
-                count++;
-            }
-            if (review.Email == null || review.Email.Trim() == "")
-            {
-                errors.Add("The Email field can't be empty or whitspace.");
-                count++;
             }
             return errors;
         }

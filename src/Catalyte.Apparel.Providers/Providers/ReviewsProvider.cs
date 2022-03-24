@@ -99,9 +99,9 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogInformation($"Review with id: {reviewId} could not be found.");
                 throw new NotFoundException($"Review {reviewId} could not be found.");
             }
-            List<string> errors = Validation.ReviewValidation(updatedReview);
-            if (errors.Count > 0)
-                throw new BadRequestException(string.Join(' ', errors));
+            //List<string> errors = Validation.ReviewValidation(updatedReview);
+            //if (errors.Count > 0)
+            //    throw new BadRequestException(string.Join(' ', errors));
 
             try
             {
