@@ -59,8 +59,6 @@ namespace Catalyte.Apparel.API.Controllers
         public async Task<ActionResult<PatientDTO>> UpdatePatientAsync(
                         int id, [FromBody] PatientDTO Patient)
         {
-            _logger.LogInformation("Request received for update user");
-
             var patientToUpdate = _mapper.Map<Patient>(Patient);
             {
                 _logger.LogInformation("Request recived for update patient");
@@ -70,6 +68,16 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(patientDTO);
         }
+        [HttpPut("{patientId}/encounters/{encounterId}")]
+        public async Task<ActionResult<EncounterDTO>> UpdateEncounterAsync(int patientId, int encounterId, [FromBody] EncounterDTO encounter)
+        {
+            _logger.LogInformation($"Request received for GetEncountersByEncounterIdAsync with encounter id: {encounterId} and patient id: {patientId}");
+            var encounterToUpdate = _mapper.Map<Encounter>(encounter);
+            var updatedEncounter = await _patientProvider.UpdateEncounterAsync(patientId, encounterId, encounterToUpdate);
+            var encounterDTOs = _mapper.Map<EncounterDTO>(updatedEncounter);
+            return Ok(encounterDTOs);
+        }
+
         [HttpPost("{id}/encounters")]
         public async Task<ActionResult<EncounterDTO>> CreateEncounterAsync([FromBody] EncounterDTO Encounter)
         {
@@ -80,14 +88,21 @@ namespace Catalyte.Apparel.API.Controllers
             return Created($"/encounters", encounterDTO);
         }
         [HttpGet("{id}/encounters")]
-        public async Task<ActionResult<EncounterDTO>> GetEncountersByIdAsync(int id)
+        public async Task<ActionResult<EncounterDTO>> GetEncountersByPatientIdAsync(int id)
         {
             _logger.LogInformation($"Request received for GetEncountersByPatientIdAsync for id: {id}");
-            var savedEncounter = await _patientProvider.GetEncountersByIdAsync(id);
+            var savedEncounter = await _patientProvider.GetEncountersByPatientIdAsync(id);
             var encounterDTOs = _mapper.Map <IEnumerable<EncounterDTO>>(savedEncounter);
             return Ok(encounterDTOs);
         }
-        
+        [HttpGet("{patientId}/encounters/{encounterId}")]
+        public async Task<ActionResult<EncounterDTO>> GetEncounterByEncounterIdAsync(int patientId, int encounterId)
+        {
+            _logger.LogInformation($"Request received for GetEncountersByEncounterIdAsync with encounter id: {encounterId} and patient id: {patientId}");
+            var savedEncounter = await _patientProvider.GetEncounterByEncounterIdAsync(patientId, encounterId);
+            var encounterDTOs = _mapper.Map<IEnumerable<EncounterDTO>>(savedEncounter);
+            return Ok(encounterDTOs);
+        }
 
         [HttpPost]
         public async Task<ActionResult<PatientDTO>> CreatePatientAsync([FromBody] PatientDTO patient)

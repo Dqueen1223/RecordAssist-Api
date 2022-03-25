@@ -164,21 +164,21 @@ namespace Catalyte.Apparel.Utilities.Validation
         public static List<string> EncounterValidation(Encounter encounter)
         {
             List<string> errors = new();
-            if (encounter.VisitCode == null)
+            if (encounter.VisitCode.Trim() == "" || encounter.VisitCode == null)
                 errors.Add("VisitCode is required.");
             else if(!Regex.IsMatch(encounter.VisitCode, @"[a-zA-Z]{1}\d{1}[a-zA-Z]{1}\s\d{1}[a-zA-Z]{1}\d{1}"))
                 {
                 errors.Add("Visit Code Format must match LDL DLD (ex. A1S 2D3)");
             }
-            if (encounter.Provider == null)
-                errors.Add("provider is required.");
-            if (encounter.BillingCode == null)
+            if (encounter.Provider.Trim() == "" || encounter.Provider == null)
+                errors.Add("Provider is required.");
+            if (encounter.BillingCode.Trim() == "" || encounter.BillingCode == null)
                 errors.Add("BillingCode is required.");
             else if (!Regex.IsMatch(encounter.BillingCode, @"\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 errors.Add("BillingCode must match format of xxx.xxx.xxx-xx (ex. 123.456.789-12)");
             }
-            if (encounter.Icd10 == null)
+            if (encounter.Icd10.Trim() == "" || encounter.Icd10 == null)
                 errors.Add("icd10 is required.");
             else if (!Regex.IsMatch(encounter.Icd10, @"[a-zA-Z]{1}\d{2}$"))
             {
@@ -188,7 +188,7 @@ namespace Catalyte.Apparel.Utilities.Validation
                     errors.Add("Total cost is required.");
             if (encounter.Copay.ToString() == null)
                 errors.Add("Copay is required.");
-            if (encounter.ChiefComplaint == null)
+            if (encounter.ChiefComplaint.Trim() == "" || encounter.ChiefComplaint == null)
                 errors.Add("Chief Complaint is required.");
             if (encounter.Date == default)
                 errors.Add("Date is required.");
@@ -197,33 +197,33 @@ namespace Catalyte.Apparel.Utilities.Validation
         public static List<string> PatientValidation(Patient patient)
         {
             List<string> errors = new();
-            if (patient.FirstName == null)
+            if (patient.FirstName.Trim() == "" || patient.FirstName == null)
                 errors.Add("FirstName is required.");
-            if (patient.LastName == null)
+            if (patient.LastName.Trim() == "" || patient.LastName == null)
                 errors.Add("LastName is required.");
-            if (patient.Ssn == null)
+            if (patient.Ssn.Trim() == "" || patient.Ssn == null)
                 errors.Add("Ssn is required.");
             else if (!Regex.IsMatch(patient.Ssn, @"\d{3}-\d{2}-\d{4}$"))
             {
                 errors.Add("Must be a valid ssn (ex. 123-45-6798)");
             }
-            if (patient.Email == null)
+            if (patient.Email.Trim() == "" || patient.Email == null)
                 errors.Add("Email is required.");
             else if (!Regex.IsMatch(patient.Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
                 errors.Add("Must be a valid email (ex.test@test.com)");
             }
-            if (patient.Street == null)
+            if (patient.Street.Trim() == "" || patient.Street == null)
                 errors.Add("Street is required.");
-            if (patient.City == null)
+            if (patient.City.Trim() == "" || patient.City == null)
                 errors.Add("City is required.");
-            if (patient.State == null)
+            if (patient.State.Trim() == "" || patient.State == null)
                 errors.Add("State is required.");
             else if (patient.State.Length != 2)
             {
                 errors.Add("State must have a valid two letter state code (ex. MD)");
             }
-            if (patient.Postal == null)
+            if (patient.Postal.Trim() == "" || patient.Postal == null)
                 errors.Add("Postal code is required.");
             else if (!Regex.IsMatch(patient.Postal, @"\d{5}$") && !Regex.IsMatch(patient.Postal, @"\d{5}-\d{4}$"))
             {
@@ -235,9 +235,9 @@ namespace Catalyte.Apparel.Utilities.Validation
                 errors.Add("Height is required.");
             if (patient.Weight.ToString() == null)
                 errors.Add("Weight is required.");
-            if (patient.Insurance == null)
+            if (patient.Insurance.Trim() == "" || patient.Insurance == null)
                 errors.Add("Insurance is required.");
-            if (patient.Gender == null)
+            if (patient.Gender.Trim() == "" || patient.Gender == null)
                 errors.Add("Gender is required.");
             else if (patient.Gender != "Male" && patient.Gender != "Female" && patient.Gender != "Other")
             {

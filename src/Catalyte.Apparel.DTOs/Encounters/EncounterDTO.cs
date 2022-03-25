@@ -2,10 +2,12 @@
 namespace Catalyte.Apparel.DTOs.Encounters
 {
     /// <summary>
-    /// Describes a data transfer objecct for a single line item of a purchase transaction.
+    /// Describes a data transfer object for any associated encounters.
     /// </summary>
     public class EncounterDTO
     {
+        public int Id { get; set; }
+
         public int PatientId { get; set; }
 
         public string Notes { get; set; }

@@ -60,13 +60,13 @@ namespace Catalyte.Apparel.Providers.Providers
         /// </summary>
         /// <param name="patientId">The id of the patient to retrieve.</param>
         /// <returns>The patient.</returns>
-        public async Task<IEnumerable<Encounter>> GetEncountersByIdAsync(int patientId)
+        public async Task<IEnumerable<Encounter>> GetEncountersByPatientIdAsync(int patientId)
         {
             IEnumerable<Encounter> encounter;
 
             try
             {
-                encounter = await _patientRepository.GetEncountersByIdAsync(patientId);
+                encounter = await _patientRepository.GetEncountersByPatientIdAsync(patientId);
             }
             catch (Exception ex)
             {
@@ -77,6 +77,26 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 _logger.LogInformation($"Encounter with id: {patientId} could not be found.");
                 throw new NotFoundException($"Encounter with id: {patientId} could not be found.");
+            }
+
+            return encounter;
+        }
+        public async Task<Encounter> GetEncounterByEncounterIdAsync(int patientId, int encounterId)
+        {
+            Encounter encounter;
+            try
+            {
+                encounter = await _patientRepository.GetEncounterByEncounterIdAsync(patientId, encounterId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (encounter == null || encounter == default)
+            {
+                _logger.LogInformation($"Encounter with id: {encounterId} and patient id: {patientId} could not be found.");
+                throw new NotFoundException($"Encounter with id: {encounterId} and patient id: {patientId} could not be found.");
             }
 
             return encounter;
@@ -259,6 +279,45 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return encounters;
         }
+
+        public async Task<Encounter> UpdateEncounterAsync (int patientId, int encounterId, Encounter updatedEncounter)
+        {
+            Encounter newEncounter;
+
+            Encounter existingEncounter;
+            List<string> errors = Validation.EncounterValidation(updatedEncounter);
+            if (errors.Count > 0)
+            {
+                throw new BadRequestException(string.Join(' ', errors));
+            }
+            try
+            {
+                existingEncounter = await _patientRepository.GetEncounterByEncounterIdAsync(patientId, encounterId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+
+            if (existingEncounter == null)
+            {
+                _logger.LogInformation($"Patient with id: {patientId} and Encounter with id: {encounterId} does not exist.");
+                throw new NotFoundException($"Patient with id: {patientId} and Encounter with id: {encounterId} does not exist.");
+            }
+            if (updatedEncounter.Id == 0)
+            {
+                throw new BadRequestException("Encounter body must have an Id associated");
+            }
+            if (updatedEncounter.Id != existingEncounter.Id)
+            {
+                throw new BadRequestException("Body Id and path Id must be identical");
+            }
+
+
+            return updatedEncounter;
+
+        }
         /// <summary>
         /// Asynchronously updates patient with new patient information
         /// </summary>
@@ -266,6 +325,7 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <returns> The updated patient</returns>
         /// <exception cref="ServiceUnavailableException"></exception>
         /// <exception cref="NotFoundException"></exception>
+        /// <exception cref="BadRequestException"></exception>
         public async Task<Patient> UpdatePatientAsync (int id, Patient updatedPatient)
         {
             Patient newPatient;
@@ -330,6 +390,8 @@ namespace Catalyte.Apparel.Providers.Providers
         /// </summary>
         /// <param name="newPatient">PatientDTO used to build the patient.</param>
         /// <returns>The persisted patient with IDs.</returns>
+        /// <exception cref="BadRequestException"></exception>
+        /// <exception cref="ServiceUnavailableException"></exception>
         public async Task<Patient> CreatePatientAsync(Patient newPatient)
         {
             Patient savedPatient;
@@ -385,7 +447,7 @@ namespace Catalyte.Apparel.Providers.Providers
                     _logger.LogInformation($"Patient with id: {id} does not exist.");
                     throw new NotFoundException($"Patient with id:{id} not found.");
                 }
-                encounter = await _patientRepository.GetEncountersByIdAsync(id);
+                encounter = await _patientRepository.GetEncountersByPatientIdAsync(id);
                     if (encounter.Count() != 0)
                 {
                     _logger.LogInformation($"Patient with id: {id} has encounters and cannot be deleted");
