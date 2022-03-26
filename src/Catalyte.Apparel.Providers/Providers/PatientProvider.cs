@@ -101,6 +101,26 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return encounter;
         }
+        public async Task<Encounter> GetEncounterByIdAsync(int id)
+        {
+            Encounter encounter;
+            try
+            {
+                encounter = await _patientRepository.GetEncounterByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (encounter == null || encounter == default)
+            {
+                _logger.LogInformation($"Encounter with id: {id} could not be found.");
+                throw new NotFoundException($"Encounter with id: {id} could not be found.");
+            }
+
+            return encounter;
+        }
         /// <summary>
         /// Asynchronously retrieves nontracked Patient with the provided id from the database.
         /// </summary>
@@ -299,7 +319,10 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-
+            try
+            {
+                newEncounter = await _patientRepository.UpdateEncounterAsync();
+            }
             if (existingEncounter == null)
             {
                 _logger.LogInformation($"Patient with id: {patientId} and Encounter with id: {encounterId} does not exist.");

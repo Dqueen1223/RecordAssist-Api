@@ -17,6 +17,7 @@ namespace Catalyte.Apparel.Providers.Interfaces
 
         Task<Encounter> GetEncounterByEncounterIdAsync(int patientId, int encounterId);
 
+        Task<Encounter> GetEncounterByIdAsync(int id);
         ////Task<IEnumerable<Patient>> GetPatientAsync(List<string> Firstname, List<string> LastName, List<string> Ssn,
         ////                                                         List<string> Email, List<string> Street, List<string> City
         //                                               /*          decimal minPrice, decimal maxPrice, List<string> type, int? range*/);

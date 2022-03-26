@@ -18,6 +18,8 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<Encounter> GetEncounterByEncounterIdAsync(int patientId, int encounterId);
 
+        Task<Encounter> GetEncounterByIdAsync(int id);
+
         //Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
         //                                                         List<string> color, List<string> demographic, List<string> material,
         //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range, int returnProducts);
@@ -32,6 +34,8 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<Encounter> CreateEncounterAsync(Encounter newEncounter);
         Task<Patient> UpdatePatientAsync(Patient patient);
+
+        Task<Encounter> UpdateEncounterAsync(Encounter encounter);
 
         //Task<List<string>> GetAllUniquePatientCategoriesAsync();
         //Task<List<string>> GetAllUniquePatientTypesAsync();

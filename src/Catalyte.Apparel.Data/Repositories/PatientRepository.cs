@@ -38,6 +38,10 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Encounters.Where(e => (e.PatientId == patientId) && (e.Id == EncounterId)).FirstOrDefaultAsync();
         }
+        public async Task<Encounter> GetEncounterByIdAsync(int id)
+        {
+            return await _ctx.Encounters.Where(e=> e.Id == id).FirstOrDefaultAsync();
+        }
         public async Task<Encounter> CreateEncounterAsync(Encounter encounter)
         {
             await _ctx.Encounters.AddAsync(encounter);
@@ -98,6 +102,13 @@ namespace Catalyte.Apparel.Data.Repositories
             await _ctx.SaveChangesAsync();
 
             return patient;
+        }
+        public async Task<Encounter> UpdateEncounteAsync(Encounter encounter)
+        {
+            _ctx.Encounters.Update(encounter);
+            await _ctx.SaveChangesAsync();
+
+            return encounter;
         }
         public async Task<Patient> DeletePatientByIdAsync(Patient product)
         {

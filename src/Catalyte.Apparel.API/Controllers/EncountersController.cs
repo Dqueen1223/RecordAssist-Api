@@ -41,6 +41,16 @@ namespace Catalyte.Apparel.API.Controllers
 
             return Ok(encounterDTO);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EncounterDTO>> GetEncounterByIdAsync(int id)
+        {
+            _logger.LogInformation("Request recieve fro GetEncounterByIdAsync");
+
+            var encounter = await _patientProvider.GetEncounterByIdAsync(id);
+            var encounterDTO = _mapper.Map<EncounterDTO>(encounter);
+
+            return Ok(encounterDTO);
+        }
     }
 }
 

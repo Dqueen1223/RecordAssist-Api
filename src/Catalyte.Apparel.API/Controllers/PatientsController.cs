@@ -100,7 +100,7 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation($"Request received for GetEncountersByEncounterIdAsync with encounter id: {encounterId} and patient id: {patientId}");
             var savedEncounter = await _patientProvider.GetEncounterByEncounterIdAsync(patientId, encounterId);
-            var encounterDTOs = _mapper.Map<IEnumerable<EncounterDTO>>(savedEncounter);
+            var encounterDTOs = _mapper.Map<EncounterDTO>(savedEncounter);
             return Ok(encounterDTOs);
         }
 
