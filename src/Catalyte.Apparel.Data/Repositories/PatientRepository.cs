@@ -38,6 +38,10 @@ namespace Catalyte.Apparel.Data.Repositories
         {
             return await _ctx.Encounters.Where(e => (e.PatientId == patientId) && (e.Id == EncounterId)).FirstOrDefaultAsync();
         }
+        public async Task<Encounter> NoTrackingGetEncounterByEncounterIdAsync(int patientId, int EncounterId)
+        {
+            return await _ctx.Encounters.Where(e => (e.PatientId == patientId) && (e.Id == EncounterId)).AsNoTracking().FirstOrDefaultAsync();
+        }
         public async Task<Encounter> GetEncounterByIdAsync(int id)
         {
             return await _ctx.Encounters.Where(e=> e.Id == id).FirstOrDefaultAsync();
@@ -103,7 +107,7 @@ namespace Catalyte.Apparel.Data.Repositories
 
             return patient;
         }
-        public async Task<Encounter> UpdateEncounteAsync(Encounter encounter)
+        public async Task<Encounter> UpdateEncounterAsync(Encounter encounter)
         {
             _ctx.Encounters.Update(encounter);
             await _ctx.SaveChangesAsync();

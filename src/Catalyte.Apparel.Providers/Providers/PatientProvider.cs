@@ -312,7 +312,7 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             try
             {
-                existingEncounter = await _patientRepository.GetEncounterByEncounterIdAsync(patientId, encounterId);
+                existingEncounter = await _patientRepository.NoTrackingGetEncounterByEncounterIdAsync(patientId, encounterId);
             }
             catch (Exception ex)
             {
@@ -321,7 +321,12 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             try
             {
-                newEncounter = await _patientRepository.UpdateEncounterAsync();
+                newEncounter = await _patientRepository.UpdateEncounterAsync(updatedEncounter);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
             if (existingEncounter == null)
             {

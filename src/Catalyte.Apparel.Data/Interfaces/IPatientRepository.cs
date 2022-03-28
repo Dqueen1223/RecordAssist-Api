@@ -18,6 +18,7 @@ namespace Catalyte.Apparel.Data.Interfaces
 
         Task<Encounter> GetEncounterByEncounterIdAsync(int patientId, int encounterId);
 
+        Task<Encounter> NoTrackingGetEncounterByEncounterIdAsync(int patientId, int encounterId);
         Task<Encounter> GetEncounterByIdAsync(int id);
 
         //Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
