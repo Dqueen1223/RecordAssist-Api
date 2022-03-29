@@ -9,8 +9,6 @@ namespace Catalyte.SuperHealth.Data.Model
     /// </summary>
     public class Encounter : BaseEntity
     {
-        //[Column("EncounterId")]
-        //public int PurchaseId { get; set; }
 
         [Column("PatientId")]
         public int PatientId { get; set; }

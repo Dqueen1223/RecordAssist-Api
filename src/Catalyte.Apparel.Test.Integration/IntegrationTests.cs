@@ -1,5 +1,4 @@
-﻿using Catalyte.Apparel.Test.Integration.Utilities;
-using Catalyte.SuperHealth.API;
+﻿using Catalyte.SuperHealth.API;
 using Catalyte.SuperHealth.Data.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -7,11 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
 using System.Net.Http;
 
-namespace Catalyte.Apparel.Test.Integration
+namespace Catalyte.SuperHealth.Test.Integration
 {
     public abstract class IntegrationTests
     {
@@ -41,14 +39,6 @@ namespace Catalyte.Apparel.Test.Integration
 
                             context.Database.EnsureCreated();
 
-                            try
-                            {
-                                context.ReinitializeDatabaseForTests();
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.LogError(ex, "An error occured seeding the database with the message: " + ex.Message);
-                            }
                         }
                     });
                     builder.UseContentRoot(Directory.GetCurrentDirectory());

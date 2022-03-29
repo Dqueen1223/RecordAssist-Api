@@ -1,8 +1,8 @@
 ﻿using System;
 using AutoMapper;
+using Catalyte.SuperHealth.Data.Model;
 using Catalyte.SuperHealth.DTOs.Encounters;
 using Catalyte.SuperHealth.DTOs.Patients;
-using Catalyte.SuperHealth.Data.Model;
 
 namespace Catalyte.SuperHealth.API.DTOMappings
 {

@@ -1,5 +1,4 @@
 ﻿using System.Net.Mime;
-using Catalyte.SuperHealth.API;
 using Catalyte.SuperHealth.API.Filters;
 using Catalyte.SuperHealth.Data;
 using Catalyte.SuperHealth.Data.Context;
@@ -7,7 +6,6 @@ using Catalyte.SuperHealth.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -78,9 +76,6 @@ namespace Catalyte.SuperHealth.API
             //Enable CORS
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            // Resets data on API startup
-            db.Database.ExecuteSqlRaw("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
-            db.Database.EnsureCreated();
 
             // app.UseHttpsRedirection();
 

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Catalyte.SuperHealth.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalyte.SuperHealth.Data.Model;
 
 namespace Catalyte.SuperHealth.Data.Context
 {

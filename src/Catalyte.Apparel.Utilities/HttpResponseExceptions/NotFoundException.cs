@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalyte.Apparel.Utilities.HttpResponseExceptions
+namespace Catalyte.SuperHealth.Utilities.HttpResponseExceptions
 {
     /// <summary>
     /// A custom exception for resource not found errors.

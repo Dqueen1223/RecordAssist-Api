@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Catalyte.SuperHealth.Data.Interfaces;
 using Catalyte.SuperHealth.Data.Model;
 using Catalyte.SuperHealth.Providers.Interfaces;
+using Catalyte.SuperHealth.Utilities.HttpResponseExceptions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;

@@ -15,7 +15,6 @@ namespace Catalyte.SuperHealth.Data.Context
 
         public DbSet<Encounter> Encounters { get; set; }
 
-
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
     }
 
