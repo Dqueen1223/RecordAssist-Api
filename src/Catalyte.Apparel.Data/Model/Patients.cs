@@ -1,9 +1,4 @@
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Catalyte.Apparel.Data.Model
+namespace Catalyte.SuperHealth.Data.Model
 {
     /// <summary>
     /// This class is a representation of Super Health Inc. patients.

@@ -1,18 +1,15 @@
-﻿using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using Microsoft.Extensions.Logging;
+﻿using Catalyte.Apparel.Utilities.HttpResponseExceptions;
 using Catalyte.Apparel.Utilities.Validation;
+using Catalyte.SuperHealth.Data.Interfaces;
+using Catalyte.SuperHealth.Data.Model;
+using Catalyte.SuperHealth.Providers.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-
-namespace Catalyte.Apparel.Providers.Providers
+namespace Catalyte.SuperHealth.Providers.Providers
 {
     /// <summary>
     /// This class provides the implementation of the IpatientProvider interface, providing service methods for Patients.
@@ -56,10 +53,10 @@ namespace Catalyte.Apparel.Providers.Providers
             return patient;
         }
 
-                /// Asynchronously retrieves the patient with the provided id from the database.
+        /// Asynchronously retrieves the Encounter with the provided  patient id from the database.
         /// </summary>
         /// <param name="patientId">The id of the patient to retrieve.</param>
-        /// <returns>The patient.</returns>
+        /// <returns>The Encounter.</returns>
         public async Task<IEnumerable<Encounter>> GetEncountersByPatientIdAsync(int patientId)
         {
             IEnumerable<Encounter> encounter;
@@ -81,6 +78,11 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return encounter;
         }
+        /// Asynchronously retrieves the encounter with the provided id from the database.
+        /// </summary>
+        /// <param name="patientId">The id of the patient to retrieve.</param> 
+        /// <param name="encounterId">The id of the encounter to retrieve.</param>
+        /// <returns>The Encounter.</returns>
         public async Task<Encounter> GetEncounterByEncounterIdAsync(int patientId, int encounterId)
         {
             Encounter encounter;
@@ -157,7 +159,7 @@ namespace Catalyte.Apparel.Providers.Providers
             {
                 CheckExistingEmail = await _patientRepository.NoTrackingCheckConflictingEmail(patientEmail);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
@@ -168,103 +170,8 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             return null;
         }
-        /// <summary>
-        /// Asynchronously retrieves all unique patient categories in the database 
-        /// </summary>
-        /// <returns>list of strings of categories</returns>
-        /// <exception cref="ServiceUnavailableException"></exception>
-        //public async Task<List<string>> GetAllUniquePatientCategoriesAsync()
-        //{
-        //    List<string> categories;
 
-        //    try
-        //    {
-        //        categories = await _patientRepository.GetAllUniquePatientCategoriesAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-        //    return categories;
-        //}
-        ///// <summary>
-        ///// Asynchronously retrieves all unique patient types in the database 
-        ///// </summary>
-        ///// <returns>list of strings of categories</returns>
-        ///// <exception cref="ServiceUnavailableException"></exception>
-        //public async Task<List<string>> GetAllUniquePatientTypesAsync()
-        //{
-        //    List<string> categories;
 
-        //    try
-        //    {
-        //        categories = await _patientRepository.GetAllUniquePatientTypesAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex.Message);
-        //        throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //    }
-        //    return categories;
-        //}
-
-        //public async Task<int> GetPatientsCountAsync(Nullable<bool> active, List<string> brand, List<string> category,
-        //                                                         List<string> color, List<string> demographic, List<string> material,
-        //                                                         decimal minPrice, decimal maxPrice, List<string> type, int? range)
-        //{
-        //    {
-        //        int patientsCount;
-
-        //        int returnPatients = 20;
-        //        if (range == null)
-        //        {
-        //            returnPatients = 100000;
-        //            range = 0;
-        //        }
-        //        // Convert input color code to hex format to match database column label
-        //        List<string> hexColor = new List<string>();
-        //        if (color.Count() > 0)
-        //        {
-        //            foreach (var colorItem in color)
-        //            {
-        //                hexColor.Add("#" + colorItem.ToLower());
-        //            }
-        //        }
-
-        //        List<string> brandLower = brand.ConvertAll(x => x.ToLower());
-        //        List<string> categoryLower = category.ConvertAll(x => x.ToLower());
-        //        List<string> demographicLower = demographic.ConvertAll(x => x.ToLower());
-        //        List<string> materialLower = material.ConvertAll(x => x.ToLower());
-        //        List<string> typeLower = type.ConvertAll(x => x.ToLower());
-
-        //        // Check that minPrice is not greater than maxPrice and minPrice is non-negative
-        //        if (minPrice < 0 || maxPrice < 0)
-        //        {
-        //            _logger.LogInformation("Prices cannot be negative.");
-        //            throw new BadRequestException("Prices cannot be negative.");
-        //        }
-        //        if (minPrice > maxPrice && !maxPrice.Equals(0))
-        //        {
-        //            _logger.LogInformation("The minimum price cannot be greater than the maximum price.");
-        //            throw new BadRequestException("The minimum price cannot be greater than the maximum price.");
-        //        }
-
-        //        try
-        //        {
-        //            patientsCount = await _patientRepository.GetPatientsCountAsync(active, brandLower, categoryLower, hexColor,
-        //                                                         demographicLower, materialLower,
-        //                                                         minPrice, maxPrice, typeLower, range, returnPatients);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            _logger.LogError(ex.Message);
-        //            throw new ServiceUnavailableException("There was a problem connecting to the database.");
-        //        }
-
-        //        return patientsCount;
-        //    }
-        //}
         /// <summary>
         /// Asynchronously retrieves all patients from the database.
         /// </summary>
@@ -284,6 +191,11 @@ namespace Catalyte.Apparel.Providers.Providers
 
             return patients;
         }
+
+        /// <summary>
+        /// Asynchronously retrieves all encounters from the database.
+        /// </summary>
+        /// <returns>All encounters in the database.</returns>
         public async Task<IEnumerable<Encounter>> GetAllEncountersAsync()
         {
             IEnumerable<Encounter> encounters;
@@ -300,7 +212,15 @@ namespace Catalyte.Apparel.Providers.Providers
             return encounters;
         }
 
-        public async Task<Encounter> UpdateEncounterAsync (int patientId, int encounterId, Encounter updatedEncounter)
+        /// <summary>
+        /// Asynchronously updates encounter with new encounter information
+        /// </summary>
+        /// <param name="updatedPatient"></param>
+        /// <returns> The updated encounter</returns>
+        /// <exception cref="ServiceUnavailableException"></exception>
+        /// <exception cref="NotFoundException"></exception>
+        /// <exception cref="BadRequestException"></exception>
+        public async Task<Encounter> UpdateEncounterAsync(int patientId, int encounterId, Encounter updatedEncounter)
         {
             Encounter newEncounter;
 
@@ -335,10 +255,12 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (updatedEncounter.Id == 0)
             {
+                _logger.LogInformation("Encounter body must have an Id associated");
                 throw new BadRequestException("Encounter body must have an Id associated");
             }
             if (updatedEncounter.Id != existingEncounter.Id)
             {
+                _logger.LogInformation("Body Id and path Id must be identical");
                 throw new BadRequestException("Body Id and path Id must be identical");
             }
 
@@ -354,7 +276,7 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <exception cref="ServiceUnavailableException"></exception>
         /// <exception cref="NotFoundException"></exception>
         /// <exception cref="BadRequestException"></exception>
-        public async Task<Patient> UpdatePatientAsync (int id, Patient updatedPatient)
+        public async Task<Patient> UpdatePatientAsync(int id, Patient updatedPatient)
         {
             Patient newPatient;
 
@@ -382,10 +304,12 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (updatedPatient.Id == 0)
             {
+                _logger.LogInformation("Patient body must have an Id associated");
                 throw new BadRequestException("Patient body must have an Id associated");
             }
-            if(updatedPatient.Id != existingPatient.Id)
+            if (updatedPatient.Id != existingPatient.Id)
             {
+                _logger.LogInformation("Body Id and path Id must be identical");
                 throw new BadRequestException("Body Id and path Id must be identical");
             }
             try
@@ -399,6 +323,7 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (checkValidEmail.Id != updatedPatient.Id && checkValidEmail != null && checkValidEmail.Email == updatedPatient.Email)
             {
+                _logger.LogInformation("This email has already been used");
                 throw new ConflictException("This email has already been used");
             }
             try
@@ -416,10 +341,11 @@ namespace Catalyte.Apparel.Providers.Providers
         /// <summary>
         /// Persists a patient to the database.
         /// </summary>
-        /// <param name="newPatient">PatientDTO used to build the patient.</param>
-        /// <returns>The persisted patient with IDs.</returns>
+        /// <param name="newPatient"></param>
+        /// <returns>The persisted patient with IDs</returns>
         /// <exception cref="BadRequestException"></exception>
         /// <exception cref="ServiceUnavailableException"></exception>
+        /// <exception cref="ConflictException"></exception>   
         public async Task<Patient> CreatePatientAsync(Patient newPatient)
         {
             Patient savedPatient;
@@ -442,6 +368,7 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             if (checkValidEmail != null && checkValidEmail.Email == newPatient.Email)
             {
+                _logger.LogError("This email has already been used");
                 throw new ConflictException("This email has already been used");
             }
             try
@@ -453,7 +380,7 @@ namespace Catalyte.Apparel.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            
+
             return savedPatient;
         }
 
@@ -476,7 +403,7 @@ namespace Catalyte.Apparel.Providers.Providers
                     throw new NotFoundException($"Patient with id:{id} not found.");
                 }
                 encounter = await _patientRepository.GetEncountersByPatientIdAsync(id);
-                    if (encounter.Count() != 0)
+                if (encounter.Count() != 0)
                 {
                     _logger.LogInformation($"Patient with id: {id} has encounters and cannot be deleted");
                     throw new ConflictException($"Patient with id: {id} has encounters and cannot be deleted");
@@ -495,7 +422,13 @@ namespace Catalyte.Apparel.Providers.Providers
             }
 
         }
-
+        /// <summary>
+        /// Creates a new Encounter based off of valid encounter information
+        /// </summary>
+        /// <param name="newEncounter"></param>
+        /// <returns>A created Encounter</returns>
+        /// <exception cref="BadRequestException"></exception>
+        /// <exception cref="ServiceUnavailableException"></exception>
         public async Task<Encounter> CreateEncounterAsync(Encounter newEncounter)
         {
             Encounter savedEncounter;
@@ -516,12 +449,5 @@ namespace Catalyte.Apparel.Providers.Providers
             }
             return savedEncounter;
         }
-        /// <summary>
-        /// Helper function for DeletePatientByIdAsync to check for purchases associated with the patient before deleting.
-        /// </summary>
-        /// <param name="patientId">Id of the patient to be deleted.</param>
-        /// <param name="patient">The patient object that will be deleted.</param>
-        /// <returns>A patient with purchases or null if there are no purchases.</returns>
-        /// <exception cref="ServiceUnavailableException"></exception>
     }
 }

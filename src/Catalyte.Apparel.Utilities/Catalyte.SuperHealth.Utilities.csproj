@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Catalyte.Apparel.Data\Catalyte.Apparel.Data.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.DTOs\Catalyte.Apparel.DTOs.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Data\Catalyte.SuperHealth.Data.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.DTOs\Catalyte.SuperHealth.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Catalyte.Apparel.Data.Model
+namespace Catalyte.SuperHealth.Data.Model
 {
     /// <summary>
     /// Describes an Encounter of a patient.
@@ -47,7 +47,7 @@ namespace Catalyte.Apparel.Data.Model
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return  x.PatientId == y.PatientId && x.Notes == y.Notes && x.VisitCode == y.VisitCode && x.Provider == y.Provider && x.BillingCode == y.BillingCode && x.Icd10 == y.Icd10 && x.TotalCost == y.TotalCost && x.Copay == y.Copay && x.ChiefComplaint == y.ChiefComplaint && x.Pulse == y.Pulse && x.Systolic == y.Systolic && x.Diastolic == y.Diastolic && x.Date == y.Date;
+                return x.PatientId == y.PatientId && x.Notes == y.Notes && x.VisitCode == y.VisitCode && x.Provider == y.Provider && x.BillingCode == y.BillingCode && x.Icd10 == y.Icd10 && x.TotalCost == y.TotalCost && x.Copay == y.Copay && x.ChiefComplaint == y.ChiefComplaint && x.Pulse == y.Pulse && x.Systolic == y.Systolic && x.Diastolic == y.Diastolic && x.Date == y.Date;
             }
 
             public int GetHashCode(Encounter obj)

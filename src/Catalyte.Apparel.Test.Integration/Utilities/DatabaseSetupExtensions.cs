@@ -1,7 +1,4 @@
-﻿using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Data.SeedData;
-
-namespace Catalyte.Apparel.Test.Integration.Utilities
+﻿namespace Catalyte.Apparel.Test.Integration.Utilities
 {
     public static class DatabaseSetupExtensions
     {

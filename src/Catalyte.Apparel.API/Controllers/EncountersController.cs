@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using Catalyte.Apparel.DTOs.Encounters;
-using Catalyte.Apparel.Providers.Interfaces;
+using Catalyte.SuperHealth.DTOs.Encounters;
+using Catalyte.SuperHealth.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

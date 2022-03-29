@@ -1,60 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
-using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Patients;
-using Catalyte.Apparel.DTOs.Promos;
-using Catalyte.Apparel.DTOs.Purchases;
-using Catalyte.Apparel.Utilities.HttpResponseExceptions;
-using Catalyte.Apparel.DTOs.Encounters;
+using Catalyte.SuperHealth.DTOs.Encounters;
+using Catalyte.SuperHealth.DTOs.Patients;
+using Catalyte.SuperHealth.Data.Model;
 
-namespace Catalyte.Apparel.API.DTOMappings
+namespace Catalyte.SuperHealth.API.DTOMappings
 {
     public static class MapperExtensions
     {
 
-        //public static IEnumerable<PurchaseDTO> MapPurchasesToPurchaseDtos(this IMapper mapper, IEnumerable<Purchase> purchases)
-        //{
-        //    return purchases
-        //        .Select(x => mapper.MapPurchaseToPurchaseDto(x))
-        //        .ToList();
-        //}
-        //public static IEnumerable<PromoDTO> MapPromosToPromoDtos(this IMapper mapper, IEnumerable<Promo> promos)
-        //{
-        //    return promos
-        //        .Select(x => mapper.MapPromoToPromoDto(x))
-        //        .ToList();
-        //}
-        public static PromoDTO MapPromoToPromoDto(this IMapper mapper, Promo promo)
-        {
-            return new PromoDTO()
-            {
-                Id = promo.ID,
-                Code = promo.Code,
-                Type = promo.Type,
-                Discount = promo.Discount,
-                StartDate = promo.StartDate,
-                EndDate = promo.EndDate
-            };
-        }
-        public static Promo MapCreatePromoDtoToPromo(this IMapper mapper, CreatePromoDTO promoDTO)
-        {
-            var promo = new Promo() { };
-            promo = mapper.Map(promoDTO, promo);
-            return promo;
-        }
         /// <summary>
-        /// Helper method to build model for a purchase DTO.
+        /// Helper method to build model for a Encounter DTO.
         /// </summary>
-        /// <param name="purchase">The purchase to be persisted.</param>
-        /// <returns>A purchase DTO.</returns>
+        /// <param name="Encounter">The Encounter to be persisted.</param>
+        /// <returns>A Encounter DTO.</returns>
         public static EncounterDTO MapEncounterToEncounterDto(this IMapper mapper, Encounter encounter)
         {
             return new EncounterDTO()
             {
                 PatientId = encounter.PatientId,
-                //Id = encounter.Id,
                 Notes = encounter.Notes,
                 VisitCode = encounter.VisitCode,
                 Provider = encounter.Provider,
@@ -68,14 +32,13 @@ namespace Catalyte.Apparel.API.DTOMappings
                 Diastolic = encounter.Diastolic,
                 Date = encounter.Date
 
-                //LineItems = mapper.Map<List<EncounterDTO>>(encounter.LineItems),
-                //DeliveryAddress = mapper.Map<DeliveryAddressDTO>(encounter),
-                //BillingAddress = mapper.Map<BillingAddressDTO>(encounter),
-                //CreditCard = mapper.Map<CreditCardDTO>(encounter)
-
             };
         }
-
+        /// <summary>
+        /// Helper method to build model for a patient DTO.
+        /// </summary>
+        /// <param name="patient">The patient to be persisted.</param>
+        /// <returns>A patient DTO.</returns>
         public static PatientDTO MapPatientToPatientDTO(this IMapper mapper, Patient patient)
         {
             return new PatientDTO()
@@ -96,24 +59,6 @@ namespace Catalyte.Apparel.API.DTOMappings
                 Postal = patient.Postal,
             };
         }
-        //public static Purchase MapCreatePurchaseDtoToPurchase(this IMapper mapper, CreatePurchaseDTO purchaseDTO)
-        //{
-        //    var purchase = new Purchase
-        //    {
-        //        OrderDate = DateTime.UtcNow,
-        //    };
-        //    if (purchaseDTO.CreditCard == null)
-        //    {
-        //        throw new BadRequestException("No credit card associated with this purchase");
-        //    }
-        //    purchase.TotalCost = purchaseDTO.TotalCost;
-        //    purchase = mapper.Map(purchaseDTO.DeliveryAddress, purchase);
-        //    purchase = mapper.Map(purchaseDTO.BillingAddress, purchase);
-        //    purchase = mapper.Map(purchaseDTO.CreditCard, purchase);
-        //    purchase.LineItems = mapper.Map(purchaseDTO.LineItems, purchase.LineItems);
-
-        //    return purchase;
-        //}
 
         public static Patient MapPatientDtoToPatient(this IMapper mapper, PatientDTO patientDTO)
         {

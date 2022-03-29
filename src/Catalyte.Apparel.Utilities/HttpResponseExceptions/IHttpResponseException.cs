@@ -1,4 +1,4 @@
-﻿namespace Catalyte.Apparel.Utilities.HttpResponseExceptions
+﻿namespace Catalyte.SuperHealth.Utilities.HttpResponseExceptions
 {
     public interface IHttpResponseException
     {

@@ -1,4 +1,3 @@
-using Catalyte.Apparel.DTOs.Products;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;

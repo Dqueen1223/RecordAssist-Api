@@ -1,6 +1,6 @@
-﻿using Catalyte.Apparel.API;
-using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Test.Integration.Utilities;
+﻿using Catalyte.Apparel.Test.Integration.Utilities;
+using Catalyte.SuperHealth.API;
+using Catalyte.SuperHealth.Data.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +25,8 @@ namespace Catalyte.Apparel.Test.Integration
                 {
                     builder.ConfigureServices(services =>
                     {
-                        services.RemoveAll(typeof(ApparelCtx));
-                        services.AddDbContext<ApparelCtx>((options, context) =>
+                        services.RemoveAll(typeof(SuperHealthCtx));
+                        services.AddDbContext<SuperHealthCtx>((options, context) =>
                         {
                             context.UseNpgsql("Host=localhost; Port=5432; Database=postgres_tests; UserName=postgres; Password=root");
                         });
@@ -36,7 +36,7 @@ namespace Catalyte.Apparel.Test.Integration
                         using (var scope = serviceProvider.CreateScope())
                         {
                             var scopedServices = scope.ServiceProvider;
-                            var context = scopedServices.GetRequiredService<ApparelCtx>();
+                            var context = scopedServices.GetRequiredService<SuperHealthCtx>();
                             var logger = scopedServices.GetRequiredService<ILogger<WebApplicationFactory<Startup>>>();
 
                             context.Database.EnsureCreated();

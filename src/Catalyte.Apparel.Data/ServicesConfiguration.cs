@@ -1,11 +1,11 @@
-﻿using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Data.Repositories;
+﻿using Catalyte.SuperHealth.Data.Context;
+using Catalyte.SuperHealth.Data.Interfaces;
+using Catalyte.SuperHealth.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalyte.Apparel.Data
+namespace Catalyte.SuperHealth.Data
 {
     /// <summary>
     /// This class provides configuration options for services and context.
@@ -15,15 +15,12 @@ namespace Catalyte.Apparel.Data
         public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration config)
         {
 
-            services.AddDbContext<ApparelCtx>(options =>
+            services.AddDbContext<SuperHealthCtx>(options =>
                 options.UseNpgsql(config.GetConnectionString("CatalyteApparel")));
 
-            services.AddScoped<IApparelCtx>(provider => provider.GetService<ApparelCtx>());
+            services.AddScoped<ISuperHealthCtx>(provider => provider.GetService<SuperHealthCtx>());
             services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IReviewsRepository, ReviewsRepository>();
-            services.AddScoped<IPromoRepository, PromoRepository>();
-            services.AddScoped<IShippingRateRepository, ShippingRateRepository>();
+            services.AddScoped<IEncounterRepository, EncounterRepository>();
 
             return services;
 

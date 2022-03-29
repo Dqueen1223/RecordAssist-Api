@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Catalyte.Apparel.DTOs.Encounters
+namespace Catalyte.SuperHealth.DTOs.Encounters
 {
     /// <summary>
     /// Describes a data transfer object for any associated encounters.

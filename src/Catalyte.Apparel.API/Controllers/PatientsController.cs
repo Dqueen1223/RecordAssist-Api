@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.Apparel.API.DTOMappings;
-using Catalyte.Apparel.Data.Model;
-using Catalyte.Apparel.DTOs.Patients;
-using Catalyte.Apparel.Providers.Interfaces;
+using Catalyte.SuperHealth.API.DTOMappings;
+using Catalyte.SuperHealth.Data.Model;
+using Catalyte.SuperHealth.DTOs.Encounters;
+using Catalyte.SuperHealth.DTOs.Patients;
+using Catalyte.SuperHealth.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Catalyte.Apparel.DTOs.Encounters;
 using Microsoft.Extensions.Logging;
 
-namespace Catalyte.Apparel.API.Controllers
+namespace Catalyte.SuperHealth.API.Controllers
 {
     /// <summary>
     /// The PatientsController exposes endpoints for patient related actions.
@@ -37,7 +36,7 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation("Request received for GetPatientsAsync");
 
-            var patients = await _patientProvider.GetPatientsAsync(); 
+            var patients = await _patientProvider.GetPatientsAsync();
 
             var patientDTOs = _mapper.Map<IEnumerable<PatientDTO>>(patients);
 
@@ -71,7 +70,7 @@ namespace Catalyte.Apparel.API.Controllers
         [HttpPut("{patientId}/encounters/{encounterId}")]
         public async Task<ActionResult<EncounterDTO>> UpdateEncounterAsync(int patientId, int encounterId, [FromBody] EncounterDTO encounter)
         {
-            _logger.LogInformation($"Request received for GetEncountersByEncounterIdAsync with encounter id: {encounterId} and patient id: {patientId}");
+            _logger.LogInformation($"Request received for UpdateEncounterAsync with encounter id: {encounterId} and patient id: {patientId}");
             var encounterToUpdate = _mapper.Map<Encounter>(encounter);
             var updatedEncounter = await _patientProvider.UpdateEncounterAsync(patientId, encounterId, encounterToUpdate);
             var encounterDTOs = _mapper.Map<EncounterDTO>(updatedEncounter);
@@ -92,7 +91,7 @@ namespace Catalyte.Apparel.API.Controllers
         {
             _logger.LogInformation($"Request received for GetEncountersByPatientIdAsync for id: {id}");
             var savedEncounter = await _patientProvider.GetEncountersByPatientIdAsync(id);
-            var encounterDTOs = _mapper.Map <IEnumerable<EncounterDTO>>(savedEncounter);
+            var encounterDTOs = _mapper.Map<IEnumerable<EncounterDTO>>(savedEncounter);
             return Ok(encounterDTOs);
         }
         [HttpGet("{patientId}/encounters/{encounterId}")]

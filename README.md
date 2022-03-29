@@ -1,10 +1,10 @@
-﻿# .Net Sports Apparel API
+﻿# . SuperHealthInc API
 
 ## Getting Started
 
 ### Start the Server
 
-- Click the drop down arrow next to the App Runner button and select `Apparel.Catalyte.API`
+- Click the drop down arrow next to the App Runner button and select `SuperHealthInc.Catalyte.API`
 - Click Build > Build Solution
 - Click the App Runner button
 
@@ -43,9 +43,6 @@ https://marketplace.visualstudio.com/items?itemName=MadsKristensen.AddNewFile
 This is some helpful documentation explaing the NuGet package manager.
 https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell
 
-#### Google Authenticator
-https://www.nuget.org/packages/GoogleAuthenticator/
-
 #### Entity Framework Core
 This is the heart of the Entity Framework tools.
 `Install-Package Microsoft.EntityFrameworkCore -Version 5.0.10`
@@ -58,3 +55,6 @@ Used for creating EF migrations
 #### Swashbuckle
 Also known as Swagger, this tool creates an interface for the API when you run the application.  You can use markup in the controllers to show documentation on the interface.  It is preinstalled with basic configuration (Startup.cs) when creating a new API with the newest versions of Visual Studio.
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-5.0&tabs=visual-studio
+
+####  Linting 
+To lint this project click 'Analyze' at the top of Visual studio 'code cleanup' => 'run code cleanup (profile 1) on solution'

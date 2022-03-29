@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Model;
+﻿using Catalyte.SuperHealth.Data.Model;
+using System.Threading.Tasks;
 
-namespace Catalyte.Apparel.Data.Interfaces
+namespace Catalyte.SuperHealth.Data.Interfaces
 {
     /// <summary>
     /// This interface provides an abstraction layer for Encounter repository methods.

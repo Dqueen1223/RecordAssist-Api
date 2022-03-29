@@ -1,4 +1,3 @@
-using Catalyte.Apparel.Data.Model;
 using Catalyte.Apparel.Utilities.Validation;
 using System;
 using System.Collections.Generic;

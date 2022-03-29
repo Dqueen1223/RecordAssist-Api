@@ -1,8 +1,8 @@
-﻿using Catalyte.Apparel.Utilities.HttpResponseExceptions;
+﻿using Catalyte.SuperHealth.Utilities.HttpResponseExceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Catalyte.Apparel.API.Filters
+namespace Catalyte.SuperHealth.API.Filters
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {

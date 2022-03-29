@@ -1,8 +1,8 @@
-﻿using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Providers.Providers;
+﻿using Catalyte.SuperHealth.Providers.Interfaces;
+using Catalyte.SuperHealth.Providers.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalyte.Apparel.Providers
+namespace Catalyte.SuperHealth.Providers
 {
     /// <summary>
     /// This class provides configuration options for provider services.
@@ -12,11 +12,7 @@ namespace Catalyte.Apparel.Providers
         public static IServiceCollection AddProviders(this IServiceCollection services)
         {
             services.AddScoped<IPatientProvider, PatientProvider>();
-            //services.AddScoped<IPurchaseProvider, PurchaseProvider>();
-            services.AddScoped<IUserProvider, UserProvider>();
-            services.AddScoped<IPromoProvider, PromoProvider>();
-            services.AddScoped<IShippingRateProvider, ShippingRateProvider>();
-            services.AddScoped<IReviewProvider, ReviewsProvider>();
+            services.AddScoped<IEncounterProvider, EncounterProvider>();
 
             return services;
         }

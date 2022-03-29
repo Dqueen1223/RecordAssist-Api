@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using Catalyte.Apparel.DTOs.Encounters;
-
-namespace Catalyte.Apparel.DTOs.Patients
+﻿namespace Catalyte.SuperHealth.DTOs.Patients
 {
     /// <summary>
     /// Describes a data transfer object for patients.

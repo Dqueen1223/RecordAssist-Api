@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Catalyte.SuperHealth.API;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Catalyte.Apparel.API
+namespace Catalyte.SuperHealth.API
 {
     public class Program
     {

@@ -1,7 +1,4 @@
-﻿using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Providers.Interfaces;
-using Catalyte.Apparel.Providers.Providers;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Moq;
 using System.Threading.Tasks;
 using Xunit;

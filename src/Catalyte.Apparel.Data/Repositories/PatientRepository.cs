@@ -1,24 +1,23 @@
-using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Data.Model;
+using Catalyte.SuperHealth.Data.Context;
+using Catalyte.SuperHealth.Data.Interfaces;
+using Catalyte.SuperHealth.Data.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
 
-namespace Catalyte.Apparel.Data.Repositories
+namespace Catalyte.SuperHealth.Data.Repositories
 {
     /// <summary>
     /// This class handles methods for making requests to the Patient repository.
     /// </summary>
     public class PatientRepository : IPatientRepository
     {
-        private readonly IApparelCtx _ctx;
+        private readonly ISuperHealthCtx _ctx;
 
-        public PatientRepository(IApparelCtx ctx)
+        public PatientRepository(ISuperHealthCtx ctx)
         {
             _ctx = ctx;
         }
@@ -44,7 +43,7 @@ namespace Catalyte.Apparel.Data.Repositories
         }
         public async Task<Encounter> GetEncounterByIdAsync(int id)
         {
-            return await _ctx.Encounters.Where(e=> e.Id == id).FirstOrDefaultAsync();
+            return await _ctx.Encounters.Where(e => e.Id == id).FirstOrDefaultAsync();
         }
         public async Task<Encounter> CreateEncounterAsync(Encounter encounter)
         {

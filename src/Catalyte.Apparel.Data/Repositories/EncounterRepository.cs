@@ -1,27 +1,20 @@
-﻿using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Data.Interfaces;
+﻿using Catalyte.SuperHealth.Data.Context;
+using Catalyte.SuperHealth.Data.Interfaces;
+using Catalyte.SuperHealth.Data.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using Catalyte.Apparel.Data.Context;
-using Catalyte.Apparel.Data.Interfaces;
-using Catalyte.Apparel.Data.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Catalyte.Apparel.Data.Repositories
+namespace Catalyte.SuperHealth.Data.Repositories
 {
     /// <summary>
     /// This class handles methods for making requests to the LineItems repository.
     /// </summary>
-    public class EncounterRepository : Interfaces.IEncounterRepository
+    public class EncounterRepository : IEncounterRepository
     {
-        private readonly IApparelCtx _ctx;
+        private readonly ISuperHealthCtx _ctx;
 
-        public EncounterRepository(IApparelCtx ctx)
+        public EncounterRepository(ISuperHealthCtx ctx)
         {
             _ctx = ctx;
         }
