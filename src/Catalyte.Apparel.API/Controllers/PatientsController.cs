@@ -31,6 +31,7 @@ namespace Catalyte.SuperHealth.API.Controllers
             _patientProvider = patientProvider;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PatientDTO>>> GetPatientsAsync()
         {

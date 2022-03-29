@@ -110,7 +110,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
         [Fact]
-        public async Task DeletePatientsByIdAsync_Returns201()
+        public async Task DeletePatientsByIdAsync_Returns204()
         {
             var response = await _client.DeleteAsync("/patients/2");
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -179,7 +179,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
         [Fact]
-        public async Task UpdatePatientReturns409()
+        public async Task UpdatePatientById_Returns409()
         {
             var patient = new Patient
             {

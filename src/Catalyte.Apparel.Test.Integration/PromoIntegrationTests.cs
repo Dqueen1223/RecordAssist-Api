@@ -61,7 +61,7 @@ namespace Catalyte.SuperHealth.Test.Integration
         }
 
         [Fact]
-        public async Task UpdateEncounterreturns201()
+        public async Task UpdateEncounterreturns200()
         {
             var encounter = new Encounter
             {
@@ -86,7 +86,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
         [Fact]
-        public async Task UpdateEncounterreturns404()
+        public async Task UpdateEncounterReturns404()
         {
             var encounter = new Encounter
             {
@@ -111,7 +111,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
         [Fact]
-        public async Task UpdateEncounterreturns400()
+        public async Task UpdateEncounterReturns400()
         {
             var encounter = new Encounter
             {
