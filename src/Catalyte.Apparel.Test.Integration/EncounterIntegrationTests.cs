@@ -12,7 +12,7 @@ namespace Catalyte.SuperHealth.Test.Integration
     public class EncounterIntegrationTests : IntegrationTests
     {
         [Fact]
-        public async Task CreateEncounterReturns201()
+        public async Task CreateEncounter_Returns201()
         {
             var encounter = new Encounter
             {
@@ -36,7 +36,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
         [Fact]
-        public async Task CreateEncounter400()
+        public async Task CreateEncounter_Returns400()
         {
             var encounter = new Encounter
             {
@@ -61,7 +61,7 @@ namespace Catalyte.SuperHealth.Test.Integration
         }
 
         [Fact]
-        public async Task UpdateEncounterreturns200()
+        public async Task UpdateEncounter_Returns200()
         {
             var encounter = new Encounter
             {
@@ -86,7 +86,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
         [Fact]
-        public async Task UpdateEncounterReturns404()
+        public async Task UpdateEncounter_Returns404()
         {
             var encounter = new Encounter
             {
@@ -111,7 +111,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
         [Fact]
-        public async Task UpdateEncounterReturns400()
+        public async Task UpdateEncounter_Returns400()
         {
             var encounter = new Encounter
             {

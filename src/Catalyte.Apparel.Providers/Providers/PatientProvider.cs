@@ -1,4 +1,4 @@
-﻿using Catalyte.Apparel.Utilities.Validation;
+﻿using Catalyte.SuperHealth.Utilities.Validation;
 using Catalyte.SuperHealth.Data.Interfaces;
 using Catalyte.SuperHealth.Data.Model;
 using Catalyte.SuperHealth.Providers.Interfaces;

@@ -1,10 +1,10 @@
-using Catalyte.Apparel.Utilities.Validation;
+using Catalyte.SuperHealth.Utilities.Validation;
 using Catalyte.SuperHealth.Data.Model;
 using System.Collections.Generic;
 using Xunit;
 
 
-namespace Catalyte.Apparel.Test.Unit
+namespace Catalyte.SuperHealth.Test.Unit
 {
     public class UnitTests
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Catalyte.Apparel.Utilities.Validation
+namespace Catalyte.SuperHealth.Utilities.Validation
 {
     public static class Validation
     {

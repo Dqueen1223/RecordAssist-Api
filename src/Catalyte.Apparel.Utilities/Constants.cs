@@ -1,4 +1,4 @@
-﻿namespace Catalyte.Apparel.Utilities
+﻿namespace Catalyte.SuperHealth.Utilities
 {
     public static class Constants
     {

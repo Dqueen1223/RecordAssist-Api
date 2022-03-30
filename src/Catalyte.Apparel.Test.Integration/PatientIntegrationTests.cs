@@ -13,7 +13,7 @@ namespace Catalyte.SuperHealth.Test.Integration
     {
 
         [Fact]
-        public async Task CreatePatientReturns201()
+        public async Task CreatePatient_Returns201()
         {
             //HttpContent patient 
             var patient = new Patient
@@ -38,7 +38,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
         [Fact]
-        public async Task CreatePatientReturns409()
+        public async Task CreatePatient_Returns409()
         {
             var patient = new Patient
             {
@@ -63,7 +63,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
         }
         [Fact]
-        public async Task CreatePatientReturns400()
+        public async Task CreatePatient_Returns400()
         {
             var patient = new Patient
             {

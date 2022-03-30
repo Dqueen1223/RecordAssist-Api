@@ -58,3 +58,12 @@ https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swas
 
 ####  Linting 
 To lint this project click 'Analyze' at the top of Visual studio 'code cleanup' => 'run code cleanup (profile 1) on solution'
+
+#### Postman Collection
+https://www.getpostman.com/collections/9378308ae2ee2020163d
+
+#### Usage  
+This project contains endpoints to create, read, update, and delete patients/encounters and validates that information accordingly
+
+#### Testing 
+Testing is done on each encounter and patient endpoint, to run all tests open test explorer and click 'run all tests' 

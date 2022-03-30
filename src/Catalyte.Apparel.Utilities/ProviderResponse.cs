@@ -1,4 +1,6 @@
-﻿namespace Catalyte.Apparel.Utilities
+﻿using Catalyte.Apparel.Utilities;
+
+namespace Catalyte.SuperHealth.Utilities
 {
     public class ProviderResponse<T>
     {
