@@ -1,4 +1,5 @@
 ﻿using Catalyte.SuperHealth.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Catalyte.SuperHealth.Utilities.Validation
         /// <returns>if invalid, it returns a list of error strings. otherwise it returns an empty list.</returns>
         public static List<string> EncounterValidation(Encounter encounter)
         {
-            List<string> errors = new();
+            List<string>? errors = new();
             if (encounter.VisitCode.Trim() == "" || encounter.VisitCode == null)
                 errors.Add("VisitCode is required.");
             else if (!Regex.IsMatch(encounter.VisitCode, @"[a-zA-Z]{1}\d{1}[a-zA-Z]{1}\s\d{1}[a-zA-Z]{1}\d{1}"))

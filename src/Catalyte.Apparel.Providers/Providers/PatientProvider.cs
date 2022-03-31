@@ -349,10 +349,10 @@ namespace Catalyte.SuperHealth.Providers.Providers
         public async Task<Patient> CreatePatientAsync(Patient newPatient)
         {
             Patient savedPatient;
-
+            Patient checkValidId;
             Patient checkValidEmail;
 
-            List<string> errors = Validation.PatientValidation(newPatient);
+            List<string>? errors = Validation.PatientValidation(newPatient);
             if (errors.Count > 0)
             {
                 throw new BadRequestException(string.Join(' ', errors));
@@ -370,6 +370,20 @@ namespace Catalyte.SuperHealth.Providers.Providers
             {
                 _logger.LogError("This email has already been used");
                 throw new ConflictException("This email has already been used");
+            }
+            try
+            {
+                checkValidId = await _patientRepository.NoTrackingGetPatientByIdAsync(newPatient.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw new ServiceUnavailableException("There was a problem connecting to the database.");
+            }
+            if (checkValidId != null && checkValidId.Id == newPatient.Id)
+            {
+                _logger.LogError("This Id has already been used");
+                throw new ConflictException("This Id has already been used");
             }
             try
             {

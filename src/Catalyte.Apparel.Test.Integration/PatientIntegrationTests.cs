@@ -20,7 +20,7 @@ namespace Catalyte.SuperHealth.Test.Integration
             {
                 FirstName = "TESTName",
                 LastName = "Last",
-                Email = "somethine2g@gmail.com",
+                Email = "somethine32g@gmail.com",
                 Ssn = "123-45-6789",
                 Age = 67,
                 Height = 80,
