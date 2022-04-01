@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalyte.SuperHealth.API
 {
@@ -62,7 +63,7 @@ namespace Catalyte.SuperHealth.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISuperHealthCtx db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SuperHealthCtx db)
         {
             if (env.IsDevelopment())
             {
@@ -75,6 +76,10 @@ namespace Catalyte.SuperHealth.API
 
             //Enable CORS
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            // Resets data on API startup
+            db.Database.ExecuteSqlRaw("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
+            db.Database.EnsureCreated();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

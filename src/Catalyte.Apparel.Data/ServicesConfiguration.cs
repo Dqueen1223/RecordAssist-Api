@@ -16,7 +16,7 @@ namespace Catalyte.SuperHealth.Data
         {
 
             services.AddDbContext<SuperHealthCtx>(options =>
-                options.UseNpgsql(config.GetConnectionString("CatalyteApparel")));
+                options.UseNpgsql(config.GetConnectionString("CatalyteSuperHealth")));
 
             services.AddScoped<ISuperHealthCtx>(provider => provider.GetService<SuperHealthCtx>());
             services.AddScoped<IPatientRepository, PatientRepository>();

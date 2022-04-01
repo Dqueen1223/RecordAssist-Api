@@ -1,5 +1,5 @@
-using Catalyte.SuperHealth.Utilities.Validation;
 using Catalyte.SuperHealth.Data.Model;
+using Catalyte.SuperHealth.Utilities.Validation;
 using System.Collections.Generic;
 using Xunit;
 
