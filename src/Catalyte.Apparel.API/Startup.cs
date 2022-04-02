@@ -6,11 +6,11 @@ using Catalyte.SuperHealth.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Catalyte.SuperHealth.API
 {
@@ -70,8 +70,6 @@ namespace Catalyte.SuperHealth.API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalyte.SuperHealth.API v1"));
-
-
             }
 
             //Enable CORS
