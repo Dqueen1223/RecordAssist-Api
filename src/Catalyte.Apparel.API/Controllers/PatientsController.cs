@@ -122,7 +122,7 @@ namespace Catalyte.SuperHealth.API.Controllers
             await _patientProvider.DeletePatientByIdAsync(id);
 
 
-            return NoContent();
+            return Ok("Patient successfully deleted");
         }
     }
 }
