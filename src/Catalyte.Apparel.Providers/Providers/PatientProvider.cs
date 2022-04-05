@@ -321,7 +321,7 @@ namespace Catalyte.SuperHealth.Providers.Providers
                 _logger.LogError(ex.Message);
                 throw new ServiceUnavailableException("There was a problem connecting to the database.");
             }
-            if (checkValidEmail.Id != updatedPatient.Id && checkValidEmail != null && checkValidEmail.Email == updatedPatient.Email)
+            if (checkValidEmail != null && checkValidEmail.Id != updatedPatient.Id && checkValidEmail.Email == updatedPatient.Email)
             {
                 _logger.LogInformation("This email has already been used");
                 throw new ConflictException("This email has already been used");
