@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Catalyte.SuperHealth.Data.Model
+namespace RecordAssist.Health.Data.Model
 {
     /// <summary>
     /// This class represents a base for all other entities.

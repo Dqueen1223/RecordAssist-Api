@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Catalyte.SuperHealth.Data.Model;
-using Catalyte.SuperHealth.DTOs.Encounters;
-using Catalyte.SuperHealth.DTOs.Patients;
+using RecordAssist.Health.Data.Model;
+using RecordAssist.Health.DTOs.Encounters;
+using RecordAssist.Health.DTOs.Patients;
 using System;
 
-namespace Catalyte.SuperHealth.API.DTOMappings
+namespace RecordAssist.Health.API.DTOMappings
 {
     public static class MapperExtensions
     {

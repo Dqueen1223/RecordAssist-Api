@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Catalyte.SuperHealth.Data.Model
+namespace RecordAssist.Health.Data.Model
 {
     /// <summary>
     /// Describes an Encounter of a patient.

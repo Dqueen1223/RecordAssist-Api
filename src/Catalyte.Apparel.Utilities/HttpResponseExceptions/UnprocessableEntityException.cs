@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catalyte.SuperHealth.Utilities.HttpResponseExceptions
+namespace RecordAssist.Health.Utilities.HttpResponseExceptions
 {
     /// <summary>
     /// A custom exception for unprocessable entity errors.

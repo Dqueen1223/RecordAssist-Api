@@ -1,8 +1,8 @@
-﻿using Catalyte.SuperHealth.Utilities.HttpResponseExceptions;
+﻿using RecordAssist.Health.Utilities.HttpResponseExceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Catalyte.SuperHealth.API.Filters
+namespace RecordAssist.Health.API.Filters
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {

@@ -1,4 +1,4 @@
-﻿namespace Catalyte.Apparel.Utilities
+﻿namespace RecordAssist.Utilities
 {
     public enum ResponseTypes
     {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Catalyte.Apparel.API\Catalyte.SuperHealth.API.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Utilities\Catalyte.SuperHealth.Utilities.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.API\RecordAssist.API.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Utilities\RecordAssist.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

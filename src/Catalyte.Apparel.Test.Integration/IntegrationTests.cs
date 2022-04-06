@@ -1,5 +1,5 @@
-﻿using Catalyte.SuperHealth.API;
-using Catalyte.SuperHealth.Data.Context;
+﻿using RecordAssist.Health.API;
+using RecordAssist.Health.Data.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Net.Http;
 
-namespace Catalyte.SuperHealth.Test.Integration
+namespace RecordAssist.Test.Integration
 {
     public abstract class IntegrationTests
     {

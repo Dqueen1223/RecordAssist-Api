@@ -1,11 +1,11 @@
-﻿using Catalyte.SuperHealth.Data.Context;
-using Catalyte.SuperHealth.Data.Interfaces;
-using Catalyte.SuperHealth.Data.Model;
+﻿using RecordAssist.Health.Data.Context;
+using RecordAssist.Health.Data.Interfaces;
+using RecordAssist.Health.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Catalyte.SuperHealth.Data.Repositories
+namespace RecordAssist.Health.Data.Repositories
 {
     /// <summary>
     /// This class handles methods for making requests to the LineItems repository.

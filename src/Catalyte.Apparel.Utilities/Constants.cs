@@ -1,4 +1,4 @@
-﻿namespace Catalyte.SuperHealth.Utilities
+﻿namespace RecordAssist.Utilities
 {
     public static class Constants
     {

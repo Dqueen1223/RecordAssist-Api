@@ -1,4 +1,4 @@
-namespace Catalyte.SuperHealth.Data.Model
+namespace RecordAssist.Health.Data.Model
 {
     /// <summary>
     /// This class is a representation of Super Health Inc. patients.

@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
-using Catalyte.SuperHealth.API.Filters;
-using Catalyte.SuperHealth.Data;
-using Catalyte.SuperHealth.Data.Context;
-using Catalyte.SuperHealth.Providers;
+using RecordAssist.Health.API.Filters;
+using RecordAssist.Health.Data;
+using RecordAssist.Health.Data.Context;
+using RecordAssist.Health.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace Catalyte.SuperHealth.API
+namespace RecordAssist.Health.API
 {
     public class Startup
     {

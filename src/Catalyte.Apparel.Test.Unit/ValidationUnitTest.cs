@@ -1,10 +1,10 @@
-using Catalyte.SuperHealth.Data.Model;
-using Catalyte.SuperHealth.Utilities.Validation;
+using RecordAssist.Health.Data.Model;
+using RecordAssist.Health.Utilities.Validation;
 using System.Collections.Generic;
 using Xunit;
 
 
-namespace Catalyte.SuperHealth.Test.Unit
+namespace RecordAssist.Health.Test.Unit
 {
     public class UnitTests
     {

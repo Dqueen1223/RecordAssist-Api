@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Catalyte.SuperHealth.DTOs.Encounters
+namespace RecordAssist.Health.DTOs.Encounters
 {
     /// <summary>
     /// Describes a data transfer object for any associated encounters.

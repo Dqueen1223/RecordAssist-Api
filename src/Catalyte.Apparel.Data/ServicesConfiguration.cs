@@ -1,11 +1,11 @@
-﻿using Catalyte.SuperHealth.Data.Context;
-using Catalyte.SuperHealth.Data.Interfaces;
-using Catalyte.SuperHealth.Data.Repositories;
+﻿using RecordAssist.Health.Data.Context;
+using RecordAssist.Health.Data.Interfaces;
+using RecordAssist.Health.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalyte.SuperHealth.Data
+namespace RecordAssist.Health.Data
 {
     /// <summary>
     /// This class provides configuration options for services and context.

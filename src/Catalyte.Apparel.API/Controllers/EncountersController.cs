@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.SuperHealth.DTOs.Encounters;
-using Catalyte.SuperHealth.Providers.Interfaces;
+using RecordAssist.Health.DTOs.Encounters;
+using RecordAssist.Health.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Catalyte.Apparel.API.Controllers
+namespace RecordAssist.Apparel.API.Controllers
 {
     /// <summary>
     /// The EncounterssController exposes endpoints for encounter related actions.

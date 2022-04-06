@@ -1,8 +1,8 @@
-﻿using Catalyte.SuperHealth.Data.Model;
+﻿using RecordAssist.Health.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Catalyte.SuperHealth.Data.Context
+namespace RecordAssist.Health.Data.Context
 {
     public static class Extensions
     {

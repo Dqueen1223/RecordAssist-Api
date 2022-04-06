@@ -1,4 +1,4 @@
-﻿namespace Catalyte.SuperHealth.Utilities.HttpResponseExceptions
+﻿namespace RecordAssist.Health.Utilities.HttpResponseExceptions
 {
     public interface IHttpResponseException
     {

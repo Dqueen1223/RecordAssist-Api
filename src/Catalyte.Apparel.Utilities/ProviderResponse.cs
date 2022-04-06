@@ -1,6 +1,4 @@
-﻿using Catalyte.Apparel.Utilities;
-
-namespace Catalyte.SuperHealth.Utilities
+﻿namespace RecordAssist.Utilities
 {
     public class ProviderResponse<T>
     {

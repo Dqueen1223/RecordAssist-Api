@@ -20,12 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Catalyte.Apparel.API\Catalyte.SuperHealth.API.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Data\Catalyte.SuperHealth.Data.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.DTOs\Catalyte.SuperHealth.DTOs.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Providers\Catalyte.SuperHealth.Providers.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Test.Integration\Catalyte.SuperHealth.Test.Integration.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Utilities\Catalyte.SuperHealth.Utilities.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.API\RecordAssist.API.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Data\RecordAssist.Data.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.DTOs\RecordAssist.DTOs.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Providers\RecordAssist.Providers.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Test.Integration\RecordAssist.Test.Integration.csproj" />
+    <ProjectReference Include="..\Catalyte.Apparel.Utilities\RecordAssist.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Catalyte.SuperHealth.API
+namespace RecordAssist.Health.API
 {
     public class Program
     {

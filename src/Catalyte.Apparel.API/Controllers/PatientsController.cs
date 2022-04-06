@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Catalyte.SuperHealth.API.DTOMappings;
-using Catalyte.SuperHealth.Data.Model;
-using Catalyte.SuperHealth.DTOs.Encounters;
-using Catalyte.SuperHealth.DTOs.Patients;
-using Catalyte.SuperHealth.Providers.Interfaces;
+using RecordAssist.Health.API.DTOMappings;
+using RecordAssist.Health.Data.Model;
+using RecordAssist.Health.DTOs.Encounters;
+using RecordAssist.Health.DTOs.Patients;
+using RecordAssist.Health.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Catalyte.SuperHealth.API.Controllers
+namespace RecordAssist.Health.API.Controllers
 {
     /// <summary>
     /// The PatientsController exposes endpoints for patient related actions.
@@ -81,7 +81,7 @@ namespace Catalyte.SuperHealth.API.Controllers
         [HttpPost("{id}/encounters")]
         public async Task<ActionResult<EncounterDTO>> CreateEncounterAsync([FromBody] EncounterDTO Encounter)
         {
-            _logger.LogInformation("Request recieve for CreateEncounter");
+            _logger.LogInformation("Request recieved for CreateEncounter");
             var newEncounter = _mapper.MapEncounterDtotoEncounter(Encounter);
             var savedEncounter = await _patientProvider.CreateEncounterAsync(newEncounter);
             var encounterDTO = _mapper.Map<EncounterDTO>(savedEncounter);

@@ -1,4 +1,4 @@
-﻿using Catalyte.SuperHealth.Data.Model;
+﻿using RecordAssist.Health.Data.Model;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Catalyte.SuperHealth.Test.Integration
+namespace RecordAssist.Test.Integration
 {
     public class EncounterIntegrationTests : IntegrationTests
     {

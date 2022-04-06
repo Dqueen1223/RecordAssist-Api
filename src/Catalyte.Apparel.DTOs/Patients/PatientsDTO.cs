@@ -1,4 +1,4 @@
-﻿namespace Catalyte.SuperHealth.DTOs.Patients
+﻿namespace RecordAssist.Health.DTOs.Patients
 {
     /// <summary>
     /// Describes a data transfer object for patients.

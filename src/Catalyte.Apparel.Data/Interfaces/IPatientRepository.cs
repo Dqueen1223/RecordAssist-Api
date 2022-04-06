@@ -1,8 +1,8 @@
-using Catalyte.SuperHealth.Data.Model;
+using RecordAssist.Health.Data.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Catalyte.SuperHealth.Data.Interfaces
+namespace RecordAssist.Health.Data.Interfaces
 {
     /// <summary>
     /// This interface provides an abstraction layer for Patient and Encounter repository methods.

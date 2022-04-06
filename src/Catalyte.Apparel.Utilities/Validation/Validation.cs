@@ -1,8 +1,8 @@
-﻿using Catalyte.SuperHealth.Data.Model;
+﻿using RecordAssist.Health.Data.Model;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Catalyte.SuperHealth.Utilities.Validation
+namespace RecordAssist.Health.Utilities.Validation
 {
     public static class Validation
     {

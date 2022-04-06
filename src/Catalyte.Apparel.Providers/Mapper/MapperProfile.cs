@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Catalyte.SuperHealth.Data.Model;
-using Catalyte.SuperHealth.DTOs.Encounters;
-using Catalyte.SuperHealth.DTOs.Patients;
+using RecordAssist.Health.Data.Model;
+using RecordAssist.Health.DTOs.Encounters;
+using RecordAssist.Health.DTOs.Patients;
 
-namespace Catalyte.SuperHealth.API
+namespace RecordAssist.Health.API
 {
     public class MapperProfile : Profile
     {

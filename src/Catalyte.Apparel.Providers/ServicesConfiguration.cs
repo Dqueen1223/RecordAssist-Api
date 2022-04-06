@@ -1,8 +1,8 @@
-﻿using Catalyte.SuperHealth.Providers.Interfaces;
-using Catalyte.SuperHealth.Providers.Providers;
+﻿using RecordAssist.Health.Providers.Interfaces;
+using RecordAssist.Health.Providers.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalyte.SuperHealth.Providers
+namespace RecordAssist.Health.Providers
 {
     /// <summary>
     /// This class provides configuration options for provider services.
