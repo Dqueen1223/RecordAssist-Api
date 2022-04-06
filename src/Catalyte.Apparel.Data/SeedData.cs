@@ -34,18 +34,35 @@ namespace RecordAssist.Health.Data.Context
             var patient2 = new Patient()
             {
                 Id = 2,
-                FirstName = "Hulk",
-                LastName = "Hogan",
+                FirstName = "Jane",
+                LastName = "Doe",
                 Ssn = "123-45-6789",
                 Email = "something@gmail.com",
-                Age = 66,
-                Height = 79,
-                Weight = 299,
-                Insurance = "Self-Insured",
-                Gender = "Male",
-                Street = "8430 W Sunset Blvd",
-                City = "Los Angeles",
-                State = "CA",
+                Age = 24,
+                Height = 77,
+                Weight = 111,
+                Insurance = "Insured",
+                Gender = "Female",
+                Street = "9933 Sandshrew bld.",
+                City = "Elkridge",
+                State = "MD",
+                Postal = "90049"
+            };
+            var patient3 = new Patient()
+            {
+                Id = 3,
+                FirstName = "Mary",
+                LastName = "Doe",
+                Ssn = "333-44-6559",
+                Email = "NewEmail@gmail.com",
+                Age = 33,
+                Height = 68,
+                Weight = 111,
+                Insurance = "Insured",
+                Gender = "Female",
+                Street = "9933 Sandshrew bld.",
+                City = "Elkridge",
+                State = "MD",
                 Postal = "90049"
             };
             var encounter = new Encounter()
@@ -67,6 +84,7 @@ namespace RecordAssist.Health.Data.Context
             };
             modelBuilder.Entity<Patient>().HasData(patient1);
             modelBuilder.Entity<Patient>().HasData(patient2);
+            modelBuilder.Entity<Patient>().HasData(patient3);
             modelBuilder.Entity<Encounter>().HasData(encounter);
 
         }
