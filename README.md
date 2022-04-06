@@ -1,10 +1,10 @@
-﻿# . SuperHealthInc API
+﻿# . Dr. RecordAssist API
 
 ## Getting Started
 
 ### Start the Server
 
-- Click the drop down arrow next to the App Runner button and select `SuperHealthInc.Catalyte.API`
+- Click the drop down arrow next to the App Runner button and select `RecordAssist.API`
 - Click Build > Build Solution
 - Click the App Runner button
 

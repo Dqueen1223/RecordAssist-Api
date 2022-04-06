@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -20,12 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Catalyte.Apparel.API\RecordAssist.API.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Data\RecordAssist.Data.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.DTOs\RecordAssist.DTOs.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Providers\RecordAssist.Providers.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Test.Integration\RecordAssist.Test.Integration.csproj" />
-    <ProjectReference Include="..\Catalyte.Apparel.Utilities\RecordAssist.Utilities.csproj" />
+    <ProjectReference Include="..\RecordAssist.API\RecordAssist.API.csproj" />
+    <ProjectReference Include="..\RecordAssist.Data\RecordAssist.Data.csproj" />
+    <ProjectReference Include="..\RecordAssist.DTOs\RecordAssist.DTOs.csproj" />
+    <ProjectReference Include="..\RecordAssist.Providers\RecordAssist.Providers.csproj" />
+    <ProjectReference Include="..\RecordAssist.Utilities\RecordAssist.Utilities.csproj" />
+    <ProjectReference Include="..\RecordAssist.Data\RecordAssist.Data.csproj" />
   </ItemGroup>
 
 </Project>

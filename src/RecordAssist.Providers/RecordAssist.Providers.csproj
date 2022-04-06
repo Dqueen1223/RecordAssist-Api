@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RecordAssist.Data\RecordAssist.Data.csproj" />
+    <ProjectReference Include="..\RecordAssist.DTOs\RecordAssist.DTOs.csproj" />
+    <ProjectReference Include="..\RecordAssist.Utilities\RecordAssist.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>
