@@ -16,7 +16,7 @@ namespace RecordAssist.Health.Data
         {
 
             services.AddDbContext<SuperHealthCtx>(options =>
-                options.UseNpgsql(config.GetConnectionString("CatalyteSuperHealth")));
+                options.UseNpgsql(config.GetConnectionString("RecordAssist")));
 
             services.AddScoped<ISuperHealthCtx>(provider => provider.GetService<SuperHealthCtx>());
             services.AddScoped<IPatientRepository, PatientRepository>();

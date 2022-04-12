@@ -15,7 +15,7 @@ namespace RecordAssist.Health.Data.Context
         { }
 
         public DbSet<Patient> Patients { get; set; }
-
+       
         public DbSet<Encounter> Encounters { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

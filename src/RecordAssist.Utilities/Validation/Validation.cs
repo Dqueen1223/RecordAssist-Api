@@ -17,18 +17,10 @@ namespace RecordAssist.Health.Utilities.Validation
             List<string>? errors = new();
             if (encounter.VisitCode.Trim() == "" || encounter.VisitCode == null)
                 errors.Add("VisitCode is required.");
-            else if (!Regex.IsMatch(encounter.VisitCode, @"[a-zA-Z]{1}\d{1}[a-zA-Z]{1}\s\d{1}[a-zA-Z]{1}\d{1}"))
-            {
-                errors.Add("Visit Code Format must match LDL DLD (ex. A1S 2D3)");
-            }
             if (encounter.Provider.Trim() == "" || encounter.Provider == null)
                 errors.Add("Provider is required.");
             if (encounter.BillingCode.Trim() == "" || encounter.BillingCode == null)
                 errors.Add("BillingCode is required.");
-            else if (!Regex.IsMatch(encounter.BillingCode, @"\d{3}\.\d{3}\.\d{3}-\d{2}$"))
-            {
-                errors.Add("BillingCode must match format of xxx.xxx.xxx-xx (ex. 123.456.789-12)");
-            }
             if (encounter.Icd10.Trim() == "" || encounter.Icd10 == null)
                 errors.Add("icd10 is required.");
             else if (!Regex.IsMatch(encounter.Icd10, @"[a-zA-Z]{1}\d{2}$"))

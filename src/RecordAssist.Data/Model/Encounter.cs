@@ -25,7 +25,7 @@ namespace RecordAssist.Health.Data.Model
 
         public decimal TotalCost { get; set; }
 
-        public int Copay { get; set; }
+        public decimal Copay { get; set; }
 
         public string ChiefComplaint { get; set; }
 

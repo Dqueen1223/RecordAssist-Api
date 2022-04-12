@@ -22,7 +22,7 @@ namespace RecordAssist.Health.DTOs.Encounters
 
         public decimal TotalCost { get; set; }
 
-        public int Copay { get; set; }
+        public decimal Copay { get; set; }
 
         public string ChiefComplaint { get; set; }
 
