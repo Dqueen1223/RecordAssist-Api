@@ -20,4 +20,4 @@ This project contains endpoints to create, read, update, and delete patients/enc
 Testing is done on each encounter and patient endpoint, to run all tests open test explorer and click 'run all tests' 
 
 #### Swagger
-To run swagger run the API and run with this link http://localhost:8085/index.html if this link does not work make sure localhost is the same port as your API.
+To run swagger run the API and run with this link http://localhost:8085/index.html if this link does not work make sure localhost is the same port as your API
