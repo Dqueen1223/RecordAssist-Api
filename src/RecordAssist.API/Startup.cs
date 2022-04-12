@@ -52,7 +52,7 @@ namespace RecordAssist.Health.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalyte.SuperHealth.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RecordAssist.Health.Api", Version = "v1" });
             });
 
             //Enable CORS
@@ -69,7 +69,7 @@ namespace RecordAssist.Health.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalyte.SuperHealth.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RecordAssist.Health.Api v1"));
             }
 
             //Enable CORS

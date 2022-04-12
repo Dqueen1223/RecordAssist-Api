@@ -6,7 +6,7 @@ using RecordAssist.Health.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace RecordAssist.Apparel.API.Controllers
+namespace RecordAssist.Health.API.Controllers
 {
     /// <summary>
     /// The EncounterssController exposes endpoints for encounter related actions.

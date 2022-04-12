@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Catalyte.Apparel.API.Controllers
+namespace RecordAssist.Health.API.Controllers
 {
     [ApiController]
     public class ErrorController : ControllerBase
